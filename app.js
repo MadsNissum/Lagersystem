@@ -1,5 +1,5 @@
 // Imports
-import express, { response } from 'express';
+import express from 'express';
 
 // Consts
 const app = express();
@@ -14,6 +14,8 @@ app.use(express.urlencoded({extended: true}));
 app.get('/', (request, response) => {
     response.send('Hello World!');
 })
+
+Date.parse()
 
 
 // Listen for connection
