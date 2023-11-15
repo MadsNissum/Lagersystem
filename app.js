@@ -27,6 +27,7 @@ function registerProducts(Brand, price, expiration, location, amount) {
     }
 }
 
+
 // Listen for connection
 app.listen(port, () => console.log(`Server listening on port: ${port}...`));
 
