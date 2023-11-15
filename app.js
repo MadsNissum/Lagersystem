@@ -1,6 +1,7 @@
 // Imports
 import express from 'express';
 import firestore from './service/firestore';
+import Product from './model/Product.js'
 
 // Consts
 const app = express();
@@ -13,10 +14,10 @@ app.use(express.urlencoded({extended: true}));
 
 // Routes
 app.get('/', (request, response) => {
-    response.send('Hello World!');
-})
+    let produkt = new Product('Carlsberg',50,Date.parse("2023-11-15"),"Skåde");
 
-Date.parse()
+    response.send(produkt);
+})
 
 
 // Listen for connection
