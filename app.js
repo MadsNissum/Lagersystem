@@ -1,5 +1,6 @@
 // Imports
 import express from 'express';
+import firestore from './service/firestore';
 
 // Consts
 const app = express();

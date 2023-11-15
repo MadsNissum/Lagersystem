@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "mocha": "^10.2.0"
+    "mocha": "^10.2.0",
+    "firebase": "^10.6.0"
   }
 }
