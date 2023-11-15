@@ -1,5 +1,5 @@
 // Imports
-import express, { response } from 'express';
+import express, { request, response } from 'express';
 
 // Consts
 const app = express();
@@ -18,3 +18,10 @@ app.get('/', (request, response) => {
 
 // Listen for connection
 app.listen(port, () => console.log(`Server listening on port: ${port}...`));
+
+//Brand, expiration, price, location
+
+
+app.get('/', (request, response) => {
+    response.
+})
