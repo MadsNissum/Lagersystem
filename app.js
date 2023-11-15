@@ -1,5 +1,6 @@
 // Imports
-import express, { request, response } from 'express';
+import express from 'express';
+import firestore from './service/firestore';
 
 // Consts
 const app = express();
@@ -14,6 +15,8 @@ app.use(express.urlencoded({extended: true}));
 app.get('/', (request, response) => {
     response.send('Hello World!');
 })
+
+Date.parse()
 
 
 // Listen for connection
