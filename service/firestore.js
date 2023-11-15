@@ -16,8 +16,24 @@ const firebaseConfig = {
     storageBucket: "lagersystem-4f134.appspot.com",
     messagingSenderId: "573614154864",
     appId: "1:573614154864:web:b3a2ee053065bc1c3e00b5"
-  }
+  };
 
   const firebase_app = initializeApp(firebaseConfig)
   const db = getFirestore(firebase_app)
-  const collections = collection(db,'lagersystem')
+  const productCollections = collection(db,'lagersystem')
+
+
+const getProduct = async (id) => {
+    const docRef = doc(db, 'products', id)
+    const productQueryDoc = await getDoc(docRef)
+    let product = productQueryDoc.data()
+    product.docID = productQueryDoc.id
+    return product
+}
+
+const deleteProduct = async (id) => {
+    const deletedProduct = await deleteDoc(db, 'products, id')
+}
+
+
+  export default {getProduct, deleteProduct};
