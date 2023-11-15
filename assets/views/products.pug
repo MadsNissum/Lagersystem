@@ -16,12 +16,38 @@ html(lang="en")
                     a Andet...
 
         main 
-            select Filtering
-                option Alle
-                option Mærke 1
-                option Mærke 2
-                option Mærke 3
-            
+                li
+                    p Mærke:
+                        select
+                            option Alle
+                            option Mærke 1
+                            option Mærke 2
+                            option Mærke 3
+                li 
+                    p Mængde:
+                        select
+                            option Alle
+                            option 10-30
+                            option 30-60
+                            option 60-100+
+                li
+                    p Pris:
+                        select
+                            option Alle
+                            option 10-30 kr.
+                            option 30-60 kr. 
+                            option 60-100+ kr.
+                li
+                    p Udløbningsdato: 
+                        input(type="date")
+                li
+                    p Lokation:
+                        select
+                            option Alle
+                            option Skåde
+                            option Aarhus
+                            option Vandrup
+
             button Register produkt
 
             table 
