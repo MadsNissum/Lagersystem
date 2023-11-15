@@ -1,6 +1,7 @@
 // Imports
-import express, { response } from 'express';
+import express from 'express';
 import Product from './model/Product.js'
+import firestore from './service/firestore';
 
 // Consts
 const app = express();
@@ -17,6 +18,8 @@ app.get('/', (request, response) => {
 
     response.send(produkt);
 })
+
+Date.parse()
 
 
 
