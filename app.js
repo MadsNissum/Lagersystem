@@ -18,6 +18,10 @@ app.get('/', (request, response) => {
 
 Date.parse()
 
+app.get('/', (request, response) => {
+    response.
+})
+
 
 // Listen for connection
 app.listen(port, () => console.log(`Server listening on port: ${port}...`));
@@ -25,6 +29,3 @@ app.listen(port, () => console.log(`Server listening on port: ${port}...`));
 //Brand, expiration, price, location
 
 
-app.get('/', (request, response) => {
-    response.
-})
