@@ -1,13 +1,11 @@
-import { log } from "console";
-
-
 export default class Product {
     /**
      * Initializes a new product
      * @param {String} brand 
      * @param {Number} price 
      * @param {Date} expirationDate 
-     * @param {String} location 
+     * @param {String} location
+     * @author Mikkel Hess
      */
     constructor(brand, price, expirationDate, location) {
 
@@ -23,9 +21,6 @@ export default class Product {
         if(typeof location !== 'string') {
             throw new TypeError('Location must be a string')
         }
-        
-        
-
         this.brand = brand;
         this.price = price;
         this.expirationDate = expirationDate;

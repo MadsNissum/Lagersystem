@@ -1,6 +1,7 @@
 import Product from "../model/Product.js"
 import assert from 'assert'
 
+
 describe('Product Constructor',()=>{
     describe('Initialize object properties', ()=>{
         const product = new Product('Carlsberg',50,new Date('2023-11-15'),'Skåde')
