@@ -7,6 +7,8 @@ import Product from './model/Product.js'
 const app = express();
 const port = 80;
 
+app.set('view engine', 'pug');
+
 // Middleware
 app.use(express.static('public'));
 app.use(express.json());
