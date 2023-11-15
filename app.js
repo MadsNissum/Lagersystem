@@ -1,7 +1,7 @@
 // Imports
 import express from 'express';
-import firestore from './service/firestore';
 import Product from './model/Product.js'
+import firestore from './service/firestore';
 
 // Consts
 const app = express();
