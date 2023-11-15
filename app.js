@@ -1,5 +1,6 @@
 // Imports
 import express, { response } from 'express';
+import Product from './model/Product.js'
 
 // Consts
 const app = express();
@@ -12,8 +13,11 @@ app.use(express.urlencoded({extended: true}));
 
 // Routes
 app.get('/', (request, response) => {
-    response.send('Hello World!');
+    let produkt = new Product('Carlsberg',50,Date.parse("2023-11-15"),"Skåde");
+
+    response.send(produkt);
 })
+
 
 
 // Listen for connection
