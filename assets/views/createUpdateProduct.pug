@@ -4,9 +4,10 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Produkt
-    body 
-        - var product = products;
-        - var brand = product.brand;
+    body
+        //if products
+            - var product = products;
+            - var brand = if product.brand;
         form(action="/productEndpoint", method="post")
             label(for="brand") Brand:
             input(type="text" id="brand" value="Test")
