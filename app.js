@@ -50,23 +50,9 @@ app.post('editProduct', (request, response) => {
 })
 
 
-//console.log(productsDBFunctions.getProducts);
-
 // Listen for connection
 app.listen(port, () => console.log(`Server listening on port: ${port}...`));
 
 
 
-// Amin Funktion
-function registerProducts(Brand, price, expiration, location, amount) {
-    for(each in amount) {
-        let product = new Product(Brand, price, expiration, location);
-        firestore.addProduct(product)
-    }
-} */
-
-
-
-
-export default firestoreAdd;
 

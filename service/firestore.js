@@ -61,4 +61,4 @@ async function addProduct(product) {
 }
 
 
-export default { getProduct, deleteProduct, addDoc };
+export default { getProducts, getProduct, deleteProduct, addProduct };
