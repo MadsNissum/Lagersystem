@@ -19,7 +19,7 @@ const productCollection = collection(db, 'products')
  * @returns 
  */
 async function getProducts() {
-  let productQueryDocs = await getDocs(productCollections)
+  let productQueryDocs = await getDocs(productCollection)
   let products = productQueryDocs.docs.map(doc => {
       let data = doc.data()
       data.docID = doc.id
@@ -30,7 +30,7 @@ async function getProducts() {
 
 /**
  * 
- * @param {*} id 
+ * @param {String} id Auto generated ID from firebase
  * @returns 
  */
 async function getProduct(id) {
@@ -43,7 +43,7 @@ async function getProduct(id) {
 
 /**
  * 
- * @param {*} id 
+ * @param {String} id Auto generated ID from firebase
  */
 async function deleteProduct(id) {
   const deletedProduct = await deleteDoc(db, 'products, id')

@@ -3,7 +3,6 @@ import express, { response } from 'express';
 import Product from './model/Product.js'
 import firestore from './service/firestore.js';
 import * as url from 'url';
-import productsDBFunctions from './service/productsDBFunctions.js'
 
 
 // Consts
