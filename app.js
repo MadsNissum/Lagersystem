@@ -8,7 +8,7 @@ import pug from 'pug';
 const app = express();
 const port = 8000;
 
-// Fake data delete when get request works!!!! - Lucas
+// Fake data replace this when get request to product works!!!! - Lucas
 let productsArray = [
     { brand: "Tuborg Classic", quantity: 10, price: 20, dueDate: new Date("2023-12-01"), location: "Skåde" },
     { brand: "Brezzer", quantity: 5, price: 15, dueDate: new Date("2023-11-30"), location: "Aarhus" },
@@ -41,3 +41,9 @@ app.get('/products', (request, response) => {
 
 // Listen for connection
 app.listen(port, () => console.log(`Server listening on port: ${port}...`));
+
+function getProducts() {
+    return productsArray; 
+}
+
+export default {app}; 
