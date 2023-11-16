@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Produkt
+    body
+    - var buttonText = product ? "Update product" : "Add product"
+    if product
+        - var brand = product.brand;
+    form(action="/productEndpoint", method="post")
+        label(for="brand") Brand:
+        input(type="text" id="brand" value=brand)
+        br
+        label(for="price") Price: 
+        input(type="number" id="price")
+        br
+        label(for="date") Date: 
+        input(type="date" id="date")
+        br
+        label(for="location") Location: 
+        input(type="text" id="location")
+        br
+        button(type="submit")= buttonText
