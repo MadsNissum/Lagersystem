@@ -35,13 +35,13 @@ app.get('/products', (request, response) => {
 })
 
 app.get('/addProduct', (request, response) => {
-    response.render('createUpdateProduct');
+    response.render('createUpdateProduct', {text: "Add product"});
 })
 
-app.get('/addProduct/:id', (request, response) => {
+app.get('/editProduct/:id', async (request, response) => {
     const id = request.params.id;
-    let product = firestore.getProduct(id)
-    response.render('createUpdateProduct', product)
+    let product = await firestore.getProduct(id)
+    response.render('createUpdateProduct', {product: product, text: "Edit product"})
 })
 
 // DELETES
@@ -60,7 +60,6 @@ app.post('/createProduct', (request, response) => {
     console.log(body);
 
     let product = new Product()
-
     response.sendStatus(200);
 })
 
