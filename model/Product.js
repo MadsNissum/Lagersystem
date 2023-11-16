@@ -5,10 +5,11 @@ export default class Product {
      * @param {Number} price 
      * @param {Date} expirationDate 
      * @param {String} location
+     * @param {Number} quantity
      * @param {String} id
      * @author Mikkel Hess
      */
-    constructor(brand, price, expirationDate, location, id) {
+    constructor(brand, price, expirationDate, location, quantity, id) {
 
         if(typeof brand !== 'string') {
             throw new TypeError('Brand must be a string')
@@ -22,6 +23,9 @@ export default class Product {
         if(typeof location !== 'string') {
             throw new TypeError('Location must be a string')
         }
+        if(typeof quantity !== 'number') {
+            throw new TypeError('Quantity must be a number')
+        }
         if(typeof id !== 'string') {
             throw new TypeError('Id must be a string')
         }
@@ -29,6 +33,7 @@ export default class Product {
         this.price = price;
         this.expirationDate = expirationDate;
         this.location = location;
+        this.quantity = quantity;
         this.id = id;
     }
 }
