@@ -8,9 +8,11 @@ import productsDBFunctions from './service/productsDBFunctions.js'
 // Consts
 const app = express();
 const port = 80;
-
-// Directory name
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+
+app.set('views', `${__dirname}/assets/views`);
+app.set('view engine', 'pug');
+
 
 // Middleware
 app.set('views', `${__dirname}/assets/views`);
@@ -30,6 +32,11 @@ app.get('/products', (request, response) => {
 })
 app.delete('/products/:id',async (req,res)=>{
     let product = await productsDBFunctions.deleteProduct()
+})
+
+
+app.get('/addProduct', (request, response) => {
+    response.render('createUpdateProduct');
 })
 
 
