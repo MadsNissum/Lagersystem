@@ -14,7 +14,7 @@ app.use(express.urlencoded({extended: true}));
 
 // Routes
 app.get('/', (request, response) => {
-    let produkt = new Product('Carlsberg',50,Date.parse("2023-11-15"),"Skåde");
+    let produkt = new Product('Carlsberg',50,Date.parse("2023-11-15"),"Skåde",'23434');
 
     response.send(produkt);
 })
