@@ -1,9 +1,9 @@
 // Imports
-import express from 'express';
+import express, { response } from 'express';
 import Product from './model/Product.js'
 import firestore from './service/firestore.js';
 import * as url from 'url';
-import productsDBFunctions from './service/productsDBFunctions.js'
+
 
 // Consts
 const app = express();
@@ -28,23 +28,40 @@ app.get('/', (request, response) => {
 })
 
 app.get('/products', (request, response) => {
-    let produkt = new Product('Carlsberg',50,Date.parse("2023-11-15"),"Skåde");
-
-    response.send(produkt);
+    response.render('products');
 })
 
-/* app.put('/products'), async (request, response) => {
-    const productId = request.params.productId;
-    const {name, price, expiration, location} = request.body;
+app.delete('/products/:id',async (req,res)=>{
+    let product = await productsDBFunctions.deleteProduct()
+})
 
-    try {
-        let existingProduct = productsDBFunctions.productId;
-      
-        if(!existingProduct) {
-            return response.status(404).send("Product not found")
-        } else {
-            return response.status
-        }
+app.get('/addProduct', (request, response) => {
+    response.render('createUpdateProduct');
+})
+
+app.get('/addProduct/:id', (request, response) => {
+    const id = request.params.id;
+    let product = firestore.getProduct(id)
+    response.render('createUpdateProduct', product)
+})
+
+app.post('editProduct', (request, response) => {
+
+})
+
+
+//console.log(productsDBFunctions.getProducts);
+
+// Listen for connection
+app.listen(port, () => console.log(`Server listening on port: ${port}...`));
+
+
+
+// Amin Funktion
+function registerProducts(Brand, price, expiration, location, amount) {
+    for(each in amount) {
+        let product = new Product(Brand, price, expiration, location);
+        firestore.addProduct(product)
     }
 } */
 
