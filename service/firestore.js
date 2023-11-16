@@ -29,7 +29,6 @@ const getProducts = async () => {
       data.docID = doc.id;
       return data;
     });
-
     return products;
   }
 

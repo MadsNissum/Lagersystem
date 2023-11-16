@@ -32,13 +32,23 @@ app.get('/', (request, response) => {
 app.get('/products', (request, response) => {
     response.render('products');
 })
+
 app.delete('/products/:id',async (req,res)=>{
     let product = await productsDBFunctions.deleteProduct()
 })
 
-
 app.get('/addProduct', (request, response) => {
     response.render('createUpdateProduct');
+})
+
+app.get('/addProduct/:id', (request, response) => {
+    const id = request.params.id;
+    let product = firestore.getProduct(id)
+    response.render('createUpdateProduct', product)
+})
+
+app.post('editProduct', (request, response) => {
+
 })
 
 
