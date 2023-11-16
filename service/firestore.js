@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app"
 import {getFirestore, collection, getDocs, getDoc, doc, deleteDoc, addDoc, updateDoc} from 'firebase/firestore'
-import Product from "../model/Product";
+import Product from "../model/Product.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBd9SN8XxBIHhI1HdabdJfqt6HcveoYGoU",
@@ -57,7 +57,7 @@ async function deleteProduct(id) {
  * @author Mads Nissum
  */
 async function addProduct(product) {
-  await addDoc(productCollections, product)
+  await addDoc(productCollection, product)
 }
 
 
