@@ -28,27 +28,28 @@ app.get('/', (request, response) => {
 })
 
 app.get('/products', (request, response) => {
-    response.render('products');
-})
-app.delete('/products/:id',async (req,res)=>{
-    let product = await productsDBFunctions.deleteProduct()
-})
+    let produkt = new Product('Carlsberg',50,Date.parse("2023-11-15"),"Skåde");
 
-
-app.get('/addProduct', (request, response) => {
-    response.render('createUpdateProduct');
+    response.send(produkt);
 })
 
+/* app.put('/products'), async (request, response) => {
+    const productId = request.params.productId;
+    const {name, price, expiration, location} = request.body;
 
-// Listen for connection
-app.listen(port, () => console.log(`Server listening on port: ${port}...`));
-
-
-
-// Amin Funktion
-function registerProducts(Brand, price, expiration, location, amount) {
-    for(each in amount) {
-        let product = new Product(Brand, price, expiration, location);
-        firestore.addProduct(product)
+    try {
+        let existingProduct = productsDBFunctions.productId;
+      
+        if(!existingProduct) {
+            return response.status(404).send("Product not found")
+        } else {
+            return response.status
+        }
     }
-}
+} */
+
+
+
+
+export default firestoreAdd;
+

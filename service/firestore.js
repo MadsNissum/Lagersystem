@@ -33,5 +33,30 @@ const getProduct = async (id) => {
 
 
 
+function registerProducts(Brand, price, expiration, location, amount) {
+    for(let i = 0; i < amount; i++) {
+        let product = new Product(Brand, price, expiration, location);
+        firestore.addProduct(product)
+    }
+}
+
+registerProducts("vand", 50, Date.parse("2023-11-16"), "skåde", 20);
+
+
+const firestoreAdd = {
+    addProduct: async function(product) {
+        try {
+            const docRef = await firestore.collection('products').addProduct({
+                Brand: product.Brand,
+                price: product.price,
+                expiration: product.expiration
+            });
+            console.log('Product added with ID ', docRef.id)
+            return docRef.id;
+        } catch (error) {
+            console.error('Error adding product: ', error)
+        }
+    }
+}
 
   export default {getProduct, deleteProduct};
