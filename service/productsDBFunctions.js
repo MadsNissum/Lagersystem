@@ -1,35 +1,30 @@
-import { initializeApp } from "firebase/app"
-import firebaseConfig from './firestore.js'
-//import firebase_app from './firestore.js'
-import db from './firestore.js'
-import {getFirestore,
-    collection,
-    getDocs,
-    getDoc, 
-    doc, 
-    deleteDoc, 
-    addDoc,
-    updateDoc
-} from 'firebase/firestore'
+import db from '.firestore.js'
 
-//const firebase_app = initializeApp(firebaseConfig)
-//const db = getFirestore(firebase_app)
-//console.log(db)
-//const productCollections = collection(db, '')
-
-//Get all products
-const productCollection = collection(db, 'products')
+const firebase_app = initializeApp(firebaseConfig)
+const db = getFirestore(firebase_app)
+const productCollections = collection(db,'lagersystem')
 
 const getProducts = async () => {
-    let productsQueryDocs = await getDocs(productCollection);
-    let products = productsQueryDocs.docs.map(doc => {
-      let data = doc.data();
-      data.docID = doc.id;
-      return data;
-    });
+    let productQueryDocs = await getDocs(productCollections)
+    let products = productQueryDocs.docs.map(doc => {
+        let data = doc.data()
+        data.docID = doc.id
+        return data
+    })
+    return products
+}
 
-    return products;
-  }
+const getProduct = async (id) => {
+    const docRef = doc(db, 'products', id)
+    const productQueryDoc = await getDoc(docRef)
+    let product = productQueryDoc.data()
+    product.docID = productQueryDoc.id
+    return product
+}
+
+const deleteProduct = async (id) => {
+    const deletedProduct = await deleteDoc(db, 'products, id')
+}
 
 
-  export default { getProducts };
+  export default {getProduct, deleteProduct};
