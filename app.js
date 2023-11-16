@@ -30,8 +30,9 @@ app.get('/', (request, response) => {
     response.send(product);
 })
 
-app.get('/products', (request, response) => {
-    response.render('products');
+app.get('/products', async (request, response) => {
+    let products = await firestore.getProducts(); 
+    response.render('products', {products: products});
 })
 
 app.get('/addProduct', (request, response) => {
@@ -59,7 +60,6 @@ app.post('/editProduct', (request, response) => {
     firestore.updateProduct(request.body.id, request.body.product);
     response.sendStatus(201);
 })
-
 
 // Listen for connection
 app.listen(port, () => console.log(`Server listening on port: ${port}...`));
