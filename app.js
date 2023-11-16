@@ -1,7 +1,7 @@
 // Imports
 import express from 'express';
-import firestore from './service/firestore';
 import Product from './model/Product.js'
+import firestore from './service/firestore';
 
 // Consts
 const app = express();
@@ -23,9 +23,9 @@ function registerProducts(Brand, price, expiration, location, amount) {
     for(each in amount) {
         let product = new Product(Brand, price, expiration, location);
         firestore.addProduct(product)
-    
     }
 }
+
 
 // Listen for connection
 app.listen(port, () => console.log(`Server listening on port: ${port}...`));
