@@ -4,7 +4,7 @@ import assert from 'assert'
 
 describe('Product Constructor',()=>{
     describe('Initialize object properties', ()=>{
-        const product = new Product('Carlsberg',50,new Date('2023-11-15'),'Skåde')
+        const product = new Product('Carlsberg',50,new Date('2023-11-15'),'Skåde', '016120')
 
         it('Should display brand correctly', () => {
             assert.equal(product.brand,'Carlsberg')
@@ -21,10 +21,14 @@ describe('Product Constructor',()=>{
         it('Should display location correctly', ()=>{
             assert.equal(product.location,'Skåde')
         })
+
+        it('Should display id correctly',()=>{
+            assert.equal(product.id,'016120')
+        })
         
     })
     describe('Type checkings', () => {
-        const product = new Product('Carlsberg',50.50,new Date('2023-11-15'),'Skåde')
+        const product = new Product('Carlsberg',50.50,new Date('2023-11-15'),'Skåde','016120')
 
         it('Brand should be of type string',()=>{
             assert.strictEqual(typeof product.brand,'string')
@@ -40,6 +44,9 @@ describe('Product Constructor',()=>{
         it('Location should be of type string',()=>{
             assert.strictEqual(typeof product.location,'string')
         })
+        it('Id should be of type string',()=>{
+            assert.strictEqual(typeof product.id, 'string')
+        })
 
     })
 
@@ -47,29 +54,34 @@ describe('Product Constructor',()=>{
         it('Should throw an error if brand is the wrong type', ()=>{
 
             assert.throws(()=>{
-                const product = new Product(1000,50.50,new Date('2023-11-15'),'Skåde')
+                const product = new Product(1000,50.50,new Date('2023-11-15'),'Skåde','016120')
             },TypeError,'Brand must be a string')
         })
 
         it('Should throw an error if number is the wrong type', ()=>{
             assert.throws(()=>{
-                const product = new Product(1000,'50',new Date('2023-11-15'),'Skåde')
+                const product = new Product(1000,'50',new Date('2023-11-15'),'Skåde','016120')
             },TypeError,'Price must be a number')
         })
 
         it('Should throw an error if Expiration date is not a date object',()=>{
             assert.throws(()=>{
-                const product = new Product(1000,50.50,'2023-11-15','Skåde')
+                const product = new Product(1000,50.50,'2023-11-15','Skåde','016120')
             },TypeError,'Expiration date must be a date object')
         })
 
         it('Should throw an error if brand is the wrong type',()=>{
             assert.throws(()=>{
-                const product = new Product(1000,50.50,'2023-11-15',100)
+                const product = new Product(1000,50.50,'2023-11-15',100,'016120')
             },TypeError,'Location must be a string')
         })
 
-
+        it('Should throw an error if id is the wrong type',()=>{
+            assert.throws(()=>{
+                const product = new Product('Carlsberg',50.50,new Date('2023-11-15'),'Skåde',500)
+                
+            },TypeError,'Id must be a string')
+        })
 
     })
 
