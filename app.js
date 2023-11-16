@@ -1,5 +1,5 @@
 // Imports
-import express from 'express';
+import express, { response } from 'express';
 import Product from './model/Product.js'
 import firestore from './service/firestore.js';
 import * as url from 'url';
@@ -31,7 +31,6 @@ app.get('/products', async (request, response) => {
     let products = await firestore.getProducts(); 
     response.render('products', {products: products});
 })
-
 app.delete('/products/:id',async (req,res)=>{
     let product = await productsDBFunctions.deleteProduct()
 })
@@ -50,8 +49,26 @@ app.post('editProduct', (request, response) => {
 
 })
 
+app.get('/addProduct/:id', (request, response) => {
+    const id = request.params.id;
+    let product = firestore.getProduct(id)
+    response.render('createUpdateProduct', product)
+})
 
-//console.log(productsDBFunctions.getProducts);
+app.post('editProduct', (request, response) => {
+
+})
+
+app.get('/addProduct/:id', (request, response) => {
+    const id = request.params.id;
+    let product = firestore.getProduct(id)
+    response.render('createUpdateProduct', product)
+})
+
+app.post('editProduct', (request, response) => {
+
+})
+
 
 // Listen for connection
 app.listen(port, () => console.log(`Server listening on port: ${port}...`));
@@ -59,10 +76,4 @@ app.listen(port, () => console.log(`Server listening on port: ${port}...`));
 
 
 
-// Amin Funktion
-function registerProducts(Brand, price, expiration, location, amount) {
-    for(each in amount) {
-        let product = new Product(Brand, price, expiration, location);
-        firestore.addProduct(product)
-    }
-}
+
