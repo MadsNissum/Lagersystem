@@ -7,9 +7,11 @@ import * as url from 'url';
 // Consts
 const app = express();
 const port = 80;
-
-// Directory name
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
+
+app.set('views', `${__dirname}/assets/views`);
+app.set('view engine', 'pug');
+
 
 // Middleware
 app.set('views', `${__dirname}/assets/views`);
@@ -26,6 +28,11 @@ app.get('/', (request, response) => {
 
 app.get('/products', (request, response) => {
     response.render('products');
+})
+
+
+app.get('/addProduct', (request, response) => {
+    response.render('createUpdateProduct');
 })
 
 
