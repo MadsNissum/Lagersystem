@@ -10,6 +10,19 @@ const app = express();
 const port = 80;
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
+let product1 = new Product('Tuborg Classic', 10, Date.now, 'Skåde', 100, 1);
+let product2 = new Product('Heineken', 15, Date.now, 'Aarhus', 30, 2);
+let product3 = new Product('Carlsberg', 13, Date.now, 'Vandrup', 40, 3);
+let product4 = new Product('Brezzer', 30, Date.now, 'Herning', 10, 4);
+let product5 = new Product('Mokai', 40, Date.now, 'Vejle', 15, 5);
+
+let productsArray = [];
+productsArray.push(product1);
+productsArray.push(product2);
+productsArray.push(product3);
+productsArray.push(product4);
+productsArray.push(product5);
+
 app.set('views', `${__dirname}/assets/views`);
 app.set('view engine', 'pug');
 
