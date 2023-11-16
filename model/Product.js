@@ -1,4 +1,7 @@
-export default class Product {
+export class Product {
+
+    #id = null;
+
     /**
      * Initializes a new product
      * @param {String} brand 
@@ -6,10 +9,9 @@ export default class Product {
      * @param {Date} expirationDate 
      * @param {String} location
      * @param {Number} quantity
-     * @param {String} id
-     * @author Mikkel Hess
+     * @author Mikkel Hess & Mads Nissum
      */
-    constructor(brand, price, expirationDate, location, quantity, id) {
+    constructor(brand, price, expirationDate, location, quantity) {
 
         if(typeof brand !== 'string') {
             throw new TypeError('Brand must be a string')
@@ -26,15 +28,29 @@ export default class Product {
         if(typeof quantity !== 'number') {
             throw new TypeError('Quantity must be a number')
         }
-        if(typeof id !== 'string') {
-            throw new TypeError('Id must be a string')
-        }
         this.brand = brand;
         this.price = price;
         this.expirationDate = expirationDate;
         this.location = location;
         this.quantity = quantity;
-        this.id = id;
+    }
+
+    /**
+     * Function returns product id
+     * @returns Auto generated id from firebase
+     * @author Mads Nissum
+     */
+    getId() {
+        return this.#id;
+    }
+
+    /**
+     * Function sets product id
+     * @param {String} id Auto generated id from firebase
+     * @author Mads Nissum
+     */
+    setId(id) {
+        this.#id = id;
     }
 }
 

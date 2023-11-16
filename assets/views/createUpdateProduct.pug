@@ -4,15 +4,18 @@ html(lang="en")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Produkt
+        script(src="/script/createUpdateScript.js" defer)
     body
-    - var buttonText = text
+    - var text = (product) ? "Edit product" : "Add product"
+    - var action = (product) ? "/editProduct" : "/createProduct"
+    h1= text 
     if product
         - var brand = product.brand;
         - var price = product.price;
-        - var date = product.expirationDate;
+        - var date = product.expirationDate.toISOString().split('T')[0];
         - var location = product.location;
         - var quantity = product.quantity;
-    form(action="/productEndpoint", method="post")
+    form(action=action, method="post")
         label(for="brand") Brand:
         input(type="text" id="brand" value=brand)
         br
@@ -25,7 +28,7 @@ html(lang="en")
         label(for="location") Location: 
         input(type="text" id="location" value=location)
         br
-        label(for="quantity")
+        label(for="quantity") Quantity:
         input(type="number" id="quantity" value=quantity)
         br
-        button(type="submit")= buttonText
+        button(type="submit")= text

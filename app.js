@@ -1,6 +1,6 @@
 // Imports
 import express, { response } from 'express';
-import Product from './model/Product.js'
+import { Product } from './model/Product.js'
 import firestore from './service/firestore.js';
 import * as url from 'url';
 
@@ -19,14 +19,14 @@ app.set('views', `${__dirname}/assets/views`);
 app.set('view engine', 'pug');
 app.use(express.static('assets'));
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 // Routes
 
 
 // GETS
 app.get('/', (request, response) => {
-    const product = new Product('Carlsberg',50,new Date('2023-11-15'),'Skåde', 20, '016120');
+    const product = new Product('Carlsberg', 50, new Date('2023-11-15'), 'Skåde', 20, '016120');
     response.send(product);
 })
 
@@ -35,32 +35,29 @@ app.get('/products', (request, response) => {
 })
 
 app.get('/addProduct', (request, response) => {
-    response.render('createUpdateProduct', {text: "Add product"});
+    response.render('createUpdateProduct', { product: null });
 })
 
 app.get('/editProduct/:id', async (request, response) => {
     const id = request.params.id;
-    let product = await firestore.getProduct(id)
-    response.render('createUpdateProduct', {product: product, text: "Edit product"})
+    let product = await firestore.getProduct(id);
+    response.render('createUpdateProduct', { product: product });
 })
 
 // DELETES
-app.delete('/products/:id',async (req,res)=>{
+app.delete('/products/:id', async (req, res) => {
     let product = await productsDBFunctions.deleteProduct()
 })
 
 // POSTS
-app.post('/editProduct', (request, response) => {
-
+app.post('/createProduct', (request, response) => {
+    firestore.addProduct(request.body.product);
+    response.sendStatus(201);
 })
 
-app.post('/createProduct', (request, response) => {
-    const body = request.body;
-
-    console.log(body);
-
-    let product = new Product()
-    response.sendStatus(200);
+app.post('/editProduct', (request, response) => {
+    firestore.updateProduct(request.body.id, request.body.product);
+    response.sendStatus(201);
 })
 
 
