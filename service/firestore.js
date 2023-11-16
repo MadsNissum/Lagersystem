@@ -31,9 +31,7 @@ const getProduct = async (id) => {
     return product
 }
 
-const deleteProduct = async (id) => {
-    const deletedProduct = await deleteDoc(db, 'products, id')
-}
+
 
 
   export default {getProduct, deleteProduct};
