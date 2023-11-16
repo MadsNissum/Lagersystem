@@ -18,10 +18,27 @@ const firebaseConfig = {
     appId: "1:573614154864:web:b3a2ee053065bc1c3e00b5"
   };
 
-  const firebase_app = initializeApp(firebaseConfig)
-  const db = getFirestore(firebase_app)
-  const productCollections = collection(db,'lagersystem')
+const firebase_app = initializeApp(firebaseConfig)
+export const db = getFirestore(firebase_app)
+const productCollection = collection(db, 'products')
 
+const getProducts = async () => {
+    let productsQueryDocs = await getDocs(productCollection);
+    let products = productsQueryDocs.docs.map(doc => {
+      let data = doc.data();
+      data.docID = doc.id;
+      return data;
+    });
+
+    return products;
+  }
+
+async function main() {
+    let data = await getProducts();
+    console.log(data);
+}
+
+main();
 
 const getProduct = async (id) => {
     const docRef = doc(db, 'products', id)
@@ -34,4 +51,4 @@ const getProduct = async (id) => {
 
 
 
-  export default {getProduct, deleteProduct};
+export default {getProduct, deleteProduct, firebase_app, firebaseConfig };

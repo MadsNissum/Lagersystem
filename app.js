@@ -5,6 +5,8 @@ import firestore from './service/firestore.js';
 import * as url from 'url';
 import productsDBFunctions from './service/productsDBFunctions.js'
 
+import productsDBFunctions from './service/productsDBFunctions.js';
+
 // Consts
 const app = express();
 const port = 80;
@@ -39,6 +41,8 @@ app.get('/addProduct', (request, response) => {
     response.render('createUpdateProduct');
 })
 
+
+//console.log(productsDBFunctions.getProducts);
 
 // Listen for connection
 app.listen(port, () => console.log(`Server listening on port: ${port}...`));
