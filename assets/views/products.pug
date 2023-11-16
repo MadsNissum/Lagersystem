@@ -64,11 +64,11 @@ html(lang="en")
                 tbody
                     each product in products
                         tr
-                            td #{product.brand}
-                            td #{product.quantity}
-                            td #{product.price} kr.
-                            td #{product.dueDate.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}
-                            td #{product.location}
+                            td= product.brand
+                            td= product.quantity
+                            td= product.price + ' kr.'
+                            td= product.date
+                            td= product.location
                             td
                                 button Knap
                             td

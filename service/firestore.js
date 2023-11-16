@@ -51,4 +51,4 @@ const getProduct = async (id) => {
 
 
 
-export default {getProduct, deleteProduct, firebase_app, firebaseConfig };
+export default {getProduct, getProducts, /*deleteProduct,*/ firebase_app, firebaseConfig };
