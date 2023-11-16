@@ -52,24 +52,27 @@ html(lang="en")
             button Register produkt
 
             table 
-                tr 
-                    th Mærke 
-                    th Mængde 
-                    th Pris 
-                    th Udløbningsdato 
-                    th Lokation
-                    th Rediger 
-                    th Slet
-                tr
-                    td Tuborg Classic
-                    td 18 stk.
-                    td 50 kr.
-                    td ons. 15 nov. 2023
-                    td Skåde
-                    td
-                        button Knap 
-                    td
-                        button Knap
+                thead
+                    tr 
+                        th Mærke 
+                        th Mængde 
+                        th Pris 
+                        th Udløbningsdato 
+                        th Lokation
+                        th Rediger 
+                        th Slet
+                tbody
+                    each product in products
+                        tr
+                            td #{product.brand}
+                            td #{product.quantity}
+                            td #{product.price} kr.
+                            td #{product.dueDate.toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' })}
+                            td #{product.location}
+                            td
+                                button Knap
+                            td
+                                button Knap
 
         footer 
             p Lagersystem - copyrights reserved since 2023
