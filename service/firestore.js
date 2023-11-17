@@ -88,9 +88,9 @@ async function updateProduct(id, product) {
  * @param {*} amount that will be sold
  * @author Kasper
  */
-async function sellProduct(id, amount) {
+async function registerSale(id, amount) {
     let product = await getProduct(id);
-    product.quantity -= amount;
+    product.quantity = product.quantity - amount;
     if (product.quantity <= 0) {
         deleteProduct(id);
     } else {
@@ -99,4 +99,4 @@ async function sellProduct(id, amount) {
 }
 
 
-export default { getProducts, getProduct, deleteProduct, addProduct, updateProduct, updateSale };
+export default { getProducts, getProduct, deleteProduct, addProduct, updateProduct, registerSale };
