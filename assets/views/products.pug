@@ -10,35 +10,25 @@ html(lang="en")
             ul(class="filter")
                 li
                     label Mærke:
-                        select
+                        select(id="brandPicker")
                             option Alle
-                            option Mærke 1
-                            option Mærke 2
-                            option Mærke 3
                 li 
                     label Mængde:
-                        select
+                        select(id="quantityPicker")
                             option Alle
-                            option 10-30
-                            option 30-60
-                            option 60-100+
                 li
                     label Pris:
-                        select
+                        select(id="pricePicker")
                             option Alle
-                            option 10-30 kr.
-                            option 30-60 kr. 
-                            option 60-100+ kr.
                 li
                     label Udløbningsdato: 
-                        input(type="date")
+                        select
+                            option Ascending 
+                            option Descending
                 li
                     label Lokation:
-                        select
+                        select(id="locationPicker")
                             option Alle
-                            option Skåde
-                            option Aarhus
-                            option Vandrup
 
             button(onclick="addProduct()") Register produkt
 

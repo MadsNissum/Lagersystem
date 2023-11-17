@@ -1,5 +1,5 @@
 // Imports
-import express from 'express';
+import express, { response } from 'express';
 import { Product } from './model/Product.js'
 import firestore from './service/firestore.js';
 import * as url from 'url';
@@ -35,6 +35,11 @@ app.get('/products', async (request, response) => {
     response.render('products', { products: products });
 })
 
+app.get('/getProducts', async (request, response) => {
+    let products = await firestore.getProducts();
+    response.send(products);
+});
+
 app.get('/addProduct', (request, response) => {
     response.render('createUpdateProduct', { product: null });
 })
@@ -66,7 +71,7 @@ app.put('/editProduct', (request, response) => {
 
 
 // Function running once a day
-setInterval(myFunction, 1000 * 60 * 60 * 24);
+// setInterval(myFunction, 1000 * 60 * 60 * 24);
 
 
 // Listen for connection
