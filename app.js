@@ -66,7 +66,7 @@ app.put('/editProduct', (request, response) => {
 
 
 // Function running once a day
-setInterval(myFunction, 1000 * 60 * 60 * 24);
+//setInterval(, 1000 * 60 * 60 * 24);
 
 
 // Listen for connection
