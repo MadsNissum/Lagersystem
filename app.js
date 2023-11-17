@@ -57,12 +57,21 @@ app.post('/createProduct', (request, response) => {
     response.sendStatus(201);
 })
 
+app.post('/registerSale', async (request, response) => {
+    request.body.forEach(order => {
+        firestore.updateSale(order.id, order.amounts);
+    });
+    response.sendStatus(200);
+})
+
 
 // PUT
 app.put('/editProduct', (request, response) => {
     firestore.updateProduct(request.body.id, request.body.product);
     response.sendStatus(201);
 })
+
+
 
 // Listen for connection
 app.listen(port, () => console.log(`Server listening on port: ${port}...`));
