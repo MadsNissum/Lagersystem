@@ -35,15 +35,19 @@ async function getProducts() {
  * Function return a Product with a given id from firestore
  * @param {String} id Auto generated ID from firebase
  * @returns {Product} A product
- * @author Mads Nissum
+ * @author Mads Nissum & Mikkel Hess
  */
 async function getProduct(id) {
     const docRef = doc(db, 'products', id);
     const productDoc = await getDoc(docRef);
     let data = productDoc.data();
-    let product = new Product(data.brand, Number(data.price), new Date(data.expirationDate), data.location, Number(data.quantity));
-    product.setId(productDoc.id);
-    return product;
+    if (data != null) {
+        let product = new Product(data.brand, Number(data.price), new Date(data.expirationDate), data.location, Number(data.quantity));
+        product.setId(productDoc.id);
+        return product;
+    } else {
+        return null;
+    }
 }
 
 /**
