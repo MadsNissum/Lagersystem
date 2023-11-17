@@ -78,30 +78,5 @@ async function updateProduct(id, product) {
     await updateDoc(docRef, product);
 }
 
-/**
- * 
- * @param {*} id Auto genrerated ID from firebase
- * @param {*} object  
- * @author Amin Dahir & Christian Surma
- */
-async function updateSale(id, amounts) {
-    const docRef = doc(db, 'products', id)
-    const productDoc = await getDoc(docRef);
-    const currentData = productDoc.data();
-    
-    if(currentData[id] > amounts[id]) {
-        currentData[id] -= amounts[id];
-    } else {
-        console.log("fejl - beholdningen er mindre end salget")
-    }
-    await updateDoc(docRef, currentData)
-}
-
-
-
-
-
-
-
 
 export default { getProducts, getProduct, deleteProduct, addProduct, updateProduct, updateSale };
