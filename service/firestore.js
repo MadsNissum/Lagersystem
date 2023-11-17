@@ -96,4 +96,12 @@ async function updateSale(id, amounts) {
     }
     await updateDoc(docRef, currentData)
 }
+
+
+
+
+
+
+
+
 export default { getProducts, getProduct, deleteProduct, addProduct, updateProduct, updateSale };
