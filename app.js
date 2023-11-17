@@ -3,6 +3,7 @@ import express from 'express';
 import { Product } from './model/Product.js'
 import firestore from './service/firestore.js';
 import * as url from 'url';
+import { notifyPeople } from './service/observer.js';
 
 
 // Consts
@@ -66,7 +67,7 @@ app.put('/editProduct', (request, response) => {
 
 
 // Function running once a day
-//setInterval(, 1000 * 60 * 60 * 24);
+setInterval(notifyPeople, 1000 * 60 * 60 * 24);
 
 
 // Listen for connection
