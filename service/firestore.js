@@ -99,4 +99,4 @@ async function sellProduct(id, amount) {
 }
 
 
-export default { getProducts, getProduct, deleteProduct, addProduct, updateProduct };
+export default { getProducts, getProduct, deleteProduct, addProduct, updateProduct, updateSale };

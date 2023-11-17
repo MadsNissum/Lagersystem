@@ -57,6 +57,14 @@ app.post('/createProduct', (request, response) => {
     response.sendStatus(201);
 })
 
+app.post('/registerSale', async (request, response) => {
+    request.body.array.forEach(order => {
+        console.log(order.id);
+        //firestore.updateSale(order.id, order.amounts);
+    });
+    response.sendStatus(200);
+})
+
 
 // PUT
 app.put('/editProduct', (request, response) => {
