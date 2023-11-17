@@ -1,10 +1,18 @@
 /**
+ * Changes url to add product
+ * @author Mads Nissum
+ */
+function addProduct() {
+    window.location = `/addProduct`;
+}
+
+/**
  * Changing url til edit product
  * @param {String} id Auto generated id from firebase
  * @author Mads Nissum
  */
 function updateProduct(id) {
-    window.location = `/editProduct/${id}`
+    window.location = `/editProduct/${id}`;
 }
 
 /**
