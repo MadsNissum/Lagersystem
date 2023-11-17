@@ -1,6 +1,6 @@
 export class Product {
 
-    #id = null;
+    #id;
 
     /**
      * Initializes a new product
@@ -33,6 +33,7 @@ export class Product {
         this.expirationDate = expirationDate;
         this.location = location;
         this.quantity = quantity;
+        this.#id = null;
     }
 
     /**

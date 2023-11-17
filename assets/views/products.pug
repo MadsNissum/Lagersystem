@@ -3,7 +3,7 @@ html(lang="en")
     head 
         title Lagersystem - Produkter  
         link(rel="stylesheet", href="/styles/style.css")
-
+        script(src="/script/productViewScript.js" defer) 
     body
         header(class="nice-header")
             h1 Lagersystem
@@ -70,9 +70,9 @@ html(lang="en")
                             td= product.expirationDate
                             td= product.location
                             td
-                                button Knap
+                                button(onclick=`updateProduct('${product.getId()}')`) Rediger
                             td
-                                button Knap
+                                button(onclick=`deleteProduct('${product.getId()}')`) Slet
 
         footer 
             p Lagersystem - copyrights reserved since 2023

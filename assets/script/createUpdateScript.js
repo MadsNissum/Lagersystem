@@ -30,8 +30,12 @@ async function handleSubmit(event) {
     } else {
 
         let id = null;
+        let method;
         if (form.action.split('/')[3] == "editProduct") {
             id = window.location.href.split('/')[4]
+            method = "PUT"
+        } else {
+            method = "POST"
         }
         const body = {
             product: {
@@ -45,7 +49,7 @@ async function handleSubmit(event) {
         };
 
         try {
-            await post(form.action, body);
+            await request(form.action, body, method);
             alert("Sucess!");
         } catch {
             alert("Something went wrong on the server!");
@@ -54,15 +58,14 @@ async function handleSubmit(event) {
 }
 
 /**
- * 
+ * Function make a post request with url and body for request
  * @param {String} url URL Sting to post a request.
  * @param {Object} objekt Object sent as the body of post request.
  * @author Mads Nissum
- * @returns 
  */
-async function post(url, objekt) {
+async function request(url, objekt, method) {
     const respons = await fetch(url, {
-        method: "POST",
+        method: method,
         body: JSON.stringify(objekt),
         headers: { 'Content-Type': 'application/json' }
     });

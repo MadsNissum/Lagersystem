@@ -24,7 +24,7 @@ async function getProducts() {
     let productQueryDocs = await getDocs(productCollection);
     let products = productQueryDocs.docs.map(doc => {
         let data = doc.data();
-        let product = new Product(data.brand, data.number, new Date(data.expirationDate), data.location, data.quantity);
+        let product = new Product(data.brand, Number(data.price), new Date(data.expirationDate), data.location, Number(data.quantity));
         product.setId(doc.id);
         return product;
     })
@@ -53,6 +53,7 @@ async function getProduct(id) {
  */
 async function deleteProduct(id) {
     const docRef = doc(db, 'products', id);
+    console.log(docRef);
     await deleteDoc(docRef);
 }
 

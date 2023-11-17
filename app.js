@@ -1,5 +1,5 @@
 // Imports
-import express, { response } from 'express';
+import express from 'express';
 import { Product } from './model/Product.js'
 import firestore from './service/firestore.js';
 import * as url from 'url';
@@ -31,8 +31,8 @@ app.get('/', (request, response) => {
 })
 
 app.get('/products', async (request, response) => {
-    let products = await firestore.getProducts(); 
-    response.render('products', {products: products});
+    let products = await firestore.getProducts();
+    response.render('products', { products: products });
 })
 
 app.get('/addProduct', (request, response) => {
@@ -46,8 +46,11 @@ app.get('/editProduct/:id', async (request, response) => {
 })
 
 // DELETES
-app.delete('/products/:id', async (req, res) => {
-    let product = await productsDBFunctions.deleteProduct()
+app.delete('/products/:id', async (request, response) => {
+    console.log(request.params.id);
+    await firestore.deleteProduct(request.params.id);
+    response.sendStatus(200);
+
 })
 
 // POSTS
@@ -56,7 +59,9 @@ app.post('/createProduct', (request, response) => {
     response.sendStatus(201);
 })
 
-app.post('/editProduct', (request, response) => {
+
+// PUT
+app.put('/editProduct', (request, response) => {
     firestore.updateProduct(request.body.id, request.body.product);
     response.sendStatus(201);
 })
