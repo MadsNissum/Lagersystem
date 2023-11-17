@@ -21,7 +21,7 @@ const db = getFirestore(firebase_app);
  * Tests that getProduct gets the correct product object
  * @author Mikkel Hess
  */
-describe('Get Product Method', () => {
+describe('Get Product function', () => {
     it('Should get the correct product', async () => {
         let product = new Product('Smirnoff Ice', 12, new Date("2013-11-15"), 'Skåde', 20)
         let id = 'test';
@@ -37,7 +37,7 @@ describe('Get Product Method', () => {
 /**
  * Tests that the product gets deleted
  */
-describe('Delete product method', () => {
+describe('Delete product function', () => {
 
     it('Should delete the correct product', async () => {
         let product = new Product('Carlsberg', 28, new Date("2013-11-16"), 'Skåde', 100)
@@ -51,6 +51,25 @@ describe('Delete product method', () => {
         assert.strictEqual(await firestore.getProduct(id), null)
 
 
+    })
+
+})
+
+describe('Add Product function',()=>{
+
+    it('Should add the correct product',()=>{
+        
+    })
+
+})
+
+describe('Get products function', ()=>{
+
+    it('Should return an array of products',()=>{
+
+
+        
+        
     })
 
 })
