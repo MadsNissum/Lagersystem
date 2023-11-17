@@ -49,7 +49,7 @@ async function getProduct(id) {
 /**
  * Deletes doc with gives id from firebase
  * @param {String} id Auto generated ID from firebase
- * @author Mads Nissum
+ * @author Mads Nissum & Mikkel Hess
  */
 async function deleteProduct(id) {
     const docRef = doc(db, 'products', id);
