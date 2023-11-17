@@ -67,7 +67,7 @@ html(lang="en")
                             td= product.brand
                             td= product.quantity + ' stk.'
                             td= product.price + ' kr.'
-                            td= product.expirationDate
+                            td= product.getDate()
                             td= product.location
                             td
                                 button(onclick=`updateProduct('${product.getId()}')`) Rediger
