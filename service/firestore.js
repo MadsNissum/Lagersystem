@@ -53,7 +53,6 @@ async function getProduct(id) {
  */
 async function deleteProduct(id) {
     const docRef = doc(db, 'products', id);
-    console.log(docRef);
     await deleteDoc(docRef);
 }
 

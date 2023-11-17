@@ -53,6 +53,14 @@ export class Product {
     setId(id) {
         this.#id = id;
     }
+
+    /**
+     * Return string date
+     * @returns String output of date yyyy-mm-dd
+     */
+    getDate() {
+        return this.expirationDate.toISOString().split('T')[0];
+    }
 }
 
 

@@ -47,10 +47,8 @@ app.get('/editProduct/:id', async (request, response) => {
 
 // DELETES
 app.delete('/products/:id', async (request, response) => {
-    console.log(request.params.id);
     await firestore.deleteProduct(request.params.id);
     response.sendStatus(200);
-
 })
 
 // POSTS
