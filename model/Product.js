@@ -19,9 +19,11 @@ export class Product {
         if(typeof price !== 'number') {
             throw new TypeError('Price must be a number')
         }
+        /*
         if(!(expirationDate instanceof Date)) {
             throw new TypeError('Expiration date must be a date object')
         }
+        */
         if(typeof location !== 'string') {
             throw new TypeError('Location must be a string')
         }
@@ -34,6 +36,21 @@ export class Product {
         this.location = location;
         this.quantity = quantity;
         this.#id = null;
+    }
+
+    /**
+     * Converts a custom object into a plain javascript object
+     * @returns plain object
+     * @author Mikkel Hess
+     */
+    toPlainObject() {
+        return {
+            brand: this.brand,
+            price: this.price,
+            expirationDate: this.getDate(),
+            location: this.location,
+            quantity: this.quantity
+        };
     }
 
     /**
@@ -52,7 +69,7 @@ export class Product {
      */
     setId(id) {
         this.#id = id;
-    }
+    }   
 
     /**
      * Return string date
@@ -60,6 +77,10 @@ export class Product {
      */
     getDate() {
         return this.expirationDate.toISOString().split('T')[0];
+    }
+
+    equals() {
+        
     }
 }
 
