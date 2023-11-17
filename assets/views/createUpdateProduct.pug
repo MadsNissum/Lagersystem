@@ -12,7 +12,7 @@ html(lang="en")
     if product
         - var brand = product.brand;
         - var price = product.price;
-        - var date = product.expirationDate.toISOString().split('T')[0];
+        - var date = product.getDate();
         - var location = product.location;
         - var quantity = product.quantity;
     form(action=action, method="post")

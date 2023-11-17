@@ -64,6 +64,11 @@ app.put('/editProduct', (request, response) => {
     response.sendStatus(201);
 })
 
+
+// Function running once a day
+setInterval(myFunction, 1000 * 60 * 60 * 24);
+
+
 // Listen for connection
 app.listen(port, () => console.log(`Server listening on port: ${port}...`));
 
