@@ -36,6 +36,7 @@ describe('Get Product Method', () => {
 
 /**
  * Tests that the product gets deleted
+ * @author Mikkel Hess
  */
 describe('Delete product method', () => {
 
