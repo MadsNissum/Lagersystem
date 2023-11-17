@@ -51,6 +51,7 @@ async function handleSubmit(event) {
         try {
             await request(form.action, body, method);
             alert("Sucess!");
+            window.location = '/products'
         } catch {
             alert("Something went wrong on the server!");
         }
