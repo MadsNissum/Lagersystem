@@ -6,29 +6,27 @@ html(lang="en")
         title Produkt
         script(src="/script/createUpdateScript.js" defer)
     body
-    - var text = (product) ? "Edit product" : "Add product"
-    - var action = (product) ? "/editProduct" : "/createProduct"
-    h1= text 
-    if product
-        - var brand = product.brand;
-        - var price = product.price;
-        - var date = product.getDate();
-        - var location = product.location;
-        - var quantity = product.quantity;
-    form(action=action, method="post")
-        label(for="brand") Brand:
-        input(type="text" id="brand" value=brand)
-        br
-        label(for="price") Price: 
-        input(type="number" id="price" value=price)
-        br
-        label(for="date") Date: 
-        input(type="date" id="date" value=date)
-        br
-        label(for="location") Location: 
-        input(type="text" id="location" value=location)
-        br
-        label(for="quantity") Quantity:
-        input(type="number" id="quantity" value=quantity)
-        br
-        button(type="submit")= text
+    include header
+    main
+        - var text = (product) ? "Edit product" : "Add product"
+        - var action = (product) ? "/editProduct" : "/createProduct"
+        h1= text 
+        if product
+            - var brand = product.brand;
+            - var price = product.price;
+            - var date = product.expirationDate.toISOString().split('T')[0];
+            - var location = product.location;
+            - var quantity = product.quantity;
+        form(action=action, method="post")
+            label(for="brand") Brand:
+            input(type="text" id="brand" value=brand placeholder="Insert brand..")
+            label(for="price") Price: 
+            input(type="number" id="price" value=price placeholder="Insert price..")
+            label(for="date") Date: 
+            input(type="date" id="date" value=date)
+            label(for="location") Location: 
+            input(type="text" id="location" value=location placeholder="Insert location..")
+            label(for="quantity") Quantity:
+            input(type="number" id="quantity" value=quantity placeholder="Insert quantity..")
+            button(type="submit")= text
+    include footer
