@@ -60,8 +60,7 @@ app.post('/createProduct', (request, response) => {
 
 app.post('/registerSale', async (request, response) => {
     request.body.array.forEach(order => {
-        console.log(order.id);
-        //firestore.updateSale(order.id, order.amounts);
+        firestore.registerSale(order.id, order.amount);
     });
     response.sendStatus(200);
 })
