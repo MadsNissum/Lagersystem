@@ -14,6 +14,8 @@ const firebaseConfig = {
 const firebase_app = initializeApp(firebaseConfig);
 const db = getFirestore(firebase_app);
 const productCollection = collection(db, 'products');
+const transactionCollection = collection(db, 'transaction');
+const productRestockCollection = collection(db, 'productRestock')
 
 /**
  * Function returns an array of products from firestore
@@ -68,7 +70,9 @@ async function deleteProduct(id) {
  */
 async function addProduct(product) {
     // TODO Error checking on variables from product!
-    return await addDoc(productCollection, product);
+    let document = await addDoc(productCollection, product);
+    addProductRestock(product);
+    return document;
 }
 
 /**
@@ -96,7 +100,29 @@ async function registerSale(id, amount) {
     } else {
         updateProduct(id, JSON.parse(JSON.stringify(product)));
     }
+    
+    addTransaction(product, amount);
+}
+/**
+ * Inserts a record of a transaction when registering a sale.
+ * @param {*} product Product that was sold
+ * @param {*} amount Amount that was sold
+ * @author Kasper
+ */
+async function addTransaction(product, amount) {
+    product.amountSold = amount;
+    product.transactionDate = new Date().toISOString().split('T')[0];
+    await addDoc(transactionCollection, JSON.parse(JSON.stringify(product)));
 }
 
+/**
+ * Inserts a record when restocking product to warehouse.
+ * @param {*} product Product that was added
+ * @author Kasper
+ */
+async function addProductRestock(product) {
+    product.restockDate = new Date().toISOString().split('T')[0];
+    await addDoc(productRestockCollection, JSON.parse(JSON.stringify(product)));
+}
 
 export default { getProducts, getProduct, deleteProduct, addProduct, updateProduct, registerSale };
