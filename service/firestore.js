@@ -18,7 +18,7 @@ const productCollection = collection(db, 'products');
 /**
  * Function returns an array of products from firestore
  * @returns {Array<Product>} An array of Products
- * @author Mads Nissum
+ * @author Mads Nissum & Kasper
  */
 async function getProducts() {
     let productQueryDocs = await getDocs(productCollection);
@@ -82,5 +82,21 @@ async function updateProduct(id, product) {
     await updateDoc(docRef, product);
 }
 
+/**
+ * Counts down products quantity, deletes if quanitity less than 1
+ * @param {*} id Id of document in firebase
+ * @param {*} amount that will be sold
+ * @author Kasper
+ */
+async function registerSale(id, amount) {
+    let product = await getProduct(id);
+    product.quantity = product.quantity - amount;
+    if (product.quantity <= 0) {
+        deleteProduct(id);
+    } else {
+        updateProduct(id, JSON.parse(JSON.stringify(product)));
+    }
+}
 
-export default { getProducts, getProduct, deleteProduct, addProduct, updateProduct };
+
+export default { getProducts, getProduct, deleteProduct, addProduct, updateProduct, registerSale };

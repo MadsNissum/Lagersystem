@@ -3,6 +3,7 @@ import express from 'express';
 import { Product } from './model/Product.js'
 import firestore from './service/firestore.js';
 import * as url from 'url';
+import { notifyPeople } from './service/observer.js';
 
 
 // Consts
@@ -57,12 +58,24 @@ app.post('/createProduct', (request, response) => {
     response.sendStatus(201);
 })
 
+app.post('/registerSale', async (request, response) => {
+    request.body.array.forEach(order => {
+        firestore.registerSale(order.id, order.amount);
+    });
+    response.sendStatus(200);
+})
+
 
 // PUT
 app.put('/editProduct', (request, response) => {
     firestore.updateProduct(request.body.id, request.body.product);
     response.sendStatus(201);
 })
+
+
+// Function running once a day
+setInterval(notifyPeople, 1000 * 60 * 60 * 24);
+
 
 // Listen for connection
 app.listen(port, () => console.log(`Server listening on port: ${port}...`));

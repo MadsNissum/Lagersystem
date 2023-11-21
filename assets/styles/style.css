@@ -66,7 +66,7 @@ button:hover {
     background-color:rgb(194, 194, 194);
 }
 
-input[type="date"] {
+input {
     font-family: 'Arial', sans-serif;
     font-weight: bold;
     background-color: transparent;

@@ -36,6 +36,7 @@ describe('Get Product function', () => {
 
 /**
  * Tests that the product gets deleted
+ * @author Mikkel Hess
  */
 describe('Delete product function', () => {
 
@@ -55,18 +56,18 @@ describe('Delete product function', () => {
 
 })
 
-describe('Add Product function',()=>{
+describe('Add Product function', () => {
 
-    it('Should add the correct product',()=>{
-        
+    it('Should add the correct product', () => {
+
     })
 
 })
 
-describe('Get products function', ()=>{
+describe('Get products function', () => {
 
-    it('Should return an array of products',()=>{
-        
+    it('Should return an array of products', () => {
+
     })
 
 })

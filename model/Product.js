@@ -12,7 +12,7 @@ export class Product {
      * @author Mikkel Hess & Mads Nissum
      */
     constructor(brand, price, expirationDate, location, quantity) {
-
+    
         if(typeof brand !== 'string') {
             throw new TypeError('Brand must be a string')
         }
