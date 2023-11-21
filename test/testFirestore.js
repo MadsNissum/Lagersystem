@@ -56,3 +56,31 @@ describe('Delete product method', () => {
 
 })
 
+
+/**
+ * Tests that ensures a product recieves an update
+ * @author Amin Dahir
+ */
+describe('Update product function', () => {
+    it('Should update a product properly', async () => {
+        let preProduct = new Product('Grimbgen', 40, new Date("2013-11-28"), 'Skåde', 20);
+        let productId = "grimbergenTest";
+        const docRef = doc(db, 'products', productId);
+        await setDoc(docRef, preProduct.toPlainObject());
+
+        let updatedDetails = {
+            brand: "Grimbergen",
+            price: 38
+        };
+
+        await firestore.updateProduct(productId, updatedDetails);
+
+        let afterProduct = await firestore.getProduct(productId);
+
+        assert.strictEqual(afterProduct.name, updatedDetails.name);
+        assert.strictEqual(afterProduct.price, updatedDetails.price);
+        await firestore.deleteProduct(productId);
+
+    })
+})
+
