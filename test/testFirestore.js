@@ -66,7 +66,9 @@ describe('Add Product function', () => {
 
         let addedProduct = await firestore.getProduct(docRef.id);
 
-        assert.deepStrictEqual(product.toPlainObject(),addedProduct.toPlainObject())        
+        assert.deepStrictEqual(product.toPlainObject(),addedProduct.toPlainObject());
+
+        await firestore.deleteProduct(docRef.id);
     })
 })
 
@@ -93,7 +95,6 @@ describe('Update product function', () => {
         assert.strictEqual(afterProduct.name, updatedDetails.name);
         assert.strictEqual(afterProduct.price, updatedDetails.price);
         await firestore.deleteProduct(productId);
-
     })
 })
 

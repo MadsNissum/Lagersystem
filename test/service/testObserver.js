@@ -20,13 +20,13 @@ describe('Observer notifications', () => {
             let product = new Product('Test', 25, date, 'Test', 20);
             let docRef = await firestore.addProduct(product.toPlainObject());
 
-            let receivers = ['LagerSystemSkaade@hotmail.com']
+            let receivers = ['LagerSystemSkaade@hotmail.com', 'nissum_10@hotmail.com']
 
-            let response = await notifyPeople(receivers);
-
-            await firestore.deleteProduct(docRef.id);
-
-            assert.equal(receivers.toString(), response.accepted.toString());
+            notifyPeople(receivers).then(async (response) => {
+                await firestore.deleteProduct(docRef.id);
+                assert.equal(receivers.toString(), response.accepted.toString());
+                done();
+            });
         });
     });
 });
