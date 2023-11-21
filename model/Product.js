@@ -68,6 +68,9 @@ export class Product {
      * @author Mads Nissum
      */
     setId(id) {
+        if(typeof id !== 'string') {
+            throw new TypeError('Id must be a string')
+        }
         this.#id = id;
     }   
 
@@ -78,11 +81,8 @@ export class Product {
     getDate() {
         return this.expirationDate.toISOString().split('T')[0];
     }
-
-    equals() {
-        
-    }
 }
+
 
 
 
