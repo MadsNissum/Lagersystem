@@ -1,12 +1,25 @@
+const tbody = document.getElementById("productList")
+
 const brandPicker = document.getElementById("brandPicker");
 const quantityPicker = document.getElementById("quantityPicker");
 const pricePicker = document.getElementById("pricePicker");
+const datePicker = document.getElementById("dateValue");
 const locationPicker = document.getElementById("locationPicker");
+
+let brandValue = brandPicker.options[brandPicker.selectedIndex].text;
+let quantityValue = quantityPicker.options[quantityPicker.selectedIndex].text;
+let priceValue = pricePicker.options[pricePicker.selectedIndex].text;
+let dateValue = datePicker.options[datePicker.selectedIndex].text;
+let locationValue = locationPicker.options[locationPicker.selectedIndex].text;
+
+
 
 productsVariableArray("brand");
 productsVariableArray("quantity");
 productsVariableArray("price");
 productsVariableArray("location");
+
+console.log(brandValue, priceValue, quantityValue, dateValue, locationValue);
 
 /**
  * Changes url to add product
@@ -75,7 +88,7 @@ async function request(url) {
  * @author Lucas Andersen
  */
 async function productsVariableArray(variableType) {
-    let products = await request('/getProducts', null, "get"); 
+    let products = await request('/getProducts'); 
     let variableArray = []; 
 
     products.forEach(product => {
@@ -83,6 +96,7 @@ async function productsVariableArray(variableType) {
                 variableArray.push(product[variableType]); 
                 let option = document.createElement("option");
                 option.textContent = product[variableType];
+                option.value = product[variableType];
 
                 switch(variableType) {
                     case "brand": 
@@ -101,3 +115,4 @@ async function productsVariableArray(variableType) {
             }
         });
     }
+

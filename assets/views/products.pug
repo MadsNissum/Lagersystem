@@ -11,24 +11,24 @@ html(lang="en")
                 li
                     label Mærke:
                         select(id="brandPicker")
-                            option Alle
+                            option(value="") Alle
                 li 
                     label Mængde:
                         select(id="quantityPicker")
-                            option Alle
+                            option(value="") Alle
                 li
                     label Pris:
                         select(id="pricePicker")
-                            option Alle
+                            option(value="") Alle
                 li
                     label Udløbningsdato: 
-                        select
+                        select(id="dateValue")
                             option Ascending 
                             option Descending
                 li
                     label Lokation:
                         select(id="locationPicker")
-                            option Alle
+                            option(value="") Alle
 
             button(onclick="addProduct()") Register produkt
 
@@ -42,16 +42,16 @@ html(lang="en")
                         th Lokation
                         th Rediger 
                         th Slet
-                tbody
-                    each product in products
-                        tr
-                            td= product.brand
-                            td= product.quantity + ' stk.'
-                            td= product.price + ' kr.'
-                            td= product.getDate()
-                            td= product.location
-                            td
-                                button(onclick=`updateProduct('${product.getId()}')`) Rediger
-                            td
-                                button(onclick=`deleteProduct('${product.getId()}')`) Slet
+                tbody 
+                each product in products
+                    tr 
+                        td= product.brand
+                        td= product.quantity + ' stk.'
+                        td= product.price + ' kr.'
+                        td= product.getDate()
+                        td= product.location
+                        td
+                            button(onclick=`updateProduct('${product.getId()}')`) Rediger
+                        td
+                            button(onclick=`deleteProduct('${product.getId()}')`) Slet
         include footer
