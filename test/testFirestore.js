@@ -66,11 +66,9 @@ describe('Add Product function',()=>{
 describe('Get products function', ()=>{
 
     it('Should return an array of products',()=>{
-
-
-        
         
     })
 
 })
 
+describe()
