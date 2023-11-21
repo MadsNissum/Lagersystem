@@ -11,15 +11,15 @@ html(lang="en")
                 li
                     label Mærke:
                         select(id="brandPicker")
-                            option(value="") Alle
+                            option(value="Alle") Alle
                 li 
                     label Mængde:
                         select(id="quantityPicker")
-                            option(value="") Alle
+                            option(value="Alle") Alle
                 li
                     label Pris:
                         select(id="pricePicker")
-                            option(value="") Alle
+                            option(value="Alle") Alle
                 li
                     label Udløbningsdato: 
                         select(id="dateValue")
@@ -28,7 +28,9 @@ html(lang="en")
                 li
                     label Lokation:
                         select(id="locationPicker")
-                            option(value="") Alle
+                            option(value="Alle") Alle
+                li 
+                    button(onclick="navigateToPage()") Søg
 
             button(onclick="addProduct()") Register produkt
 

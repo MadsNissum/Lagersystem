@@ -12,15 +12,39 @@ let priceValue = pricePicker.options[pricePicker.selectedIndex].text;
 let dateValue = datePicker.options[datePicker.selectedIndex].text;
 let locationValue = locationPicker.options[locationPicker.selectedIndex].text;
 
-
-
 productsVariableArray("brand");
 productsVariableArray("quantity");
 productsVariableArray("price");
 productsVariableArray("location");
 
-console.log(brandValue, priceValue, quantityValue, dateValue, locationValue);
 
+/**
+ * Navigates user to different page
+ * @author Lucas Andersen
+ */
+function navigateToPage() {
+    window.location = '/products?brand=' + brandValue + '&quantity=' + quantityValue + '&price=' + priceValue + '&expirationDate=' + dateValue + '&location=' + locationValue; 
+}
+
+/**
+ * Changes value of selects
+ * @author Lucas Andersen
+ */
+brandPicker.addEventListener("change", function() {
+    brandValue = this.value;
+});
+pricePicker.addEventListener("change", function() {
+    priceValue = this.value;
+});
+quantityPicker.addEventListener("change", function() {
+    quantityValue = this.value;
+});
+datePicker.addEventListener("change", function() {
+    dateValue = this.value;
+});
+locationPicker.addEventListener("change", function() {
+    locationValue = this.value;
+});
 /**
  * Changes url to add product
  * @author Mads Nissum
@@ -73,7 +97,6 @@ async function deleteRequest(url) {
  */
 async function request(url) {
     const respons = await fetch(url);
-    console.log(respons.status);
     if (respons.status !== 200) {
         console.log("TEST");
         throw new Error(respons.status);

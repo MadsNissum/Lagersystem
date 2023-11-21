@@ -114,7 +114,3 @@ app.put('/editProduct', (request, response) => {
 
 // Listen for connection
 app.listen(port, () => console.log(`Server listening on port: ${port}...`));
-
-
-
-
