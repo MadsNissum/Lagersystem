@@ -29,7 +29,7 @@ describe('Get Product function', () => {
 
         await setDoc(docRef, product.toPlainObject())
 
-        assert.deepStrictEqual(await firestore.getProduct('test'), product)
+        assert.deepStrictEqual(await firestore.getProduct(id), product)
         firestore.deleteProduct(id)
     })
 })
@@ -75,6 +75,7 @@ describe('Add Product function', () => {
 })
 
 describe('Register Sale function', () => {
+
     
 
 })
