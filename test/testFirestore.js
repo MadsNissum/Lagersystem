@@ -98,8 +98,14 @@ describe('Update product function', () => {
     })
 })
 
-describe('Register sale function', () => {
-    it('Should update the product if the quantity after the sale is above 0', ()=> {
+describe('Register sale function',() => {
+    it('Should update the product if the quantity after the sale is above 0', async ()=> {
+        let product = new Product('Fuck',50,new Date("2013-11-28",'Skåde',20))
+        await firestore.addProduct(product);
+
+        
+
+
 
     })
 
