@@ -68,7 +68,7 @@ async function deleteProduct(id) {
  */
 async function addProduct(product) {
     // TODO Error checking on variables from product!
-    await addDoc(productCollection, product);
+    return await addDoc(productCollection, product);
 }
 
 /**

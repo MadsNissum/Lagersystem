@@ -42,7 +42,7 @@ describe('Delete product function', () => {
 
     it('Should delete the correct product', async () => {
         let product = new Product('Carlsberg', 28, new Date("2013-11-16"), 'Skåde', 100)
-        let id = 'tes'
+        let id = 'test'
         const docRef = doc(db, 'products', id)
 
         await setDoc(docRef, product.toPlainObject())
@@ -56,20 +56,24 @@ describe('Delete product function', () => {
 
 })
 
+/**
+ * Tests that the product gets added
+ * @author Mikkel Hess
+ */
 describe('Add Product function', () => {
 
-    it('Should add the correct product', () => {
+    it('Should add the correct product', async () => {
+        let product = new Product('Carlsberg', 28, new Date("2013-11-16"), 'Skåde', 100)
+      
+        //adding the product
+        let docRef = await firestore.addProduct(product.toPlainObject())
 
+        let addedProduct = await firestore.getProduct(docRef.id);
+
+        assert.deepStrictEqual(product.toPlainObject(),addedProduct.toPlainObject())        
     })
-
 })
 
-describe('Get products function', () => {
-
-    it('Should return an array of products', () => {
-
-    })
+describe('Register Sale function', () => {
 
 })
-
-describe()
