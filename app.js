@@ -74,7 +74,7 @@ app.put('/editProduct', (request, response) => {
 
 
 // Function running once a day
-setInterval(notifyPeople, 1000 * 60 * 60 * 24);
+setInterval(() => {notifyPeople(['LagerSystemSkaade@hotmail.com'])}, 1000 * 60 * 60 * 24);
 
 
 // Listen for connection

@@ -57,7 +57,7 @@ async function getProduct(id) {
  */
 async function deleteProduct(id) {
     const docRef = doc(db, 'products', id);
-    await deleteDoc(docRef);
+    return await deleteDoc(docRef);
 }
 
 
@@ -68,7 +68,7 @@ async function deleteProduct(id) {
  */
 async function addProduct(product) {
     // TODO Error checking on variables from product!
-    await addDoc(productCollection, product);
+    return await addDoc(productCollection, product);
 }
 
 /**

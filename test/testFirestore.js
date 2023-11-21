@@ -3,7 +3,6 @@ import { setDoc, doc, deleteDoc, getFirestore } from "firebase/firestore"
 import { Product } from "../model/Product.js"
 import firestore from "../service/firestore.js"
 import assert from 'assert'
-import { log } from "console";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBd9SN8XxBIHhI1HdabdJfqt6HcveoYGoU",
