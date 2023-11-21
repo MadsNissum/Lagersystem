@@ -16,41 +16,52 @@ const transporter = nodemailer.createTransport({
 
 notifyPeople()
 
-export async function notifyPeople() {
-    const product = await firestore.getProducts();
-    let array = [];
+/**
+ * Notify people of product in database that expries in 10 days.
+ * @param {Array<String>} receivers List of mail adresses to send to
+ * @returns response of either info or error
+ */
+export async function notifyPeople(receivers) {
+    return new Promise(async (resolve, reject) => {
+        const product = await firestore.getProducts();
+        let array = [];
 
-    product.forEach(product => {
-        let date = new Date();
-        date.setDate(date.getDate() + 10);
+    
+        product.forEach(product => {
+            let date = new Date();
+            date.setDate(date.getDate() + 10);
 
-        if (product.getDate() == date.toISOString().split('T')[0]) {
-            const brandText = String(product.brand);
-            const exDate = String(product.getDate());
-            array.push({text: brandText, date: exDate});
-        }
-    })
-
-    if (array.length != 0) {
-        let html = "";
-
-        array.forEach(product => {
-            html += `${product.text} udløber her den <b>${product.date}</b><br>`;
+            if (product.getDate() == date.toISOString().split('T')[0]) {
+                const brandText = String(product.brand);
+                const exDate = String(product.getDate());
+                array.push({ text: brandText, date: exDate });
+            }
         })
 
-        const mailData = {
-            from: 'LagerSystemSkaade@hotmail.com',  // sender address
-            replyTo: 'LagerSystemSkaade@hotmail.com',
-            to: 'mikkelhess@icloud.com, nissum_10@hotmail.com',   // list of receivers
-            subject: `Inventar er ved at udløbe på dato!`,
-            html: html,
-        };
-    
-        transporter.sendMail(mailData, (err, info) => {
-            if (err)
-                console.log(err)
-            else
-                console.log(info);
-        });
-    }
+        if (array.length != 0) {
+            let html = "";
+
+            array.forEach(product => {
+                html += `${product.text} udløber her den <b>${product.date}</b><br>`;
+            })
+
+            const mailData = {
+                from: 'LagerSystemSkaade@hotmail.com',  // sender address
+                replyTo: 'LagerSystemSkaade@hotmail.com',
+                to: receivers.toString(),   // list of receivers
+                subject: `Inventar er ved at udløbe på dato!`,
+                html: html,
+            };
+
+            transporter.sendMail(mailData, (err, info) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(info);
+                }
+            });
+        } else {
+            resolve(null);
+        }
+    })
 }

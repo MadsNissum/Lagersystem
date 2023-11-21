@@ -48,9 +48,17 @@ app.get('/editProduct/:id', async (request, response) => {
 
 // DELETES
 app.delete('/products/:id', async (request, response) => {
-    await firestore.deleteProduct(request.params.id);
-    response.sendStatus(200);
-})
+    const result = await firestore.deleteProduct(request.params.id);
+
+    if (result) {
+        //Deletion was successful
+        response.sendStatus(200);
+    } else {
+        //Deletion failed
+        console.error('Error deleting product:', result);
+        response.status(500).send('Internal Server Error');
+    }
+});
 
 // POSTS
 app.post('/createProduct', (request, response) => {
@@ -74,7 +82,7 @@ app.put('/editProduct', (request, response) => {
 
 
 // Function running once a day
-setInterval(notifyPeople, 1000 * 60 * 60 * 24);
+setInterval(() => {notifyPeople(['LagerSystemSkaade@hotmail.com'])}, 1000 * 60 * 60 * 24);
 
 
 // Listen for connection

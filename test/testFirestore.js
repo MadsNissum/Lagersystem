@@ -3,7 +3,6 @@ import { setDoc, doc, deleteDoc, getFirestore } from "firebase/firestore"
 import { Product } from "../model/Product.js"
 import firestore from "../service/firestore.js"
 import assert from 'assert'
-import { log } from "console";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBd9SN8XxBIHhI1HdabdJfqt6HcveoYGoU",
@@ -50,10 +49,7 @@ describe('Delete product function', () => {
         await firestore.deleteProduct(id)
 
         assert.strictEqual(await firestore.getProduct(id), null)
-
-
     })
-
 })
 
 /**
@@ -70,11 +66,36 @@ describe('Add Product function', () => {
 
         let addedProduct = await firestore.getProduct(docRef.id);
 
-        assert.deepStrictEqual(product.toPlainObject(),addedProduct.toPlainObject())        
+        assert.deepStrictEqual(product.toPlainObject(),addedProduct.toPlainObject());
+
+        await firestore.deleteProduct(docRef.id);
     })
 })
 
-describe('Register Sale function', () => {
+/**
+ * Tests that ensures a product recieves an update
+ * @author Amin Dahir
+ */
+describe('Update product function', () => {
+    it('Should update a product properly', async () => {
+        let preProduct = new Product('Grimbgen', 40, new Date("2013-11-28"), 'Skåde', 20);
+        let productId = "grimbergenTest";
+        const docRef = doc(db, 'products', productId);
+        await setDoc(docRef, preProduct.toPlainObject());
 
-    
+        let updatedDetails = {
+            brand: "Grimbergen",
+            price: 38
+        };
+
+        await firestore.updateProduct(productId, updatedDetails);
+
+        let afterProduct = await firestore.getProduct(productId);
+
+        assert.strictEqual(afterProduct.name, updatedDetails.name);
+        assert.strictEqual(afterProduct.price, updatedDetails.price);
+        await firestore.deleteProduct(productId);
+    })
 })
+
+
