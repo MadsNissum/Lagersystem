@@ -49,10 +49,7 @@ describe('Delete product function', () => {
         await firestore.deleteProduct(id)
 
         assert.strictEqual(await firestore.getProduct(id), null)
-
-
     })
-
 })
 
 /**
