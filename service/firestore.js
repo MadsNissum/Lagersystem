@@ -18,7 +18,7 @@ const productCollection = collection(db, 'products');
 /**
  * Function returns an array of products from firestore
  * @returns {Array<Product>} An array of Products
- * @author Mads Nissum
+ * @author Mads Nissum & Kasper
  */
 async function getProducts() {
     let productQueryDocs = await getDocs(productCollection);
@@ -35,21 +35,25 @@ async function getProducts() {
  * Function return a Product with a given id from firestore
  * @param {String} id Auto generated ID from firebase
  * @returns {Product} A product
- * @author Mads Nissum
+ * @author Mads Nissum & Mikkel Hess
  */
 async function getProduct(id) {
     const docRef = doc(db, 'products', id);
     const productDoc = await getDoc(docRef);
     let data = productDoc.data();
-    let product = new Product(data.brand, Number(data.price), new Date(data.expirationDate), data.location, Number(data.quantity));
-    product.setId(productDoc.id);
-    return product;
+    if (data != null) {
+        let product = new Product(data.brand, Number(data.price), new Date(data.expirationDate), data.location, Number(data.quantity));
+        product.setId(productDoc.id);
+        return product;
+    } else {
+        return null;
+    }
 }
 
 /**
  * Deletes doc with gives id from firebase
  * @param {String} id Auto generated ID from firebase
- * @author Mads Nissum
+ * @author Mads Nissum & Mikkel Hess
  */
 async function deleteProduct(id) {
     const docRef = doc(db, 'products', id);
@@ -79,29 +83,20 @@ async function updateProduct(id, product) {
 }
 
 /**
- * 
- * @param {*} id Auto genrerated ID from firebase
- * @param {*} object  
- * @author Amin Dahir & Christian Surma
+ * Counts down products quantity, deletes if quanitity less than 1
+ * @param {*} id Id of document in firebase
+ * @param {*} amount that will be sold
+ * @author Kasper
  */
-async function updateSale(id, amounts) {
-    const docRef = doc(db, 'products', id)
-    const productDoc = await getDoc(docRef);
-    const currentData = productDoc.data();
-    
-    if(currentData[id] > amounts[id]) {
-        currentData[id] -= amounts[id];
+async function registerSale(id, amount) {
+    let product = await getProduct(id);
+    product.quantity = product.quantity - amount;
+    if (product.quantity <= 0) {
+        deleteProduct(id);
     } else {
-        console.log("fejl - beholdningen er mindre end salget")
+        updateProduct(id, JSON.parse(JSON.stringify(product)));
     }
-    await updateDoc(docRef, currentData)
 }
 
 
-
-
-
-
-
-
-export default { getProducts, getProduct, deleteProduct, addProduct, updateProduct, updateSale };
+export default { getProducts, getProduct, deleteProduct, addProduct, updateProduct, registerSale };

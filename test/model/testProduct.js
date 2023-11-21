@@ -1,7 +1,10 @@
-import Product from "../model/Product.js"
+import Product from "../../model/Product.js"
 import assert from 'assert'
 
-
+/**
+ * Tests instantiation of Product object
+ * @author Mikkel Hess
+ */
 describe('Product Constructor',()=>{
     describe('Initialize object properties', ()=>{
         const product = new Product('Carlsberg',50,new Date('2023-11-15'),'Skåde', 20, '016120')
@@ -30,6 +33,10 @@ describe('Product Constructor',()=>{
         })
         
     })
+    /**
+     * Tests that the product variables are the correct types
+     * @author Mikkel Hess
+     */
     describe('Type checkings', () => {
         const product = new Product('Carlsberg',50.50,new Date('2023-11-15'),'Skåde',20,'016120')
 
@@ -56,6 +63,10 @@ describe('Product Constructor',()=>{
 
     })
 
+    /**
+     * Tests that errors gets thrown if the types are wrong
+     * @author Mikkel Hess
+     */
     describe('Error throws', () => {
         it('Should throw an error if brand is the wrong type', ()=>{
 
