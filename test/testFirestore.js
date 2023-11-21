@@ -75,5 +75,6 @@ describe('Add Product function', () => {
 })
 
 describe('Register Sale function', () => {
+    
 
 })
