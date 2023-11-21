@@ -98,4 +98,13 @@ describe('Update product function', () => {
     })
 })
 
+describe('Register sale function', () => {
+    it('Should update the product if the quantity after the sale is above 0', ()=> {
 
+    })
+
+    it('Should delete the product if the quantity is below 0 after the sale', ()=> {
+
+    })
+
+})
