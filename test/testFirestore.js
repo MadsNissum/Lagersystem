@@ -20,7 +20,7 @@ const db = getFirestore(firebase_app);
  * Tests that getProduct gets the correct product object
  * @author Mikkel Hess
  */
-describe('Get Product Method', () => {
+describe('Get Product function', () => {
     it('Should get the correct product', async () => {
         let product = new Product('Smirnoff Ice', 12, new Date("2013-11-15"), 'Skåde', 20)
         let id = 'test';
@@ -28,7 +28,7 @@ describe('Get Product Method', () => {
 
         await setDoc(docRef, product.toPlainObject())
 
-        assert.deepStrictEqual(await firestore.getProduct('test'), product)
+        assert.deepStrictEqual(await firestore.getProduct(id), product)
         firestore.deleteProduct(id)
     })
 })
@@ -37,11 +37,11 @@ describe('Get Product Method', () => {
  * Tests that the product gets deleted
  * @author Mikkel Hess
  */
-describe('Delete product method', () => {
+describe('Delete product function', () => {
 
     it('Should delete the correct product', async () => {
         let product = new Product('Carlsberg', 28, new Date("2013-11-16"), 'Skåde', 100)
-        let id = 'tes'
+        let id = 'test'
         const docRef = doc(db, 'products', id)
 
         await setDoc(docRef, product.toPlainObject())
@@ -52,5 +52,29 @@ describe('Delete product method', () => {
 
 
     })
+
+})
+
+/**
+ * Tests that the product gets added
+ * @author Mikkel Hess
+ */
+describe('Add Product function', () => {
+
+    it('Should add the correct product', async () => {
+        let product = new Product('Carlsberg', 28, new Date("2013-11-16"), 'Skåde', 100)
+      
+        //adding the product
+        let docRef = await firestore.addProduct(product.toPlainObject())
+
+        let addedProduct = await firestore.getProduct(docRef.id);
+
+        assert.deepStrictEqual(product.toPlainObject(),addedProduct.toPlainObject())        
+    })
+})
+
+describe('Register Sale function', () => {
+
+    
 
 })
