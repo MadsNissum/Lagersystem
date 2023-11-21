@@ -56,3 +56,12 @@ describe('Delete product method', () => {
 
 })
 
+describe('Add product method', ()=> {
+
+})
+
+describe('Update product method',()=>{
+
+
+    
+})
