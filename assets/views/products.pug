@@ -10,35 +10,27 @@ html(lang="en")
             ul(class="filter")
                 li
                     label Mærke:
-                        select
-                            option Alle
-                            option Mærke 1
-                            option Mærke 2
-                            option Mærke 3
+                        select(id="brandPicker")
+                            option(value="Alle") Alle
                 li 
                     label Mængde:
-                        select
-                            option Alle
-                            option 10-30
-                            option 30-60
-                            option 60-100+
+                        select(id="quantityPicker")
+                            option(value="Alle") Alle
                 li
                     label Pris:
-                        select
-                            option Alle
-                            option 10-30 kr.
-                            option 30-60 kr. 
-                            option 60-100+ kr.
+                        select(id="pricePicker")
+                            option(value="Alle") Alle
                 li
                     label Udløbningsdato: 
-                        input(type="date")
+                        select(id="dateValue")
+                            option Ascending 
+                            option Descending
                 li
                     label Lokation:
-                        select
-                            option Alle
-                            option Skåde
-                            option Aarhus
-                            option Vandrup
+                        select(id="locationPicker")
+                            option(value="Alle") Alle
+                li 
+                    button(onclick="navigateToPage()") Søg
 
             button(onclick="addProduct()") Register produkt
 
@@ -52,16 +44,16 @@ html(lang="en")
                         th Lokation
                         th Rediger 
                         th Slet
-                tbody
-                    each product in products
-                        tr
-                            td= product.brand
-                            td= product.quantity + ' stk.'
-                            td= product.price + ' kr.'
-                            td= product.getDate()
-                            td= product.location
-                            td
-                                button(onclick=`updateProduct('${product.getId()}')`) Rediger
-                            td
-                                button(onclick=`deleteProduct('${product.getId()}')`) Slet
+                tbody 
+                each product in products
+                    tr 
+                        td= product.brand
+                        td= product.quantity + ' stk.'
+                        td= product.price + ' kr.'
+                        td= product.getDate()
+                        td= product.location
+                        td
+                            button(onclick=`updateProduct('${product.getId()}')`) Rediger
+                        td
+                            button(onclick=`deleteProduct('${product.getId()}')`) Slet
         include footer
