@@ -6,6 +6,7 @@ import { notifyPeople } from './service/observer.js';
 import { addEmail, deleteEmail, getEmail, getEmails, updateEmail } from './database/emailDB.js';
 import { addProduct, deleteProduct, getProduct, getProducts, updateProduct } from './database/productDB.js';
 import { getFilterAndSortProducts } from './service/filterProduct.js';
+import { getTransactions } from './database/transactionDB.js';
 
 
 // Consts
@@ -77,7 +78,7 @@ app.get('/editMail/:id', async (request, response) => {
 })
 
 app.get('/transactions', async (request, response) => {
-    let transactions = await firestore.getTransactions();
+    let transactions = await getTransactions();
     response.render('transactions', { transactions: transactions });
 });
 

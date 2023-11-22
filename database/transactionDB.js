@@ -1,6 +1,7 @@
 import { db } from './firestore.js';
 import { getFirestore, collection, getDocs, getDoc, doc, deleteDoc, addDoc, updateDoc } from 'firebase/firestore';
 import { deleteProduct, getProduct, updateProduct } from "./productDB.js";
+import { Sale } from '../model/Sale.js';
 
 const transactionCollection = collection(db, 'transaction');
 
