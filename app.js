@@ -76,6 +76,11 @@ app.get('/editMail/:id', async (request, response) => {
     response.render('createUpdateMail', {email: mail});
 })
 
+app.get('/transactions', async (request, response) => {
+    let transactions = await firestore.getTransactions();
+    response.render('transactions', { transactions: transactions });
+});
+
 // DELETES
 app.delete('/products/:id', async (request, response) => {
     deleteProduct(request.params.id).then(() => {

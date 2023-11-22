@@ -3,7 +3,7 @@ import { Product } from "../model/Product.js"
 import assert from 'assert'
 import { addProduct, deleteProduct, getProduct, updateProduct } from "../database/productDB.js";
 import { db } from '../database/firestore.js';
-import { registerSale } from "../database/transactionDB.js";
+import { getTransactions, registerSale } from "../database/transactionDB.js";
 
 /**
  * Tests that getProduct gets the correct product object
@@ -107,3 +107,10 @@ describe('Register sale function',() => {
     })
 
 })
+
+describe('Sales endpoint test', () => {
+    it('Should return an array of transactions', async () => {
+        let transactions = await getTransactions();
+        assert(Array.isArray(transactions), 'Transactions should be an array');
+    });
+});
