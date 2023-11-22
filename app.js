@@ -53,9 +53,7 @@ app.get('/editProduct/:id', async (request, response) => {
     response.render('createUpdateProduct', { product: product });
 });
 
-app.get('/emails', async (request, response) => {
-    response.send(await firestore.getEmails());
-});
+
 
 app.get('/emails', async (request, response) => {
     response.send(await getEmails());
