@@ -13,9 +13,6 @@ const transporter = nodemailer.createTransport({
     secure: false,
 });
 
-
-notifyPeople()
-
 /**
  * Notify people of product in database that expries in 10 days.
  * @param {Array<String>} receivers List of mail adresses to send to
@@ -25,7 +22,6 @@ export async function notifyPeople(receivers) {
     return new Promise(async (resolve, reject) => {
         const product = await firestore.getProducts();
         let array = [];
-
     
         product.forEach(product => {
             let date = new Date();
@@ -48,7 +44,7 @@ export async function notifyPeople(receivers) {
             const mailData = {
                 from: 'LagerSystemSkaade@hotmail.com',  // sender address
                 replyTo: 'LagerSystemSkaade@hotmail.com',
-                to: receivers.toString(),   // list of receivers
+                to: receivers,   // list of receivers
                 subject: `Inventar er ved at udløbe på dato!`,
                 html: html,
             };
@@ -57,6 +53,7 @@ export async function notifyPeople(receivers) {
                 if (err) {
                     reject(err);
                 } else {
+                    console.log("Mail sent!");
                     resolve(info);
                 }
             });

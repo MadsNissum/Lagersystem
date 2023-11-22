@@ -15,7 +15,8 @@ const firebase_app = initializeApp(firebaseConfig);
 const db = getFirestore(firebase_app);
 const productCollection = collection(db, 'products');
 const transactionCollection = collection(db, 'transaction');
-const productRestockCollection = collection(db, 'productRestock')
+const productRestockCollection = collection(db, 'productRestock');
+const emailsCollection = collection(db, 'emails');
 
 /**
  * Function returns an array of products from firestore
@@ -122,7 +123,15 @@ async function addTransaction(product, amount) {
  */
 async function addProductRestock(product) {
     product.restockDate = new Date().toISOString().split('T')[0];
-    await addDoc(productRestockCollection, JSON.parse(JSON.stringify(product)));
+    await addDoc(productRestockCollection, product);
 }
 
-export default { getProducts, getProduct, deleteProduct, addProduct, updateProduct, registerSale };
+async function getEmails() {
+    return (await getDocs(emailsCollection)).docs.map(doc => doc.data().email);
+}
+
+async function addEmail(email) {
+    await addDoc(emailsCollection, email)
+}
+
+export default { getProducts, getProduct, deleteProduct, addProduct, updateProduct, registerSale, getEmails, addEmail };
