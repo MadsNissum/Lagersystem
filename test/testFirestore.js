@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { setDoc, doc, deleteDoc, getFirestore } from "firebase/firestore"
 import { Product } from "../model/Product.js"
+import { Sale } from "../model/Sale.js"
 import firestore from "../service/firestore.js"
 import assert from 'assert'
 
@@ -98,3 +99,9 @@ describe('Update product function', () => {
     })
 })
 
+describe('Sales endpoint test', () => {
+    it('Should return an array of transactions', async () => {
+        let transactions = await firestore.getTransactions();
+        assert(Array.isArray(transactions), 'Transactions should be an array');
+    });
+});

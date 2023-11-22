@@ -62,5 +62,4 @@ export class Sale {
     getTransactionDate() {
         return this.transactionDate.toISOString().split('T')[0];
     }
-
 }
