@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title E-mail
+        script(src="/script/createUpdateScript.js" defer)
+    body
+    include header
+    main
+        - var text = (email) ? "Edit E-mail" : "Add E-mail"
+        - var action = (email) ? "/editEmail" : "/createEmail"
+        h1= text 
+        if email
+            - var email = mail.mail;
+            - var name = mail.name;
+
+        form(action=action, method="post")
+            label(for="email") Email:
+            input(type="text" id="email" value=brand placeholder="indsæt e-mail..")
+            label(for="name") Navn: 
+            input(type="text" id="name" value=price placeholder="Indsæt navn..")
+            button(type="submit")= text
+    include footer

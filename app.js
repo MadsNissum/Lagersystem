@@ -1,9 +1,9 @@
 // Imports
-import express from 'express';
+import express, { response } from 'express';
 import { Product } from './model/Product.js'
 import firestore from './service/firestore.js';
 import * as url from 'url';
-import { notifyPeople } from './service/observer.js';
+// import { notifyPeople } from './service/observer.js';
 
 
 // Consts
@@ -44,6 +44,20 @@ app.get('/editProduct/:id', async (request, response) => {
     const id = request.params.id;
     let product = await firestore.getProduct(id);
     response.render('createUpdateProduct', { product: product });
+})
+
+app.get('/mail', (request, response) => {
+    response.render('mail');
+});
+
+app.get('/addMail', (request, response) => {
+    response.render('createUpdateMail', { mail: null });
+})
+
+app.get('/editMail/:id', async (request, response) => {
+    const id = request.params.id;
+    // let mail = await firestore.getMail(id);
+    response.render('createUpdateMail');
 })
 
 // DELETES
