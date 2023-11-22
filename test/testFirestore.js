@@ -86,3 +86,24 @@ describe('Update product function', () => {
     })
 })
 
+describe('Register sale function',() => {
+    it('Should update the product if the quantity after the sale is above 0', async ()=> {
+        let product = new Product('Fuck',50,new Date("2013-11-28"),'Skåde',20)
+        let docRef = await firestore.addProduct(product.toPlainObject());
+    
+        console.log("Før Sale" + await firestore.getProduct(docRef.id).quantity);
+        await firestore.registerSale(docRef.id,10)
+        console.log("Efter Sale" + await firestore.getProduct(docRef.id).quantity);
+
+        assert.equal(await firestore.getProduct(docRef.id).quantity,10)
+        
+        await firestore.deleteProduct(docRef.id)
+    })
+
+       
+
+    it('Should delete the product if the quantity is below 0 after the sale', ()=> {
+
+    })
+
+})
