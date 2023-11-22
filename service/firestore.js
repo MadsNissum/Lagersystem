@@ -87,6 +87,18 @@ async function updateProduct(id, product) {
     await updateDoc(docRef, product);
 }
 
+
+async function getTransactions() {
+    let transactionsQueryDocs = await getDocs(transactionCollection);
+    let transactions = transactionsQueryDocs.docs.map(doc => {
+        let data = doc.data();
+        let transaction = new Product(data.brand, Number(data.price), new Date(data.expirationDate), data.location, Number(data.quantity));
+        transaction.setId(doc.id);
+        return transaction;
+    })
+    return transactions;
+}
+
 /**
  * Counts down products quantity, deletes if quanitity less than 1
  * @param {*} id Id of document in firebase
@@ -104,6 +116,7 @@ async function registerSale(id, amount) {
     
     addTransaction(product, amount);
 }
+
 /**
  * Inserts a record of a transaction when registering a sale.
  * @param {*} product Product that was sold
