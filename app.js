@@ -55,7 +55,7 @@ app.get('/emails', async (request, response) => {
 
 // DELETES
 app.delete('/products/:id', async (request, response) => {
-    firestore.deleteProduct(request.params.id).then(() => {
+    deleteProduct(request.params.id).then(() => {
         response.sendStatus(200);
     }).catch((reason) => {
         console.error('Error deleting product:', reason);
