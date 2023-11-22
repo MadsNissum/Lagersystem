@@ -33,3 +33,18 @@ async function addTransaction(product, amount) {
     product.transactionDate = new Date().toISOString().split('T')[0];
     await addDoc(transactionCollection, JSON.parse(JSON.stringify(product)));
 }
+
+/**
+ * Function returns an array of products from firestore
+ * @returns {Array<Sale>} An array of Products
+ * @author Lucas Andersen
+ */
+export async function getTransactions() {
+    let transactionsQueryDocs = await getDocs(transactionCollection);
+    let transactions = transactionsQueryDocs.docs.map(doc => {
+        let data = doc.data();
+        let transaction = new Sale(Number(data.amountSold), data.brand, new Date(data.expirationDate), data.location, Number(data.price), Number(data.quantity), new Date(data.expirationDate))
+        return transaction;
+    });
+    return transactions;
+}
