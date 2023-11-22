@@ -2,27 +2,41 @@ import nodemailer from 'nodemailer';
 import { getProducts } from '../database/productDB.js';
 
 
-// create reusable transporter object using the default SMTP transport
-const transporter = nodemailer.createTransport({
-    port: 587,
-    host: "smtp.office365.com",
-    auth: {
-        user: 'LagerSystemSkaade@hotmail.com',
-        pass: 'Gruppenersej123'
-    },
-    secure: false,
-});
+
+let messageArray = [];
+
+/**
+ * Adds message to daily sent email
+ * @param {String} message message that want to be sent
+ * @author Mads Nissum
+ */
+export function addMessageToMail(message) {
+    messageArray.push(message)
+}
 
 /**
  * Notify people of product in database that expries in 10 days.
  * @param {Array<String>} receivers List of mail adresses to send to
  * @returns response of either info or error
+ * @author Mads Nissum
  */
 export async function notifyPeople(receivers) {
+    // create reusable transporter object using the default SMTP transport
+    const transporter = nodemailer.createTransport({
+        port: 587,
+        host: "smtp.office365.com",
+        auth: {
+            user: 'LagerSystemSkaade@hotmail.com',
+            pass: 'Gruppenersej123'
+        },
+        secure: false,
+    });
+
+
     return new Promise(async (resolve, reject) => {
         const product = await getProducts();
         let array = [];
-    
+
         product.forEach(product => {
             let date = new Date();
             date.setDate(date.getDate() + 10);
@@ -34,11 +48,15 @@ export async function notifyPeople(receivers) {
             }
         })
 
-        if (array.length != 0) {
+        if (array.length != 0 || messageArray.length != 0) {
             let html = "";
 
             array.forEach(product => {
                 html += `${product.text} udløber her den <b>${product.date}</b><br>`;
+            })
+
+            messageArray.forEach(message => {
+                html += `${message}<br>`
             })
 
             const mailData = {
@@ -54,7 +72,7 @@ export async function notifyPeople(receivers) {
                     reject(err);
                 } else {
                     console.log("Mail sent!");
-                    resolve(info);
+                    resolve({info: info, message: html});
                 }
             });
         } else {
