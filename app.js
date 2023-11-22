@@ -1,9 +1,10 @@
 // Imports
 import express from 'express';
 import { Product } from './model/Product.js'
-import firestore from './service/firestore.js';
 import * as url from 'url';
 import { notifyPeople } from './service/observer.js';
+import { getEmails } from './database/emailDB.js';
+import { addProduct, deleteProduct, getProduct, getProducts } from './database/productDB.js';
 import session from 'express-session';
 
 
@@ -40,7 +41,7 @@ app.get('/', (request, response) => {
 })
 
 app.get('/products', async (request, response) => {
-    let products = await firestore.getProducts();
+    let products = await getProducts();
     response.render('products', { products: products });
 })
 
@@ -50,13 +51,17 @@ app.get('/addProduct', (request, response) => {
 
 app.get('/editProduct/:id', async (request, response) => {
     const id = request.params.id;
-    let product = await firestore.getProduct(id);
+    let product = await getProduct(id);
     response.render('createUpdateProduct', { product: product });
 })
 
+app.get('/emails', async (request, response) => {
+    response.send(await getEmails());
+});
+
 // DELETES
 app.delete('/products/:id', async (request, response) => {
-    const result = await firestore.deleteProduct(request.params.id);
+    const result = await deleteProduct(request.params.id);
 
     if (result) {
         //Deletion was successful
@@ -70,24 +75,22 @@ app.delete('/products/:id', async (request, response) => {
 
 // POSTS
 app.post('/createProduct', (request, response) => {
-    firestore.addProduct(request.body.product);
+    addProduct(request.body.product);
     response.sendStatus(201);
 })
 
 app.post('/registerSale', async (request, response) => {
     request.body.array.forEach(order => {
-        firestore.registerSale(order.id, order.amount);
+        registerSale(order.id, order.amount);
     });
     response.sendStatus(200);
 })
-
 
 // PUT
 app.put('/editProduct', (request, response) => {
     firestore.updateProduct(request.body.id, request.body.product);
     response.sendStatus(201);
 })
-
 
 // Function running once a day
 setInterval(() => {notifyPeople(['LagerSystemSkaade@hotmail.com'])}, 1000 * 60 * 60 * 24);

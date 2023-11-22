@@ -1,20 +1,8 @@
-import { initializeApp } from "firebase/app";
 import { setDoc, doc, deleteDoc, getFirestore } from "firebase/firestore"
 import { Product } from "../model/Product.js"
-import firestore from "../service/firestore.js"
 import assert from 'assert'
-
-const firebaseConfig = {
-    apiKey: "AIzaSyBd9SN8XxBIHhI1HdabdJfqt6HcveoYGoU",
-    authDomain: "lagersystem-4f134.firebaseapp.com",
-    projectId: "lagersystem-4f134",
-    storageBucket: "lagersystem-4f134.appspot.com",
-    messagingSenderId: "573614154864",
-    appId: "1:573614154864:web:b3a2ee053065bc1c3e00b5"
-};
-
-const firebase_app = initializeApp(firebaseConfig);
-const db = getFirestore(firebase_app);
+import { addProduct, deleteProduct, getProduct, updateProduct } from "../database/productDB.js";
+import { db } from '../database/firestore.js';
 
 /**
  * Tests that getProduct gets the correct product object
@@ -28,8 +16,8 @@ describe('Get Product function', () => {
 
         await setDoc(docRef, product.toPlainObject())
 
-        assert.deepStrictEqual(await firestore.getProduct(id), product)
-        firestore.deleteProduct(id)
+        assert.deepStrictEqual(await getProduct(id), product)
+        deleteProduct(id)
     })
 })
 
@@ -46,9 +34,9 @@ describe('Delete product function', () => {
 
         await setDoc(docRef, product.toPlainObject())
 
-        await firestore.deleteProduct(id)
+        await deleteProduct(id)
 
-        assert.strictEqual(await firestore.getProduct(id), null)
+        assert.strictEqual(await getProduct(id), null)
     })
 })
 
@@ -62,13 +50,13 @@ describe('Add Product function', () => {
         let product = new Product('Carlsberg', 28, new Date("2013-11-16"), 'Skåde', 100)
       
         //adding the product
-        let docRef = await firestore.addProduct(product.toPlainObject())
+        let docRef = await addProduct(product.toPlainObject())
 
-        let addedProduct = await firestore.getProduct(docRef.id);
+        let addedProduct = await getProduct(docRef.id);
 
         assert.deepStrictEqual(product.toPlainObject(),addedProduct.toPlainObject());
 
-        await firestore.deleteProduct(docRef.id);
+        await deleteProduct(docRef.id);
     })
 })
 
@@ -88,13 +76,13 @@ describe('Update product function', () => {
             price: 38
         };
 
-        await firestore.updateProduct(productId, updatedDetails);
+        await updateProduct(productId, updatedDetails);
 
-        let afterProduct = await firestore.getProduct(productId);
+        let afterProduct = await getProduct(productId);
 
         assert.strictEqual(afterProduct.name, updatedDetails.name);
         assert.strictEqual(afterProduct.price, updatedDetails.price);
-        await firestore.deleteProduct(productId);
+        await deleteProduct(productId);
     })
 })
 
