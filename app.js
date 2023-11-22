@@ -1,5 +1,5 @@
 // Imports
-import express from 'express';
+import express, { response } from 'express';
 import { Product } from './model/Product.js'
 import firestore from './service/firestore.js';
 import * as url from 'url';
@@ -45,6 +45,11 @@ app.get('/editProduct/:id', async (request, response) => {
     let product = await firestore.getProduct(id);
     response.render('createUpdateProduct', { product: product });
 })
+
+app.get('/sales', async (request, response) => {
+    let transactions = await firestore.getTransactions();
+    response.render('transactions', { transactions: transactions });
+});
 
 // DELETES
 app.delete('/products/:id', async (request, response) => {

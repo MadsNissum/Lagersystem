@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, getDoc, doc, deleteDoc, addDoc, updateDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, getDoc, doc, deleteDoc, addDoc, updateDoc, Transaction } from 'firebase/firestore';
 import { Product } from "../model/Product.js";
 
 const firebaseConfig = {
@@ -87,12 +87,16 @@ async function updateProduct(id, product) {
     await updateDoc(docRef, product);
 }
 
-
+/**
+ * Function returns an array of products from firestore
+ * @returns {Array<Transaction>} An array of Products
+ * @author Lucas Andersen
+ */
 async function getTransactions() {
     let transactionsQueryDocs = await getDocs(transactionCollection);
     let transactions = transactionsQueryDocs.docs.map(doc => {
         let data = doc.data();
-        let transaction = new Product(data.brand, Number(data.price), new Date(data.expirationDate), data.location, Number(data.quantity));
+        let transaction = new Transaction(Number(data.amountSold), data.brand, new Date(data.expirationDate), data.location, Number(data.price), Number(data.quantity), new Date(transactionDate));
         transaction.setId(doc.id);
         return transaction;
     })
@@ -157,4 +161,4 @@ async function addEmail(email) {
     await addDoc(emailsCollection, email)
 }
 
-export default { getProducts, getProduct, deleteProduct, addProduct, updateProduct, registerSale, getEmails, addEmail };
+export default { getProducts, getProduct, deleteProduct, addProduct, updateProduct, registerSale, getEmails, addEmail, getTransactions};
