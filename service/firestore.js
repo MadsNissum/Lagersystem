@@ -126,10 +126,20 @@ async function addProductRestock(product) {
     await addDoc(productRestockCollection, product);
 }
 
+/**
+ * Function returns all emails from firestore storage
+ * @returns email list signed up
+ * @author Mads Nissum
+ */
 async function getEmails() {
     return (await getDocs(emailsCollection)).docs.map(doc => doc.data().email);
 }
 
+/**
+ * Adds an email to firestore storage
+ * @param {String} email String of email adresse
+ * @author Mads Nissum
+ */
 async function addEmail(email) {
     await addDoc(emailsCollection, email)
 }
