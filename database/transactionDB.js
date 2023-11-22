@@ -1,6 +1,6 @@
 import { db } from './firestore.js';
 import { getFirestore, collection, getDocs, getDoc, doc, deleteDoc, addDoc, updateDoc } from 'firebase/firestore';
-import { deleteProduct, updateProduct } from "./productDB.js";
+import { deleteProduct, getProduct, updateProduct } from "./productDB.js";
 
 const transactionCollection = collection(db, 'transaction');
 
@@ -16,7 +16,7 @@ export async function registerSale(id, amount) {
     if (product.quantity <= 0) {
         deleteProduct(id);
     } else {
-        updateProduct(id, JSON.parse(JSON.stringify(product)));
+        updateProduct(id, product.toPlainObject());
     }
     
     addTransaction(product, amount);

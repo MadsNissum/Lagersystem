@@ -3,6 +3,7 @@ import { Product } from "../model/Product.js"
 import assert from 'assert'
 import { addProduct, deleteProduct, getProduct, updateProduct } from "../database/productDB.js";
 import { db } from '../database/firestore.js';
+import { registerSale } from "../database/transactionDB.js";
 
 /**
  * Tests that getProduct gets the correct product object
@@ -89,16 +90,15 @@ describe('Update product function', () => {
 describe('Register sale function',() => {
     it('Should update the product if the quantity after the sale is above 0', async ()=> {
         let product = new Product('Fuck',50,new Date("2013-11-28"),'Skåde',20)
-        let docRef = await firestore.addProduct(product.toPlainObject());
+        let docRef = await addProduct(product.toPlainObject());
     
-        console.log("Før Sale" + await firestore.getProduct(docRef.id).quantity);
-        await firestore.registerSale(docRef.id,10)
-        console.log("Efter Sale" + await firestore.getProduct(docRef.id).quantity);
+        await registerSale(docRef.id,10)
+        let productdb = await getProduct(docRef.id);
 
-        assert.equal(await firestore.getProduct(docRef.id).quantity,10)
-        
-        await firestore.deleteProduct(docRef.id)
-    })
+        await deleteProduct(docRef.id)
+
+        assert.equal(productdb.quantity, 10)
+    });
 
        
 
