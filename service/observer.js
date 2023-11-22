@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import firestore from './firestore.js';
+import { getProducts } from '../database/productDB.js';
 
 
 // create reusable transporter object using the default SMTP transport
@@ -20,7 +20,7 @@ const transporter = nodemailer.createTransport({
  */
 export async function notifyPeople(receivers) {
     return new Promise(async (resolve, reject) => {
-        const product = await firestore.getProducts();
+        const product = await getProducts();
         let array = [];
     
         product.forEach(product => {
