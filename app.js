@@ -5,6 +5,7 @@ import * as url from 'url';
 import { notifyPeople } from './service/observer.js';
 import { getEmails } from './database/emailDB.js';
 import { addProduct, deleteProduct, getProduct, getProducts } from './database/productDB.js';
+import { getFilterAndSortProducts } from './service/filterProduct.js';
 
 
 // Consts
@@ -38,7 +39,7 @@ app.get('/products', async (request, response) => {
 });
 
 app.get('/getProducts', async (request, response) => {
-    let products = await firestore.getProducts();
+    let products = await getProducts();
     response.send(products);
 });
 
@@ -59,41 +60,6 @@ app.get('/emails', async (request, response) => {
 app.get('/emails', async (request, response) => {
     response.send(await getEmails());
 });
-
-/**
- * 
- * @param {?String} brand 
- * @param {?Int} price 
- * @param {?Int} quantity 
- * @param {?String} expirationDate 
- * @param {?String} location 
- * @author Lucas Andersen
- */
-async function getFilterAndSortProducts(brand, price, quantity, expirationDate, location) {
-    try {
-        let productsList = await firestore.getProducts();
-
-        const filteredList = productsList.filter((product) => (
-            (brand && brand != 'Alle' ? brand == product.brand : true) &&
-            (price && price != 'Alle' ?  price == product.price : true) &&
-            (quantity && quantity != 'Alle' ? quantity == product.quantity : true) &&
-            (location && location != 'Alle' ? location == product.location : true)
-        ));
-        
-        const sortedList = filteredList.sort((a, b) => {
-            const dateA = new Date(a.expirationDate);
-            const dateB = new Date(b.expirationDate);
-
-            return expirationDate && expirationDate.toLowerCase() === 'ascending'
-              ? dateA - dateB
-              : dateB - dateA;
-          });
-          return sortedList;
-
-    } catch (error) {
-        console.error('Error fetching or processing products:', error);
-    }
-}
 
 // DELETES
 app.delete('/products/:id', async (request, response) => {
