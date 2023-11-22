@@ -89,20 +89,23 @@ describe('Update product function', () => {
 
 describe('Register sale function',() => {
     it('Should update the product if the quantity after the sale is above 0', async ()=> {
-        let product = new Product('Fuck',50,new Date("2013-11-28"),'Skåde',20)
+        let product = new Product('Hindbær Brus',50,new Date("2013-11-28"),'Skåde',20)
         let docRef = await addProduct(product.toPlainObject());
     
         await registerSale(docRef.id,10)
         let productdb = await getProduct(docRef.id);
 
-        await deleteProduct(docRef.id)
-
+    
         assert.equal(productdb.quantity, 10)
+
+        await deleteProduct(docRef.id)
     });
 
        
 
     it('Should delete the product if the quantity is below 0 after the sale', ()=> {
+
+
 
     })
 
