@@ -46,7 +46,7 @@ app.get('/editProduct/:id', async (request, response) => {
     response.render('createUpdateProduct', { product: product });
 })
 
-app.get('/sales', async (request, response) => {
+app.get('/transactions', async (request, response) => {
     let transactions = await firestore.getTransactions();
     response.render('transactions', { transactions: transactions });
 });

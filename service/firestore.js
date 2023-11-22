@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs, getDoc, doc, deleteDoc, addDoc, updateDoc, Transaction } from 'firebase/firestore';
 import { Product } from "../model/Product.js";
+import { Sale } from "../model/Sale.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBd9SN8XxBIHhI1HdabdJfqt6HcveoYGoU",
@@ -89,19 +90,20 @@ async function updateProduct(id, product) {
 
 /**
  * Function returns an array of products from firestore
- * @returns {Array<Transaction>} An array of Products
+ * @returns {Array<Sale>} An array of Products
  * @author Lucas Andersen
  */
 async function getTransactions() {
     let transactionsQueryDocs = await getDocs(transactionCollection);
     let transactions = transactionsQueryDocs.docs.map(doc => {
         let data = doc.data();
-        let transaction = new Transaction(Number(data.amountSold), data.brand, new Date(data.expirationDate), data.location, Number(data.price), Number(data.quantity), new Date(transactionDate));
-        transaction.setId(doc.id);
-        return transaction;
-    })
-    return transactions;
-}
+        let transaction = new Sale(Number(data.amountSold), data.brand, new Date(data.expirationDate), data.location, Number(data.price), Number(data.quantity), new Date(data.expirationDate))
+        return transaction; 
+    });
+        return transactions;
+    }
+    
+
 
 /**
  * Counts down products quantity, deletes if quanitity less than 1

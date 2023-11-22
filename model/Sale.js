@@ -1,4 +1,4 @@
-export class Transaction { 
+export class Sale { 
     /**
      * Initializes a new transaction
      * @param {Number} amountSold
