@@ -107,9 +107,9 @@ describe('Register sale function',() => {
         await firestore.registerSale(docRef.id,10)
         console.log("Efter Sale" + await firestore.getProduct(docRef.id).quantity);
 
-        assert.equal(await firestore.getProduct(doc.id).quantity,10)
+        assert.equal(await firestore.getProduct(docRef.id).quantity,10)
         
-        await firestore.deleteProduct(doc.id)
+        await firestore.deleteProduct(docRef.id)
     })
 
        
