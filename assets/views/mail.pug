@@ -16,12 +16,12 @@ html(lang="en")
                             th Rediger 
                             th Slet
                     tbody
-                        // each mail in mails
+                        each mail in mails
                             tr
-                                td= mail.mail
-                                td= mail.navn
+                                td= mail.email
+                                td= mail.name
                                 td
-                                    button(onclick=`updateMail('${product.getId()}')`) Rediger
+                                    button(onclick=`updateMail('${mail.id}')`) Rediger
                                 td
-                                    button(onclick=`deleteMail('${product.getId()}')`) Slet
+                                    button(onclick=`deleteMail('${mail.id}')`) Slet
         include footer

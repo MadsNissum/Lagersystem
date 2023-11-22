@@ -3,8 +3,8 @@ import express, { response } from 'express';
 import { Product } from './model/Product.js'
 import * as url from 'url';
 import { notifyPeople } from './service/observer.js';
-import { getEmails } from './database/emailDB.js';
-import { addProduct, deleteProduct, getProduct, getProducts } from './database/productDB.js';
+import { addEmail, deleteEmail, getEmail, getEmails, updateEmail } from './database/emailDB.js';
+import { addProduct, deleteProduct, getProduct, getProducts, updateProduct } from './database/productDB.js';
 import { getFilterAndSortProducts } from './service/filterProduct.js';
 
 
@@ -59,23 +59,35 @@ app.get('/emails', async (request, response) => {
     response.send(await getEmails());
 });
 
-app.get('/mail', (request, response) => {
-    response.render('mail');
+app.get('/mail', async (request, response) => {
+    response.render('mail', {mails: await getEmails()});
 });
 
 app.get('/addMail', (request, response) => {
-    response.render('createUpdateMail', { mail: null });
+    response.render('createUpdateMail', { email: null });
 })
 
 app.get('/editMail/:id', async (request, response) => {
     const id = request.params.id;
-    // let mail = await firestore.getMail(id);
-    response.render('createUpdateMail');
+    let mail = await getEmail(id);
+
+    console.log(mail);
+
+    response.render('createUpdateMail', {email: mail});
 })
 
 // DELETES
 app.delete('/products/:id', async (request, response) => {
     deleteProduct(request.params.id).then(() => {
+        response.sendStatus(200);
+    }).catch((reason) => {
+        console.error('Error deleting product:', reason);
+        response.status(500).send('Internal Server Error');
+    });
+});
+
+app.delete('/mail/:id', async (request, response) => {
+    deleteEmail(request.params.id).then(() => {
         response.sendStatus(200);
     }).catch((reason) => {
         console.error('Error deleting product:', reason);
@@ -97,13 +109,18 @@ app.post('/registerSale', async (request, response) => {
 });
 
 app.post('/addEmail', async (request, response) => {
-    firestore.addEmail(request.body);
-    response.sendStatus(200);
-})
+    addEmail(request.body.email);
+    response.sendStatus(201);
+});
 
 // PUT
 app.put('/editProduct', (request, response) => {
-    firestore.updateProduct(request.body.id, request.body.product);
+    updateProduct(request.body.id, request.body.product);
+    response.sendStatus(201);
+});
+
+app.put('/editEmail', (request, response) => {
+    updateEmail(request.body.id, request.body.email);
     response.sendStatus(201);
 });
 

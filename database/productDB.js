@@ -65,8 +65,8 @@ export async function addProduct(product) {
 
 /**
  * Updates product with given id in firestore
- * @param {*} id Auto generated ID from firebase
- * @param {*} product class Product object
+ * @param {String} id Auto generated ID from firebase
+ * @param {Product} product class Product object
  * @author Mads Nissum
  */
 export async function updateProduct(id, product) {
