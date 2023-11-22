@@ -59,6 +59,20 @@ app.get('/emails', async (request, response) => {
     response.send(await getEmails());
 });
 
+app.get('/mail', (request, response) => {
+    response.render('mail');
+});
+
+app.get('/addMail', (request, response) => {
+    response.render('createUpdateMail', { mail: null });
+})
+
+app.get('/editMail/:id', async (request, response) => {
+    const id = request.params.id;
+    // let mail = await firestore.getMail(id);
+    response.render('createUpdateMail');
+})
+
 // DELETES
 app.delete('/products/:id', async (request, response) => {
     deleteProduct(request.params.id).then(() => {
