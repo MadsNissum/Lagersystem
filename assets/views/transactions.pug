@@ -10,14 +10,12 @@ html(lang="en")
                 thead
                     tr 
                         th Udløbningsdato 
-                        th Transactiondato
+                        th Transaktionsdato
                         th Antal solgt 
                         th Mærke
                         th Pris 
                         th Mængde 
                         th Lokation
-                        th Rediger 
-                        th Slet
                 tbody
                     each transaction in transactions
                         tr
@@ -28,6 +26,4 @@ html(lang="en")
                             td= transaction.price + ' kr.'
                             td= transaction.quantity + ' stk.'
                             td= transaction.location
-                            td 
-                            td
         include footer 
