@@ -87,6 +87,10 @@ describe('Update product function', () => {
     })
 })
 
+/**
+ * Tests register sale 
+ * @author Mikkel Hess
+ */
 describe('Register sale function',() => {
     it('Should update the product if the quantity after the sale is above 0', async ()=> {
         let product = new Product('Hindbær Brus',50,new Date("2013-11-28"),'Skåde',20)
@@ -102,11 +106,13 @@ describe('Register sale function',() => {
     });
 
        
+    //TODO. Venter på at der kastes fejl
+    it('Should throw an error if quantity is below 0 after sale', ()=> {
 
-    it('Should delete the product if the quantity is below 0 after the sale', ()=> {
-
-
+        assert.equal(5,3)
 
     })
+
+
 
 })
