@@ -4,6 +4,7 @@ import { Product } from './model/Product.js'
 import firestore from './service/firestore.js';
 import * as url from 'url';
 import { notifyPeople } from './service/observer.js';
+import session from 'express-session';
 
 
 // Consts
@@ -21,9 +22,16 @@ app.set('view engine', 'pug');
 app.use(express.static('assets'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(session({
+    secret: 'hemmelighed',
+    saveUninitialized: true,
+    resave: true,
+}))
+
+
+
 
 // Routes
-
 
 // GETS
 app.get('/', (request, response) => {
