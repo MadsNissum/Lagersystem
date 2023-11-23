@@ -93,9 +93,11 @@ describe('Register sale function', () => {
         await registerSale(docRef.id, 10)
         let productdb = await getProduct(docRef.id);
 
+        
+        assert.equal(productdb.quantity, 10)
+
         await deleteProduct(docRef.id)
 
-        assert.equal(productdb.quantity, 10)
     });
 
 
