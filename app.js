@@ -1,11 +1,14 @@
 // Imports
-import express from 'express';
+import express, { response } from 'express';
 import { Product } from './model/Product.js'
 import * as url from 'url';
 import { notifyPeople } from './service/observer.js';
 import { getEmails } from './database/emailDB.js';
 import { addProduct, deleteProduct, getProduct, getProducts } from './database/productDB.js';
 import session from 'express-session';
+import { addAccount, getAccount } from './database/loginDB.js';
+import { log } from 'console';
+import { checkAllowedPages, checkLogin } from './service/login.js';
 
 
 // Consts
@@ -30,6 +33,7 @@ app.use(session({
 }))
 
 
+app.use(checkAllowedPages);
 
 
 // Routes
@@ -38,6 +42,14 @@ app.use(session({
 app.get('/', (request, response) => {
     const product = new Product('Carlsberg', 50, new Date('2023-11-15'), 'Skåde', 20, '016120');
     response.send(product);
+})
+
+app.get('/createAccount', (request, response) => {
+    response.render('createAccount');
+})
+
+app.get('/login', (request, response) => {
+    response.render('loginForm');
 })
 
 app.get('/products', async (request, response) => {
@@ -86,6 +98,25 @@ app.post('/registerSale', async (request, response) => {
     response.sendStatus(200);
 })
 
+app.post('/postLogin', async (request, response) => {
+    const { username, password } = request.body;
+    if (await checkLogin(username, password)) {
+        request.session.isLoggedIn = true;
+    }
+    response.redirect('/products');
+})
+app.post('/postCreateAccount', (request, response) => {
+    const { username, password } = request.body;
+    createAccount(username, password);
+
+    response.redirect('/login');
+})
+
+app.post('/logout', (request, response) => {
+    request.session.isLoggedIn = false;
+    response.redirect('/login');
+})
+
 // PUT
 app.put('/editProduct', (request, response) => {
     firestore.updateProduct(request.body.id, request.body.product);
@@ -94,6 +125,9 @@ app.put('/editProduct', (request, response) => {
 
 // Function running once a day
 setInterval(() => {notifyPeople(['LagerSystemSkaade@hotmail.com'])}, 1000 * 60 * 60 * 24);
+
+
+
 
 
 // Listen for connection
