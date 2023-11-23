@@ -85,25 +85,28 @@ describe('Update product function', () => {
     })
 })
 
-describe('Register sale function', () => {
+describe('Register sale function', async () => {
+    //FEJLER NOGLE GANGE???
     it('Should update the product if the quantity after the sale is above 0', async () => {
-        let product = new Product('Duck', 50, new Date("2013-11-28"), 'Skåde', 20)
-        let docRef = await addProduct(product.toPlainObject())
-
-        await registerSale(docRef.id, 10)
-        let productdb = await getProduct(docRef.id)
-
+        let product = new Product('Vand', 50, new Date("2013-11-28"), 'Skåde', 20)
+        let docRef1233 = await addProduct(product.toPlainObject())
         
+        await registerSale(docRef1233.id, 10)
+        let productdb = await getProduct(docRef1233.id)
+
         assert.equal(productdb.quantity, 10)
 
-        await deleteProduct(docRef.id)
-
+        await deleteProduct(docRef1233.id)
     });
 
+    it('Should delete the product if the quantity is below 0 after the sale', async () => {
 
+        let product_ = new Product('Syltet Gris',30,new Date("2015-11-29"),'Danmark', 10)
+        let thaDocRef = await addProduct(product_.toPlainObject())
 
-    it('Should delete the product if the quantity is below 0 after the sale', () => {
+        await registerSale(thaDocRef.id,30)
 
+        assert.strictEqual(await getProduct(thaDocRef.id),null)
     })
 
 })
