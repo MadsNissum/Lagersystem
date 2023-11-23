@@ -88,7 +88,7 @@ describe('Update product function', () => {
 })
 
 /**
- * Tests register sale 
+ * Tests register sale  
  * @author Mikkel Hess
  */
 describe('Register sale function',() => {
