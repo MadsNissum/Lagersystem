@@ -1,6 +1,25 @@
-form(action="/postCreateAccount", method="POST")
-    label username 
-    input(type="text", name="username")
-    label password 
-    input(type="text", name="password")
-    button(type="submit") Create
+doctype html
+html(lang="en")
+    head 
+        title Lagersystem - Produkter  
+        link(rel="stylesheet", href="/styles/style.css")
+        script(src="/script/productViewScript.js" defer) 
+    body
+        include header
+        div(class="loginContainer")
+            div(class="loginMain")
+                form(action="/postCreateAccount", method="POST")
+                    label Username 
+                    br
+                    br
+                    input(type="text", name="username")
+                    br
+                    br
+                    label Password 
+                    br
+                    br
+                    input(type="password", name="password")
+                    br
+                    br
+                    button(type="submit") Create
+        include footer
