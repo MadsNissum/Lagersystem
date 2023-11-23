@@ -1,0 +1,27 @@
+doctype html
+html(lang="en")
+    head 
+        title Lagersystem - Produkter  
+        link(rel="stylesheet", href="/styles/style.css")
+        script(src="/script/mailViewScript.js" defer) 
+    body
+        include header
+        main 
+            button(onclick="addMail()") Tilføj E-mail
+            table 
+                    thead
+                        tr 
+                            th Mail 
+                            th Navn 
+                            th Rediger 
+                            th Slet
+                    tbody
+                        each mail in mails
+                            tr
+                                td= mail.email
+                                td= mail.name
+                                td
+                                    button(onclick=`updateMail('${mail.id}')`) Rediger
+                                td
+                                    button(onclick=`deleteMail('${mail.id}')`) Slet
+        include footer

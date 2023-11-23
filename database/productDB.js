@@ -1,5 +1,5 @@
 import { db } from './firestore.js';
-import { getFirestore, collection, getDocs, getDoc, doc, deleteDoc, addDoc, updateDoc } from 'firebase/firestore';
+import { collection, getDocs, getDoc, doc, deleteDoc, addDoc, updateDoc } from 'firebase/firestore';
 import { Product } from "../model/Product.js";
 import { addProductRestock } from './productRestockDB.js';
 
@@ -50,7 +50,6 @@ export async function deleteProduct(id) {
     return await deleteDoc(docRef);
 }
 
-
 /**
  * Function add product to firestore doc
  * @param {Object} product class Product object with the given attributes
@@ -65,8 +64,8 @@ export async function addProduct(product) {
 
 /**
  * Updates product with given id in firestore
- * @param {*} id Auto generated ID from firebase
- * @param {*} product class Product object
+ * @param {String} id Auto generated ID from firebase
+ * @param {Product} product class Product object
  * @author Mads Nissum
  */
 export async function updateProduct(id, product) {

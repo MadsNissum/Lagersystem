@@ -1,0 +1,29 @@
+html(lang="en")
+    head 
+        title Lagersystem - Salg  
+        link(rel="stylesheet", href="/styles/style.css")
+        script(src="/script/productViewScript.js" defer) 
+    body
+        include header
+        main 
+            table 
+                thead
+                    tr 
+                        th Udløbningsdato 
+                        th Transaktionsdato
+                        th Antal solgt 
+                        th Mærke
+                        th Pris 
+                        th Mængde 
+                        th Lokation
+                tbody
+                    each transaction in transactions
+                        tr
+                            td= transaction.getExpirationDate()
+                            td= transaction.getTransactionDate()
+                            td= transaction.amountSold
+                            td= transaction.brand
+                            td= transaction.price + ' kr.'
+                            td= transaction.quantity + ' stk.'
+                            td= transaction.location
+        include footer 
