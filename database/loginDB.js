@@ -4,8 +4,8 @@ import { getFirestore, collection, getDocs, getDoc, doc, deleteDoc, addDoc, upda
 const accountsCollection = collection(db, 'accounts');
 
 
-export async function addAccount(username, password) {
-    let user = { username: username, password: password };
+export async function addAccount(username, password, salt) {
+    let user = { username: username, password: password, salt: salt };
 
     await setDoc(doc(db, "accounts", username), user);
 }
