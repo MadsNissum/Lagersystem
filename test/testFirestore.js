@@ -99,10 +99,14 @@ describe('Register sale function', async () => {
         await deleteProduct(docRef1233.id)
     });
 
-  
+    it('Should delete the product if the quantity is below 0 after the sale', async () => {
 
-    it('Should delete the product if the quantity is below 0 after the sale', () => {
+        let product_ = new Product('Syltet Gris',30,new Date("2015-11-29"),'Danmark', 10)
+        let thaDocRef = await addProduct(product_.toPlainObject())
 
+        await registerSale(thaDocRef.id,30)
+
+        assert.strictEqual(await getProduct(thaDocRef.id),null)
     })
 
 
