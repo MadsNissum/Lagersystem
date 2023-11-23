@@ -27,7 +27,6 @@ describe('Get Product function', () => {
  * @author Mikkel Hess
  */
 describe('Delete product function', () => {
-
     it('Should delete the correct product', async () => {
         let product = new Product('Carlsberg', 28, new Date("2013-11-16"), 'Skåde', 100)
         let id = 'test'
@@ -46,16 +45,15 @@ describe('Delete product function', () => {
  * @author Mikkel Hess
  */
 describe('Add Product function', () => {
-
     it('Should add the correct product', async () => {
         let product = new Product('Carlsberg', 28, new Date("2013-11-16"), 'Skåde', 100)
-      
+
         //adding the product
         let docRef = await addProduct(product.toPlainObject())
 
         let addedProduct = await getProduct(docRef.id);
 
-        assert.deepStrictEqual(product.toPlainObject(),addedProduct.toPlainObject());
+        assert.deepStrictEqual(product.toPlainObject(), addedProduct.toPlainObject());
 
         await deleteProduct(docRef.id);
     })
@@ -87,12 +85,12 @@ describe('Update product function', () => {
     })
 })
 
-describe('Register sale function',() => {
-    it('Should update the product if the quantity after the sale is above 0', async ()=> {
-        let product = new Product('Fuck',50,new Date("2013-11-28"),'Skåde',20)
+describe('Register sale function', () => {
+    it('Should update the product if the quantity after the sale is above 0', async () => {
+        let product = new Product('Fuck', 50, new Date("2013-11-28"), 'Skåde', 20)
         let docRef = await addProduct(product.toPlainObject());
-    
-        await registerSale(docRef.id,10)
+
+        await registerSale(docRef.id, 10)
         let productdb = await getProduct(docRef.id);
 
         await deleteProduct(docRef.id)
@@ -100,9 +98,9 @@ describe('Register sale function',() => {
         assert.equal(productdb.quantity, 10)
     });
 
-       
 
-    it('Should delete the product if the quantity is below 0 after the sale', ()=> {
+
+    it('Should delete the product if the quantity is below 0 after the sale', () => {
 
     })
 

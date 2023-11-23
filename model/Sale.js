@@ -1,4 +1,4 @@
-export class Sale { 
+export class Sale {
     /**
      * Initializes a new transaction
      * @param {Number} amountSold
@@ -11,19 +11,19 @@ export class Sale {
      * @author Lucas Andersen
      */
     constructor(amountSold, brand, expirationDate, location, price, quantity, transactionDate) {
-         if(typeof amountSold !== 'number') {
+        if (typeof amountSold !== 'number') {
             throw new TypeError('Amount sold must be a number')
         }
-        if(typeof brand !== 'string') {
+        if (typeof brand !== 'string') {
             throw new TypeError('Brand must be a string')
         }
-        if(typeof price !== 'number') {
+        if (typeof price !== 'number') {
             throw new TypeError('Price must be a number')
         }
-        if(typeof location !== 'string') {
+        if (typeof location !== 'string') {
             throw new TypeError('Location must be a string')
         }
-        if(typeof quantity !== 'number') {
+        if (typeof quantity !== 'number') {
             throw new TypeError('Quantity must be a number')
         }
         this.amountSold = amountSold;
@@ -32,7 +32,7 @@ export class Sale {
         this.location = location;
         this.price = price;
         this.quantity = quantity;
-        this.transactionDate = transactionDate; 
+        this.transactionDate = transactionDate;
     }
 
     /**

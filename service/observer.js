@@ -72,7 +72,7 @@ export async function notifyPeople(receivers) {
                     reject(err);
                 } else {
                     console.log("Mail sent!");
-                    resolve({info: info, message: html});
+                    resolve({ info: info, message: html });
                 }
             });
         } else {

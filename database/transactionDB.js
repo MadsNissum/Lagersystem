@@ -19,7 +19,7 @@ export async function registerSale(id, amount) {
     } else {
         updateProduct(id, product.toPlainObject());
     }
-    
+
     addTransaction(product, amount);
 }
 

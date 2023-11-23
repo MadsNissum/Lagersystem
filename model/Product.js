@@ -12,11 +12,11 @@ export class Product {
      * @author Mikkel Hess & Mads Nissum
      */
     constructor(brand, price, expirationDate, location, quantity) {
-    
-        if(typeof brand !== 'string') {
+
+        if (typeof brand !== 'string') {
             throw new TypeError('Brand must be a string')
         }
-        if(typeof price !== 'number') {
+        if (typeof price !== 'number') {
             throw new TypeError('Price must be a number')
         }
         /*
@@ -24,10 +24,10 @@ export class Product {
             throw new TypeError('Expiration date must be a date object')
         }
         */
-        if(typeof location !== 'string') {
+        if (typeof location !== 'string') {
             throw new TypeError('Location must be a string')
         }
-        if(typeof quantity !== 'number') {
+        if (typeof quantity !== 'number') {
             throw new TypeError('Quantity must be a number')
         }
         this.brand = brand;
@@ -68,11 +68,11 @@ export class Product {
      * @author Mads Nissum
      */
     setId(id) {
-        if(typeof id !== 'string') {
+        if (typeof id !== 'string') {
             throw new TypeError('Id must be a string')
         }
         this.#id = id;
-    }   
+    }
 
     /**
      * Return string date
@@ -86,4 +86,3 @@ export class Product {
 
 
 
- 

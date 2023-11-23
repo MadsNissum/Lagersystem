@@ -32,7 +32,7 @@ describe('Sale Constructor', () => {
             assert.equal(transaction.transactionDate.getDate(), new Date('2023-11-15').getDate());
         });
     }
-    
+
     )
     /**
      * Tests that the product variables are the correct types
@@ -43,22 +43,22 @@ describe('Sale Constructor', () => {
 
         it('Id should be of type number', () => {
             assert.strictEqual(typeof transaction.amountSold, 'number')
-        }); 
+        });
         it('Id should be of type string', () => {
             assert.strictEqual(typeof transaction.brand, 'string')
-        });  
+        });
         it('Expiration date should be a Date object', () => {
             assert.strictEqual(transaction.expirationDate instanceof Date, true)
         })
         it('Id should be of type string', () => {
             assert.strictEqual(typeof transaction.location, 'string')
-        }); 
+        });
         it('Id should be of type number', () => {
             assert.strictEqual(typeof transaction.price, 'number')
-        }); 
+        });
         it('Id should be of type number', () => {
             assert.strictEqual(typeof transaction.quantity, 'number')
-        }); 
+        });
         it('Transaction date should be a Date object', () => {
             assert.strictEqual(transaction.transactionDate instanceof Date, true)
         })
@@ -74,5 +74,5 @@ describe('Sale Constructor', () => {
                 const transaction = new Sale("100e2e", "Carlsberg", new Date(Date.now), "Skåde", 30, 50, new Date(Date.now));
             }, TypeError, 'Amount sold must be a number')
         })
-    }); 
+    });
 })

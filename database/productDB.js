@@ -1,5 +1,5 @@
 import { db } from './firestore.js';
-import { getFirestore, collection, getDocs, getDoc, doc, deleteDoc, addDoc, updateDoc } from 'firebase/firestore';
+import { collection, getDocs, getDoc, doc, deleteDoc, addDoc, updateDoc } from 'firebase/firestore';
 import { Product } from "../model/Product.js";
 import { addProductRestock } from './productRestockDB.js';
 
@@ -49,7 +49,6 @@ export async function deleteProduct(id) {
     const docRef = doc(db, 'products', id);
     return await deleteDoc(docRef);
 }
-
 
 /**
  * Function add product to firestore doc
