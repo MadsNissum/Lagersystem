@@ -29,7 +29,7 @@ export async function registerSale(id, amount) {
  * @param {*} amount Amount that was sold
  * @author Kasper
  */
-async function addTransaction(product, amount) {
+export async function addTransaction(product, amount) {
     product.amountSold = amount;
     product.transactionDate = new Date().toISOString().split('T')[0];
     await addDoc(transactionCollection, JSON.parse(JSON.stringify(product)));

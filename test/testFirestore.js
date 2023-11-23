@@ -1,9 +1,10 @@
-import { setDoc, doc, deleteDoc, getFirestore } from "firebase/firestore"
+import { setDoc, doc, deleteDoc, getFirestore, getDoc } from "firebase/firestore"
 import { Product } from "../model/Product.js"
 import assert from 'assert'
 import { addProduct, deleteProduct, getProduct, updateProduct } from "../database/productDB.js";
 import { db } from '../database/firestore.js';
-import { getTransactions, registerSale } from "../database/transactionDB.js";
+import { addTransaction, getTransactions, registerSale } from "../database/transactionDB.js";
+import { expect } from 'chai';
 
 /**
  * Tests that getProduct gets the correct product object
@@ -117,3 +118,20 @@ describe('Sales endpoint test', () => {
         assert(Array.isArray(transactions), 'Transactions should be an array');
     });
 });
+
+
+describe('Add transaction test',()=>{
+    it('Should add the transaction into the database', async ()=>{
+        let product = new Product('Carlsberg', 28, new Date("2013-11-16"), 'Skåde', 100)
+
+        let transDoc = await addTransaction(product,10)
+
+        const docSnapshot = await db.collection('transaction').doc(id).get()
+        
+        expect(docSnapshot.exists).to.be.true;
+
+    })
+
+})
+
+
