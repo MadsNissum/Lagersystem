@@ -183,3 +183,29 @@ input {
     border: none;
     padding: 5px;
   }
+
+  /* Style for the alert */
+  .alert {
+    padding: 15px;
+    background-color: #f44336; /* Red background color */
+    color: white; /* White text color */
+    margin-bottom: 15px; /* Add some space at the bottom */
+    border-radius: 4px; /* Rounded corners */
+  }
+
+  /* Style for the close button */
+  .closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+  }
+
+  /* Change the color of the close button on hover */
+  .closebtn:hover {
+      color: black;
+  }

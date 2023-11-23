@@ -3,9 +3,14 @@ html(lang="en")
     head 
         title Lagersystem - Produkter  
         link(rel="stylesheet", href="/styles/style.css")
-        script(src="/script/productViewScript.js" defer) 
     body
         include header
+        if showAlert
+            div(class="alert")
+                alert
+                    span.closebtn(onclick="this.parentElement.parentElement.style.display='none';") &times;
+                    strong Alert: Wrong username or password! 🚨 
+
         div(class="loginContainer")
             div(class="loginMain")
                 form(action="/postLogin", method="POST")
@@ -24,4 +29,5 @@ html(lang="en")
                     button(type="submit") Sign in
                 br
                 a(href="/createaccount") Create account 
+        
         include footer 

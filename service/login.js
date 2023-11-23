@@ -1,4 +1,4 @@
-import { getAccount } from "../database/loginDB.js";
+import { getAccount, addAccount} from "../database/loginDB.js";
 
 export function checkAllowedPages(request, response, next) {
     let allowedPages = [ '/login', '/postLogin', '/createaccount', '/postCreateAccount' ];
@@ -22,10 +22,21 @@ export async function checkLogin(username, password) {
     return false;
 }
 
+export async function checkUsername(username) {
+    let user = await getAccount(username);
+    if (user !== null && username === user.username) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 export async function createAccount(username, password) {
     if (await getAccount(username) != null) {
         console.log("Username already in use");
+        return false; 
     } else {
         addAccount(username, password);
+        return true; 
     }
 }

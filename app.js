@@ -6,9 +6,7 @@ import { notifyPeople } from './service/observer.js';
 import { getEmails } from './database/emailDB.js';
 import { addProduct, deleteProduct, getProduct, getProducts } from './database/productDB.js';
 import session from 'express-session';
-import { addAccount, getAccount } from './database/loginDB.js';
-import { log } from 'console';
-import { checkAllowedPages, checkLogin } from './service/login.js';
+import { checkAllowedPages, checkLogin, checkUsername, createAccount} from './service/login.js';
 
 
 // Consts
@@ -45,11 +43,11 @@ app.get('/', (request, response) => {
 })
 
 app.get('/createAccount', (request, response) => {
-    response.render('createAccount');
+    response.render('createAccount', { showAlert: false });
 })
 
 app.get('/login', (request, response) => {
-    response.render('loginForm');
+    response.render('loginForm', { showAlert: false });
 })
 
 app.get('/products', async (request, response) => {
@@ -102,13 +100,21 @@ app.post('/postLogin', async (request, response) => {
     const { username, password } = request.body;
     if (await checkLogin(username, password)) {
         request.session.isLoggedIn = true;
+    } else {
+        response.render('loginForm', { showAlert: true });
+        return; 
     }
     response.redirect('/products');
 })
-app.post('/postCreateAccount', (request, response) => {
+app.post('/postCreateAccount', async (request, response) => {
     const { username, password } = request.body;
-    createAccount(username, password);
-
+    if (!checkUsername(username)) {
+       createAccount(username, password);
+    } else {
+        response.render('createAccount', { showAlert: true });
+        return; 
+    }
+    
     response.redirect('/login');
 })
 
@@ -125,10 +131,6 @@ app.put('/editProduct', (request, response) => {
 
 // Function running once a day
 setInterval(() => {notifyPeople(['LagerSystemSkaade@hotmail.com'])}, 1000 * 60 * 60 * 24);
-
-
-
-
 
 // Listen for connection
 app.listen(port, () => console.log(`Server listening on port: ${port}...`));
