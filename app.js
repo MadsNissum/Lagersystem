@@ -8,8 +8,7 @@ import transactionRoutes from './routes/transactions.js';
 import productRoutes from './routes/product.js';
 import loginRoutes from './routes/login.js';
 import session from 'express-session';
-import { checkAllowedPages, checkLogin, createAccount } from './service/login.js';
-
+import { checkAllowedPages } from './service/login.js';
 
 // Consts
 const app = express();
@@ -30,9 +29,7 @@ app.use(session({
     resave: true,
 }))
 
-
 app.use(checkAllowedPages);
-
 
 // Routes
 app.use('/mail', mailRoutes);
@@ -49,7 +46,6 @@ app.post('/registerSale', async (request, response) => {
     });
     response.sendStatus(200);
 });
-
 
 // Function running once a day and when the program starts
 notifyPeople(await getEmails());
