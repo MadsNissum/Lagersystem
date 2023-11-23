@@ -3,7 +3,7 @@
  * @author Lucas Andersen
  */
 function addMail() {
-    window.location = `/addMail`;
+    window.location = `mail/add`;
 }
 
 /**
@@ -12,7 +12,7 @@ function addMail() {
  * @author Mads Nissum
  */
 function updateMail(id) {
-    window.location = `/editMail/${id}`;
+    window.location = `mail/edit/${id}`;
 }
 
 /**

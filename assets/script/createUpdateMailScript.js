@@ -19,11 +19,11 @@ async function handleSubmit(event) {
     } else {
         let id = null;
         let method;
-        if (form.action.split('/')[3] == "editEmail") {
-            id = window.location.href.split('/')[4]
-            method = "PUT"
+        if (form.action.split('/')[4] == "edit") {
+            id = window.location.href.split('/')[5];
+            method = "PUT";
         } else {
-            method = "POST"
+            method = "POST";
         }
         const body = {
             email: {
@@ -34,7 +34,6 @@ async function handleSubmit(event) {
         };
 
         try {
-            console.log(form.action);
             await request(form.action, body, method);
             window.location = "/mail";
         } catch {

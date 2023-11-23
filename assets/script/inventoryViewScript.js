@@ -23,26 +23,26 @@ productsVariableArray("location");
  * @author Lucas Andersen
  */
 function navigateToPage() {
-    window.location = '/products?brand=' + brandValue + '&quantity=' + quantityValue + '&price=' + priceValue + '&expirationDate=' + dateValue + '&location=' + locationValue; 
+    window.location = '/inventory?brand=' + brandValue + '&quantity=' + quantityValue + '&price=' + priceValue + '&expirationDate=' + dateValue + '&location=' + locationValue;
 }
 
 /**
  * Changes value of selects
  * @author Lucas Andersen
  */
-brandPicker.addEventListener("change", function() {
+brandPicker.addEventListener("change", function () {
     brandValue = this.value;
 });
-pricePicker.addEventListener("change", function() {
+pricePicker.addEventListener("change", function () {
     priceValue = this.value;
 });
-quantityPicker.addEventListener("change", function() {
+quantityPicker.addEventListener("change", function () {
     quantityValue = this.value;
 });
-datePicker.addEventListener("change", function() {
+datePicker.addEventListener("change", function () {
     dateValue = this.value;
 });
-locationPicker.addEventListener("change", function() {
+locationPicker.addEventListener("change", function () {
     locationValue = this.value;
 });
 /**
@@ -50,7 +50,7 @@ locationPicker.addEventListener("change", function() {
  * @author Mads Nissum
  */
 function addProduct() {
-    window.location = `/addProduct`;
+    window.location = `/inventory/create`;
 }
 
 /**
@@ -59,7 +59,7 @@ function addProduct() {
  * @author Mads Nissum
  */
 function updateProduct(id) {
-    window.location = `/editProduct/${id}`;
+    window.location = `/inventory/edit/${id}`;
 }
 
 /**
@@ -70,7 +70,7 @@ function updateProduct(id) {
 async function deleteProduct(id) {
     try {
         await deleteRequest(window.location.href + "/" + id);
-        window.location = '/products';
+        window.location = '/inventory';
     } catch {
         alert("Something went wrong on the server!");
     }
@@ -111,31 +111,31 @@ async function request(url) {
  * @author Lucas Andersen
  */
 async function productsVariableArray(variableType) {
-    let products = await request('/getProducts'); 
-    let variableArray = []; 
+    let products = await request('/inventory/get');
+    let variableArray = [];
 
     products.forEach(product => {
         if (!variableArray.includes(product[variableType])) {
-                variableArray.push(product[variableType]); 
-                let option = document.createElement("option");
-                option.textContent = product[variableType];
-                option.value = product[variableType];
+            variableArray.push(product[variableType]);
+            let option = document.createElement("option");
+            option.textContent = product[variableType];
+            option.value = product[variableType];
 
-                switch(variableType) {
-                    case "brand": 
-                        brandPicker.appendChild(option);
-                        break; 
-                    case "quantity": 
-                        quantityPicker.appendChild(option);
-                        break; 
-                    case "price": 
-                        pricePicker.appendChild(option);
-                        break; 
-                    case "location": 
-                        locationPicker.appendChild(option); 
-                        break; 
-                }
+            switch (variableType) {
+                case "brand":
+                    brandPicker.appendChild(option);
+                    break;
+                case "quantity":
+                    quantityPicker.appendChild(option);
+                    break;
+                case "price":
+                    pricePicker.appendChild(option);
+                    break;
+                case "location":
+                    locationPicker.appendChild(option);
+                    break;
             }
-        });
-    }
+        }
+    });
+}
 

@@ -9,7 +9,7 @@ html(lang="en")
     include header
     main
         - var text = (email) ? "Edit E-mail" : "Add E-mail"
-        - var action = (email) ? "/editEmail" : "/addEmail"
+        - var action = (email) ? "/mail/edit" : "/mail/add"
         h1= text
         if email
             - var mail = email.email;

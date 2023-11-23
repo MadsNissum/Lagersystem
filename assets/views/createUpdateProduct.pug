@@ -9,7 +9,7 @@ html(lang="en")
     include header
     main
         - var text = (product) ? "Edit product" : "Add product"
-        - var action = (product) ? "/editProduct" : "/createProduct"
+        - var action = (product) ? "/inventory/edit" : "/inventory/create"
         h1= text 
         if product
             - var brand = product.brand;
