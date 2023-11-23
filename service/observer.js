@@ -32,7 +32,6 @@ export async function notifyPeople(receivers) {
         secure: false,
     });
 
-
     return new Promise(async (resolve, reject) => {
         const product = await getProducts();
         let array = [];
@@ -49,21 +48,36 @@ export async function notifyPeople(receivers) {
         })
 
         if (array.length != 0 || messageArray.length != 0) {
+            let subject = "";
             let html = "";
+            if (array.length != 0 && messageArray.length != 0) {
+                subject = "Opdatering på inventar!";
+            } else if (array.length != 0) {
+                subject = "Inventar er ved at udløbe på dato!";
+            } else if (messageArray.length != 0) {
+                subject = "Nyt invventar skal bestilles hjem!";
+            }
 
-            array.forEach(product => {
-                html += `${product.text} udløber her den <b>${product.date}</b><br>`;
-            })
+            if (array.length != 0) {
+                html += `<h2></h2>`;
+                array.forEach(product => {
+                    html += `${product.text} udløber her den <b>${product.date}</b><br>`;
+                })
+                html += `<br>`;
+            }
 
-            messageArray.forEach(message => {
-                html += `${message}<br>`
-            })
+            if (messageArray.length != 0) {
+                html += `<h2></h2>`;
+                messageArray.forEach(message => {
+                    html += `${message}<br>`;
+                })
+            }
 
             const mailData = {
                 from: 'LagerSystemSkaade@hotmail.com',  // sender address
                 replyTo: 'LagerSystemSkaade@hotmail.com',
                 to: receivers,   // list of receivers
-                subject: `Inventar er ved at udløbe på dato!`,
+                subject: subject,
                 html: html,
             };
 

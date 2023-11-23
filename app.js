@@ -9,6 +9,7 @@ import productRoutes from './routes/product.js';
 import loginRoutes from './routes/login.js';
 import session from 'express-session';
 import { checkAllowedPages } from './service/login.js';
+import { registerSale } from './database/transactionDB.js';
 
 // Consts
 const app = express();

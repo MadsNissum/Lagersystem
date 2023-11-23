@@ -37,7 +37,7 @@ describe('Observer notifications', () => {
 
             let response = await notifyPeople(receivers);
 
-            assert.equal(response.message, 'Testing<br>');
+            assert.equal(response.message, '<h2></h2>Testing<br>');
         })
     })
 });

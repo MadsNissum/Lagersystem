@@ -9,6 +9,7 @@ const productCollection = collection(db, 'products');
  * Function returns an array of products from firestore
  * @returns {Array<Product>} An array of Products
  * @author Mads Nissum & Kasper
+ * @returns 
  */
 export async function getProducts() {
     let productQueryDocs = await getDocs(productCollection);
