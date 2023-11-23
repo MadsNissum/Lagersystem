@@ -5,6 +5,7 @@ import { addProduct, deleteProduct, getProduct, updateProduct } from "../databas
 import { db } from '../database/firestore.js';
 import { addTransaction, getTransactions, registerSale } from "../database/transactionDB.js";
 import { expect } from 'chai';
+import { collection } from 'firebase/firestore';
 
 /**
  * Tests that getProduct gets the correct product object
@@ -119,17 +120,18 @@ describe('Sales endpoint test', () => {
     });
 });
 
-
+//kan ikk få den til at virke
 describe('Add transaction test',()=>{
     it('Should add the transaction into the database', async ()=>{
         let product = new Product('Carlsberg', 28, new Date("2013-11-16"), 'Skåde', 100)
 
         let transDoc = await addTransaction(product,10)
 
-        const docSnapshot = await db.collection('transaction').doc(id).get()
+        const transactionCollection = await collection(db, 'transaction');
+
+        const docSnapshot = await transactionCollection.doc().get()
         
         expect(docSnapshot.exists).to.be.true;
-
     })
 
 })
