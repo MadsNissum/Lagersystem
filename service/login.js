@@ -1,7 +1,7 @@
-import { getAccount } from "../database/loginDB.js";
+import { addAccount, getAccount } from "../database/loginDB.js";
 
 export function checkAllowedPages(request, response, next) {
-    let allowedPages = [ '/login', '/postLogin', '/createaccount', '/postCreateAccount' ];
+    let allowedPages = [ '/login', '/login/create' ];
     if (allowedPages.includes(request.url)) {
         next();
     } else {

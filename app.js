@@ -6,9 +6,9 @@ import { getEmails } from './database/emailDB.js';
 import mailRoutes from './routes/mail.js';
 import transactionRoutes from './routes/transactions.js';
 import productRoutes from './routes/product.js';
+import loginRoutes from './routes/login.js';
 import session from 'express-session';
-import { addAccount, getAccount } from './database/loginDB.js';
-import { checkAllowedPages, checkLogin } from './service/login.js';
+import { checkAllowedPages, checkLogin, createAccount } from './service/login.js';
 
 
 // Consts
@@ -41,40 +41,13 @@ app.use('/transactions', transactionRoutes);
 
 app.use('/inventory', productRoutes);
 
+app.use('/login', loginRoutes);
+
 app.post('/registerSale', async (request, response) => {
     request.body.array.forEach(order => {
         registerSale(order.id, order.amount);
     });
     response.sendStatus(200);
-});
-
-
-app.get('/createAccount', (request, response) => {
-    response.render('createAccount');
-});
-
-app.get('/login', (request, response) => {
-    response.render('loginForm');
-});
-
-app.post('/postLogin', async (request, response) => {
-    const { username, password } = request.body;
-    if (await checkLogin(username, password)) {
-        request.session.isLoggedIn = true;
-    }
-    response.redirect('/products');
-});
-
-app.post('/postCreateAccount', (request, response) => {
-    const { username, password } = request.body;
-    createAccount(username, password);
-
-    response.redirect('/login');
-});
-
-app.post('/logout', (request, response) => {
-    request.session.isLoggedIn = false;
-    response.redirect('/login');
 });
 
 
