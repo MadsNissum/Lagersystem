@@ -109,8 +109,6 @@ describe('Register sale function', async () => {
         assert.strictEqual(await getProduct(thaDocRef.id),null)
     })
 
-
-
 })
 
 describe('Sales endpoint test', () => {
