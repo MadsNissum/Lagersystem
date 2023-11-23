@@ -31,9 +31,8 @@ describe('Sale Constructor', () => {
         it('Should display expirationDate correctly', () => {
             assert.equal(transaction.transactionDate.getDate(), new Date('2023-11-15').getDate());
         });
-    }
+    })
 
-    )
     /**
      * Tests that the product variables are the correct types
      * @author Lucas Andersen
@@ -61,8 +60,8 @@ describe('Sale Constructor', () => {
         });
         it('Transaction date should be a Date object', () => {
             assert.strictEqual(transaction.transactionDate instanceof Date, true)
-        })
-    })
+        });
+    });
 
     /**
      * Tests that errors gets thrown if the types are wrong
