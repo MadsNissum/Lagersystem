@@ -66,7 +66,7 @@ app.get('/mail', async (request, response) => {
 
 app.get('/addMail', (request, response) => {
     response.render('createUpdateMail', { email: null });
-})
+});
 
 app.get('/editMail/:id', async (request, response) => {
     const id = request.params.id;
@@ -75,7 +75,7 @@ app.get('/editMail/:id', async (request, response) => {
     console.log(mail);
 
     response.render('createUpdateMail', { email: mail });
-})
+});
 
 app.get('/transactions', async (request, response) => {
     let transactions = await getTransactions();
