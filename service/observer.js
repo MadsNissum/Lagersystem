@@ -1,8 +1,6 @@
 import nodemailer from 'nodemailer';
 import { getProducts } from '../database/productDB.js';
 
-
-
 let messageArray = [];
 
 /**
@@ -48,7 +46,7 @@ export async function notifyPeople(receivers) {
                 const exDate = String(product.getDate());
                 array.push({ text: brandText, date: exDate });
             }
-        })
+        });
 
         if (array.length != 0 || messageArray.length != 0) {
             let subject = "";
@@ -74,6 +72,7 @@ export async function notifyPeople(receivers) {
                 messageArray.forEach(message => {
                     html += `${message}<br>`;
                 })
+                messageArray = [];
             }
 
             const mailData = {
@@ -96,49 +95,4 @@ export async function notifyPeople(receivers) {
             resolve(null);
         }
     })
-}
-
-//sendMail();
-
-
-function sendMail() {
-    const transporter = nodemailer.createTransport({
-        port: 587,
-        host: "smtp.office365.com",
-        auth: {
-            user: 'LagerSystemSkaade@hotmail.com',
-            pass: 'Gruppenersej123'
-        },
-        secure: false,
-    });
-
-
-    const mailData = {
-        from: 'LagerSystemSkaade@hotmail.com',  // sender address
-        replyTo: 'LagerSystemSkaade@hotmail.com',
-        to: 'LagerSystemSkaade@hotmail.com',   // list of receivers
-        subject: 'TESTING',
-        html: `<!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
-        </head>
-        <body>
-            <h1>TESTING</h1>
-            <h2>Test</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed quidem obcaecati voluptas illo eius veniam magni vitae unde quaerat quisquam excepturi, quasi quod nobis, tempora exercitationem ducimus cum corrupti recusandae!</p>    
-        </body>
-        </html>`,
-    };
-
-    transporter.sendMail(mailData, (err, info) => {
-        if (err) {
-            console.log(err);
-        } else {
-            console.log("Mail sent!");
-            console.log(info);
-        }
-    });
 }
