@@ -13,7 +13,7 @@ router.get('/', async (request, response) => {
 
 router.get('/get', async (request, response) => {
     response.send(await getProducts());
-})
+});
 
 router.get('/create', (request, response) => {
     response.render('createUpdateProduct', { product: null });
@@ -27,6 +27,7 @@ router.get('/edit/:id', async (request, response) => {
 
 // POSTS
 router.post('/create', (request, response) => {
+    console.log(request.body.product);
     addProduct(request.body.product);
     response.sendStatus(201);
 });

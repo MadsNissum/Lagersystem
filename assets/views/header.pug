@@ -1,6 +1,7 @@
 html(lang="en")
     head 
         link(rel="stylesheet", href="/styles/style.css")
+        script(src="/script/request.js" defer) 
     body
         header(class="nice-header")
             h1 Lagersystem
@@ -15,6 +16,6 @@ html(lang="en")
                     a(href="/transactions") Transactions
                 li     
                     form(action="/login/logout", method="POST")
-                        input(type="submit" value="Logout") 
+                        input(class="loginButton" type="submit" value="Logout") 
             
         

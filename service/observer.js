@@ -1,8 +1,6 @@
 import nodemailer from 'nodemailer';
 import { getProducts } from '../database/productDB.js';
 
-
-
 let messageArray = [];
 
 /**
@@ -21,6 +19,7 @@ export function addMessageToMail(message) {
  * @author Mads Nissum
  */
 export async function notifyPeople(receivers) {
+    console.log("Entered");
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
         port: 587,
@@ -32,6 +31,7 @@ export async function notifyPeople(receivers) {
         secure: false,
     });
 
+    let mailList = receivers.map(data => data.email);
 
     return new Promise(async (resolve, reject) => {
         const product = await getProducts();
@@ -46,24 +46,40 @@ export async function notifyPeople(receivers) {
                 const exDate = String(product.getDate());
                 array.push({ text: brandText, date: exDate });
             }
-        })
+        });
 
         if (array.length != 0 || messageArray.length != 0) {
+            let subject = "";
             let html = "";
+            if (array.length != 0 && messageArray.length != 0) {
+                subject = "Opdatering på inventar!";
+            } else if (array.length != 0) {
+                subject = "Inventar er ved at udløbe på dato!";
+            } else if (messageArray.length != 0) {
+                subject = "Nyt invventar skal bestilles hjem!";
+            }
 
-            array.forEach(product => {
-                html += `${product.text} udløber her den <b>${product.date}</b><br>`;
-            })
+            if (array.length != 0) {
+                html += `<h2>Inventar der udløber snart:</h2>`;
+                array.forEach(product => {
+                    html += `${product.text} udløber her den <b>${product.date}</b><br>`;
+                })
+                html += `<br>`;
+            }
 
-            messageArray.forEach(message => {
-                html += `${message}<br>`
-            })
+            if (messageArray.length != 0) {
+                html += `<h2>Inventar der skal bestilles:</h2>`;
+                messageArray.forEach(message => {
+                    html += `${message}<br>`;
+                })
+                messageArray = [];
+            }
 
             const mailData = {
                 from: 'LagerSystemSkaade@hotmail.com',  // sender address
                 replyTo: 'LagerSystemSkaade@hotmail.com',
-                to: receivers,   // list of receivers
-                subject: `Inventar er ved at udløbe på dato!`,
+                to: mailList.toString(),   // list of receivers
+                subject: subject,
                 html: html,
             };
 

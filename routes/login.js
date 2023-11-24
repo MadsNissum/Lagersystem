@@ -17,16 +17,24 @@ router.get('/create', (request, response) => {
 // POST
 router.post('/', async (request, response) => {
     const { username, password } = request.body;
-    if (await checkLogin(username, password)) {
+    let statusCode = await checkLogin(username, password);
+    if (statusCode == 200) {
         request.session.isLoggedIn = true;
+        response.redirect('/inventory');
+    } else {
+        response.sendStatus(statusCode);
     }
-    response.redirect('/inventory');
 });
 
-router.post('/create', (request, response) => {
+router.post('/create', async (request, response) => {
     const { username, password } = request.body;
-    createAccount(username, password);
-    response.redirect('/login');
+    const statusCode = await createAccount(username, password);
+
+    if (statusCode == 201) {
+        response.redirect('/login');
+    } else {
+        response.sendStatus(statusCode);
+    }
 });
 
 router.post('/logout', (request, response) => {

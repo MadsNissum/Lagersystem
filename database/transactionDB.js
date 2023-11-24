@@ -2,6 +2,7 @@ import { db } from './firestore.js';
 import { getFirestore, collection, getDocs, getDoc, doc, deleteDoc, addDoc, updateDoc } from 'firebase/firestore';
 import { deleteProduct, getProduct, updateProduct } from "./productDB.js";
 import { Sale } from '../model/Sale.js';
+import { addMessageToMail } from '../service/observer.js';
 
 const transactionCollection = collection(db, 'transaction');
 
@@ -12,8 +13,19 @@ const transactionCollection = collection(db, 'transaction');
  * @author Kasper
  */
 export async function registerSale(id, amount) {
+    console.log("INDE I REGISTER SALE");
     let product = await getProduct(id);
-    product.quantity = product.quantity - amount;
+
+    let newProductQuantity = product.quantity - amount;
+
+    // Add logic for each type of product there is and when you should be notified
+    if (product.quantity >= 10 && newProductQuantity < 10) {
+        console.log("INDE I IF");
+        addMessageToMail(`Beholdning  af <b>${product.brand}</b> med ID: <b>${product.getId()}</b> er lavere 10`);
+    }
+
+    product.quantity = newProductQuantity;
+
     if (product.quantity <= 0) {
         deleteProduct(id);
     } else {

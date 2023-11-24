@@ -9,6 +9,7 @@ import productRoutes from './routes/product.js';
 import loginRoutes from './routes/login.js';
 import session from 'express-session';
 import { checkAllowedPages } from './service/login.js';
+import { registerSale } from './database/transactionDB.js';
 
 // Consts
 const app = express();
@@ -27,7 +28,7 @@ app.use(session({
     secret: 'hemmelighed',
     saveUninitialized: true,
     resave: true,
-}))
+}));
 
 app.use(checkAllowedPages);
 
@@ -49,8 +50,8 @@ app.post('/registerSale', async (request, response) => {
 
 // Function running once a day and when the program starts
 notifyPeople(await getEmails());
-setInterval(async () => { await notifyPeople(await firestore.getEmails()) }, 1000 * 60 * 60 * 24);
-
+setInterval(async () => { await notifyPeople(await getEmails()) }, 1000 * 60 * 60 * 24);
+// 1000 * 60 * 60 * 24
 
 // Listen for connection
 app.listen(port, () => console.log(`Server listening on port: ${port}...`));

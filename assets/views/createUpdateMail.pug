@@ -14,7 +14,7 @@ html(lang="en")
         if email
             - var mail = email.email;
             - var name = email.name;
-        form(action=action, method="post")
+        form(action=action id="form")
             label(for="email") Email:
             input(type="email" id="email" value=mail placeholder="indsæt e-mail..")
             label(for="name") Navn: 

@@ -1,4 +1,4 @@
-const form = document.querySelector('form');
+const form = document.getElementById('form');
 form.addEventListener('submit', handleSubmit);
 
 const email = document.getElementById('email');
@@ -36,27 +36,9 @@ async function handleSubmit(event) {
         try {
             await request(form.action, body, method);
             window.location = "/mail";
-        } catch {
-            alert("Something went wrong on the server!");
+        } catch (error) {
+            errorCodeAlert(error)
         }
     }
 }
 
-/**
- * Function make a post request with url and body for request
- * @param {String} url URL Sting to post a request.
- * @param {Object} objekt Object sent as the body of post request.
- * @author Mads Nissum
- */
-async function request(url, objekt, method) {
-    const respons = await fetch(url, {
-        method: method,
-        body: JSON.stringify(objekt),
-        headers: { 'Content-Type': 'application/json' }
-    });
-    console.log(respons.status);
-    if (respons.status !== 201) {
-        console.log("TEST");
-        throw new Error(respons.status);
-    }
-}
