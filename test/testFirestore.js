@@ -6,6 +6,7 @@ import { db } from '../database/firestore.js';
 import { addTransaction, getTransactions, registerSale } from "../database/transactionDB.js";
 import { expect } from 'chai';
 import { collection } from 'firebase/firestore';
+import { log } from "console";
 
 /**
  * Tests that getProduct gets the correct product object
@@ -55,6 +56,8 @@ describe('Add Product function', () => {
 
         let addedProduct = await getProduct(docRef.id);
 
+        console.log("TEST TEST: " + product.toPlainObject());
+
         assert.deepStrictEqual(product.toPlainObject(), addedProduct.toPlainObject());
 
         await deleteProduct(docRef.id);
@@ -103,7 +106,7 @@ describe('Register sale function', async () => {
 
     it('Should delete the product if the quantity is below 0 after the sale', async () => {
 
-        let product_ = new Product('Syltet Gris',30,new Date("2015-11-29"),'Danmark', 10)
+        let product_ = new Product('Syltet Gris',30,new Date("2015-11-29"),'Danmark', 20)
         let thaDocRef = await addProduct(product_.toPlainObject())
 
         await registerSale(thaDocRef.id,30)
@@ -128,7 +131,7 @@ describe('Add transaction test',()=>{
         let transDoc = await addTransaction(product,10)
 
         console.log(await getProduct(transDoc.id) + " faq faq faq");
-        
+
         const transactionCollection = await collection(db, 'transaction');
             
         const docSnapshot = await transactionCollection.doc().get()
