@@ -24,20 +24,8 @@ async function deleteMail(id) {
     try {
         await deleteRequest(window.location.href + "/" + id);
         window.location = '/mail';
-    } catch {
-        alert("Something went wrong on the server!");
+    } catch (error) {
+        errorCodeAlert(error);
     }
 }
 
-/**
- * HTTP delete request from url
- * @param {String} url String url
- * @returns request response
- * @author Mads Nissum
- */
-async function deleteRequest(url) {
-    console.log(url);
-    let respons = await fetch(url, { method: "DELETE" });
-    if (respons.status !== 200) // OK
-        throw new Error(respons.status);
-}
