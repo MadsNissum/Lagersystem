@@ -124,11 +124,13 @@ describe('Sales endpoint test', () => {
 describe('Add transaction test',()=>{
     it('Should add the transaction into the database', async ()=>{
         let product = new Product('Carlsberg', 28, new Date("2013-11-16"), 'Skåde', 100)
-
+        
         let transDoc = await addTransaction(product,10)
 
+        console.log(await getProduct(transDoc.id) + " faq faq faq");
+        
         const transactionCollection = await collection(db, 'transaction');
-
+            
         const docSnapshot = await transactionCollection.doc().get()
         
         expect(docSnapshot.exists).to.be.true;
