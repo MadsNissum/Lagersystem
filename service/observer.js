@@ -21,6 +21,7 @@ export function addMessageToMail(message) {
  * @author Mads Nissum
  */
 export async function notifyPeople(receivers) {
+    console.log("Entered");
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
         port: 587,
@@ -31,6 +32,8 @@ export async function notifyPeople(receivers) {
         },
         secure: false,
     });
+
+    let mailList = receivers.map(data => data.email);
 
     return new Promise(async (resolve, reject) => {
         const product = await getProducts();
@@ -59,7 +62,7 @@ export async function notifyPeople(receivers) {
             }
 
             if (array.length != 0) {
-                html += `<h2></h2>`;
+                html += `<h2>Inventar der udløber snart:</h2>`;
                 array.forEach(product => {
                     html += `${product.text} udløber her den <b>${product.date}</b><br>`;
                 })
@@ -67,7 +70,7 @@ export async function notifyPeople(receivers) {
             }
 
             if (messageArray.length != 0) {
-                html += `<h2></h2>`;
+                html += `<h2>Inventar der skal bestilles:</h2>`;
                 messageArray.forEach(message => {
                     html += `${message}<br>`;
                 })
@@ -76,7 +79,7 @@ export async function notifyPeople(receivers) {
             const mailData = {
                 from: 'LagerSystemSkaade@hotmail.com',  // sender address
                 replyTo: 'LagerSystemSkaade@hotmail.com',
-                to: receivers,   // list of receivers
+                to: mailList.toString(),   // list of receivers
                 subject: subject,
                 html: html,
             };
@@ -93,4 +96,49 @@ export async function notifyPeople(receivers) {
             resolve(null);
         }
     })
+}
+
+//sendMail();
+
+
+function sendMail() {
+    const transporter = nodemailer.createTransport({
+        port: 587,
+        host: "smtp.office365.com",
+        auth: {
+            user: 'LagerSystemSkaade@hotmail.com',
+            pass: 'Gruppenersej123'
+        },
+        secure: false,
+    });
+
+
+    const mailData = {
+        from: 'LagerSystemSkaade@hotmail.com',  // sender address
+        replyTo: 'LagerSystemSkaade@hotmail.com',
+        to: 'LagerSystemSkaade@hotmail.com',   // list of receivers
+        subject: 'TESTING',
+        html: `<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+        </head>
+        <body>
+            <h1>TESTING</h1>
+            <h2>Test</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed quidem obcaecati voluptas illo eius veniam magni vitae unde quaerat quisquam excepturi, quasi quod nobis, tempora exercitationem ducimus cum corrupti recusandae!</p>    
+        </body>
+        </html>`,
+    };
+
+    transporter.sendMail(mailData, (err, info) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log("Mail sent!");
+            console.log(info);
+        }
+    });
 }

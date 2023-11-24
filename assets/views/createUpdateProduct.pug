@@ -17,7 +17,7 @@ html(lang="en")
             - var date = product.expirationDate.toISOString().split('T')[0];
             - var location = product.location;
             - var quantity = product.quantity;
-        form(action=action, method="post")
+        form(action=action, method="post" id="form")
             label(for="brand") Brand:
             input(type="text" id="brand" value=brand placeholder="Insert brand..")
             label(for="price") Price: 

@@ -13,12 +13,14 @@ const transactionCollection = collection(db, 'transaction');
  * @author Kasper
  */
 export async function registerSale(id, amount) {
+    console.log("INDE I REGISTER SALE");
     let product = await getProduct(id);
 
     let newProductQuantity = product.quantity - amount;
 
     // Add logic for each type of product there is and when you should be notified
-    if (product.quantity > 10 && newProductQuantity < 10) {
+    if (product.quantity >= 10 && newProductQuantity < 10) {
+        console.log("INDE I IF");
         addMessageToMail(`Beholdning  af <b>${product.brand}</b> med ID: <b>${product.getId()}</b> er lavere 10`);
     }
 

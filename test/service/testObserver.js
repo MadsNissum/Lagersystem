@@ -2,6 +2,7 @@ import assert from 'assert'
 import { addMessageToMail, notifyPeople } from '../../service/observer.js'
 import { Product } from '../../model/Product.js'
 import { addProduct, deleteProduct } from '../../database/productDB.js';
+import { registerSale } from '../../database/transactionDB.js';
 
 /**
  * Test observer.js file
@@ -38,7 +39,18 @@ describe('Observer notifications', () => {
             let response = await notifyPeople(receivers);
 
             assert.equal(response.message, '<h2></h2>Testing<br>');
-        })
+        });
+
+        it('Should automatically add message notifyPeople in registerSale', async () => {
+            //IN PROGRESS
+            registerSale();
+
+            let receivers = ['LagerSystemSkaade@hotmail.com'];
+
+            let response = await notifyPeople(receivers);
+
+            assert.equal();
+        });
     })
 });
 

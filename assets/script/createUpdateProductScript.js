@@ -1,4 +1,4 @@
-const form = document.querySelector('form');
+const form = document.getElementById('form');
 form.addEventListener('submit', handleSubmit);
 
 const brand = document.getElementById('brand');
@@ -6,6 +6,8 @@ const price = document.getElementById('price');
 const date = document.getElementById('date');
 const loc = document.getElementById('location');
 const quantity = document.getElementById('quantity');
+
+console.log("TEST");
 
 /**
  * This function handles the form request on create and update product.
@@ -49,6 +51,7 @@ async function handleSubmit(event) {
         };
 
         try {
+            console.log(body);
             await request(form.action, body, method);
             window.location = "/inventory";
         } catch {

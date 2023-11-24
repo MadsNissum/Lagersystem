@@ -4,7 +4,7 @@ import * as crypto from 'crypto';
 
 
 export function checkAllowedPages(request, response, next) {
-    let allowedPages = [ '/login', '/login/create' ];
+    let allowedPages = [ '/login', '/login/create', '/registerSale' ];
     if (allowedPages.includes(request.url)) {
         next();
     } else {

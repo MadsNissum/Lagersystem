@@ -1,4 +1,4 @@
-const form = document.querySelector('form');
+const form = document.getElementById('form');
 form.addEventListener('submit', handleSubmit);
 
 const email = document.getElementById('email');
@@ -34,6 +34,7 @@ async function handleSubmit(event) {
         };
 
         try {
+            console.log(form.action);
             await request(form.action, body, method);
             window.location = "/mail";
         } catch {

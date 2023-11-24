@@ -27,6 +27,7 @@ router.get('/edit/:id', async (request, response) => {
 
 // POSTS
 router.post('/create', (request, response) => {
+    console.log(request.body.product);
     addProduct(request.body.product);
     response.sendStatus(201);
 });
