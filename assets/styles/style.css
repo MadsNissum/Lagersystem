@@ -109,6 +109,58 @@ input {
     color: #ffd700;
   }
 
+  .loginContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    margin: 25px;
+  }
+
+  .loginMain {
+    display: block;
+    text-align: center;
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* login settings */
+  .loginMain input{
+    font-weight: 300;
+    text-align: left;
+    display: block;
+    margin: auto;
+    width: 80%; /* Adjust the width as needed */
+    padding: 8px;
+    border: 1px solid rgb(150, 150, 150);
+    border-radius: 5px;
+  }
+
+  .loginButton {
+    font-size: 16px;
+    color: white;
+  }
+
+  .loginButton a:hover {
+    color: #ffd700;
+  }
+
+  .loginMain a {
+    color: #333;
+    font-size: small;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+  .loginMain label{
+    font-weight: bold;
+  }
+
 /* filter settings */
 .filter {
     list-style: none;
@@ -130,4 +182,30 @@ input {
   .filter input {
     border: none;
     padding: 5px;
+  }
+
+  /* Style for the alert */
+  .alert {
+    padding: 15px;
+    background-color: #f44336; /* Red background color */
+    color: white; /* White text color */
+    margin-bottom: 15px; /* Add some space at the bottom */
+    border-radius: 4px; /* Rounded corners */
+  }
+
+  /* Style for the close button */
+  .closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+  }
+
+  /* Change the color of the close button on hover */
+  .closebtn:hover {
+      color: black;
   }

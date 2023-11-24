@@ -18,19 +18,40 @@ export function checkAllowedPages(request, response, next) {
 
 export async function checkLogin(username, password) {
     let user = await getAccount(username);
-    if (user !== null && hash(password, user.salt) === user.password) {
-        return true;
+
+    if (user == null) {
+        return 401;
     }
-    console.log("Wrong username or password");
-    return false;
+
+    let passwordTrue = hash(password, user.salt) === user.password;
+
+    if (user !== null && !passwordTrue) {
+        return 403;
+    } else if (user !== null && passwordTrue) {
+        return 200;
+    }
+}
+
+export async function checkUsername(username) {
+    let user = await getAccount(username);
+    if (user !== null && username === user.username) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 export async function createAccount(username, password) {
+
+    console.log(username);
+    console.log(password);
+
     if (await getAccount(username) != null) {
-        console.log("Username already in use");
+        return 409; 
     } else {
         const salt = generateSalt();
         addAccount(username, hash(password, salt), salt);
+        return 201;
     }
 }
 

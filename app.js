@@ -50,7 +50,7 @@ app.post('/registerSale', async (request, response) => {
 
 // Function running once a day and when the program starts
 notifyPeople(await getEmails());
-setInterval(async () => { await notifyPeople(await getEmails()) }, 30000);
+setInterval(async () => { await notifyPeople(await getEmails()) }, 1000 * 60 * 60 * 24);
 // 1000 * 60 * 60 * 24
 
 // Listen for connection
