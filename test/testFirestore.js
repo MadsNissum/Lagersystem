@@ -4,11 +4,12 @@ import assert from 'assert'
 import { addProduct, deleteProduct, getProduct, updateProduct } from "../database/productDB.js";
 import { db } from '../database/firestore.js';
 import { addTransaction, getTransactions, registerSale } from "../database/transactionDB.js";
-import { expect } from 'chai';
+import { expect, use } from 'chai';
 import { collection } from 'firebase/firestore';
 import { addProductRestock } from "../database/productRestockDB.js";
 import { log } from "console";
-
+import { generateSalt } from "../service/login.js"
+import { addAccount, getAccount } from "../database/loginDB.js";
 
 describe('Testing firebase', () => {
     /**
@@ -156,5 +157,23 @@ describe('Product restock test',()=>{
         assert.deepStrictEqual(product.toPlainObject(), addedProductRestock.toPlainObject());
         
     })
+
+})
+
+describe('LoginDB Test',()=>{
+
+it('Should add the account to the database',async ()=>{
+    
+    let username = 'xXMLGPro420Xx'
+    let password = 'flæskesteg'
+    let salt = generateSalt()
+
+    await addAccount(username,password,salt);
+
+    let account = await getAccount(username)
+
+    assert.strictEqual(await account.username,username)
+    
+})
 
 })
