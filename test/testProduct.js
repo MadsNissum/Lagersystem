@@ -1,4 +1,12 @@
-        /**
+import { Product } from "../model/Product.js";
+import { doc, setDoc } from "firebase/firestore";
+import assert from 'assert'
+import { deleteProduct, addProduct, getProduct, updateProduct } from "../database/productDB.js";
+import { db } from "../database/firestore.js";
+
+
+
+       /**
      * Tests that getProduct gets the correct product object
      * @author Mikkel Hess
      */
