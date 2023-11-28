@@ -20,3 +20,8 @@ export async function getAccount(username) {
         return null;
     }
 }
+
+export async function deleteAccount(username) {
+    const docRef = doc(db,'accounts', username)
+    await deleteDoc(docRef)
+}

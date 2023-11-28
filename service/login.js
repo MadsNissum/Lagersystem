@@ -55,6 +55,7 @@ export async function createAccount(username, password) {
     }
 }
 
+
 function generateSalt() {
     const salt = crypto.randomBytes(16).toString('hex');
     return salt;
