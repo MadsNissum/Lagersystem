@@ -123,19 +123,19 @@ describe('Testing firebase', () => {
 });
 
 
-    /** 
-     * Test that ensures that a user gets deleted
-     * @author Amin Dahir
-    */
-    describe('Delete user function',() => {
-        it('Should delete a account if their username matches in the db', async () => {
-            const username = 'testUser';
-            await addAccount(username, 'password', 'salt');
+/** 
+ * Test that ensures that a user gets deleted
+ * @author Amin Dahir
+*/
+describe('Delete user function', () => {
+    it('Should delete a account if their username matches in the db', async () => {
+        const username = 'testUser';
+        await addAccount(username, 'password', 'salt');
 
-            await deleteAccount(username);
-
-            const deletedAccount = await getAccount(username);
-            assert.strictEqual(deletedAccount,null)
-
-        })
-    })
+        await deleteAccount(username);
+        
+        const deletedAccount = await getAccount(username);
+        
+        assert.strictEqual(deletedAccount, null);
+    });
+});
