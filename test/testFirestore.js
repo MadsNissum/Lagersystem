@@ -5,7 +5,7 @@ import { addProduct, deleteProduct, getProduct, updateProduct } from "../databas
 import { db } from '../database/firestore.js';
 import { getTransactions, registerSale } from "../database/transactionDB.js";
 import { createAccount } from "../service/login.js";
-
+import { addAccount, getAccount, deleteAccount } from "../database/loginDB.js";
 
 describe('Testing firebase', () => {
     /**
@@ -129,8 +129,13 @@ describe('Testing firebase', () => {
     */
     describe('Delete user function',() => {
         it('Should delete a account if their username matches in the db', async () => {
-           let testUser =  createAccount(testUser, testPassword)
-           
+            const username = 'testUser';
+            await addAccount(username, 'password', 'salt');
+
+            await deleteAccount(username);
+
+            const deletedAccount = await getAccount(username);
+            assert.strictEqual(deletedAccount,null)
 
         })
     })
