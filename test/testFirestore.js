@@ -4,6 +4,7 @@ import assert from 'assert'
 import { addProduct, deleteProduct, getProduct, updateProduct } from "../database/productDB.js";
 import { db } from '../database/firestore.js';
 import { getTransactions, registerSale } from "../database/transactionDB.js";
+import { createAccount } from "../service/login.js";
 
 
 describe('Testing firebase', () => {
@@ -87,6 +88,7 @@ describe('Testing firebase', () => {
         });
     });
 
+
     describe('Register sale function', async () => {
         //FEJLER NOGLE GANGE???
         it('Should update the product if the quantity after the sale is above 0', async () => {
@@ -119,3 +121,16 @@ describe('Testing firebase', () => {
         });
     });
 });
+
+
+    /** 
+     * Test that ensures that a user gets deleted
+     * @author Amin Dahir
+    */
+    describe('Delete user function',() => {
+        it('Should delete a account if their username matches in the db', async () => {
+           let testUser =  createAccount(testUser, testPassword)
+           
+
+        })
+    })
