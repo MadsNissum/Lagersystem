@@ -4,12 +4,10 @@ import assert from 'assert'
 import { addProduct, deleteProduct, getProduct, updateProduct } from "../database/productDB.js";
 import { db } from '../database/firestore.js';
 import { addTransaction, getTransactions, registerSale } from "../database/transactionDB.js";
-import { expect, use } from 'chai';
 import { collection } from 'firebase/firestore';
 import { addProductRestock } from "../database/productRestockDB.js";
-import { log } from "console";
-import { generateSalt } from "../service/login.js"
-import { addAccount, getAccount } from "../database/loginDB.js";
+import { generateSalt, createAccount } from "../service/login.js"
+import { addAccount, deleteAccount, getAccount } from "../database/loginDB.js";
 
 describe('Testing firebase', () => {
     /**
@@ -92,6 +90,7 @@ describe('Testing firebase', () => {
         });
     });
 
+
     describe('Register sale function', async () => {
         //FEJLER NOGLE GANGE???
         it('Should update the product if the quantity after the sale is above 0', async () => {
@@ -126,55 +125,70 @@ describe('Testing firebase', () => {
 });
 
 //kan ikk få den til at virke
-describe('Add transaction test',()=>{
-    it('Should add the transaction into the database', async ()=>{
+describe('Add transaction test', () => {
+    it('Should add the transaction into the database', async () => {
         let product = new Product('Carlsberg', 28, new Date("2013-11-16"), 'Skåde', 100)
-        
-        let transDoc = await addTransaction(product,10)
+
+        let transDoc = await addTransaction(product, 10)
 
         console.log(await getProduct(transDoc.id) + " faq faq faq");
 
         const transactionCollection = await collection(db, 'transaction');
-            
+
         const docSnapshot = await transactionCollection.doc().get()
-        
+
         expect(docSnapshot.exists).to.be.true;
     })
 
 })
 
 
-describe('Product restock test',()=>{
+describe('Product restock test', () => {
 
-    it('Should add a product to the product restock collection',async ()=>{
+    it('Should add a product to the product restock collection', async () => {
 
         let product = new Product('Carlsberg', 28, new Date("2013-11-16"), 'Skåde', 100)
-        
+
         let doc = await addProductRestock(product)
 
         let addedProductRestock = await getProduct(doc.id)
-    
+
         assert.deepStrictEqual(product.toPlainObject(), addedProductRestock.toPlainObject());
-        
+
     })
 
 })
 
-describe('LoginDB Test',()=>{
+describe('LoginDB Test', () => {
+    it('Should add the account to the database', async () => {
 
-it('Should add the account to the database',async ()=>{
-    
-    let username = 'xXMLGPro420Xx'
-    let password = 'flæskesteg'
-    let salt = generateSalt()
+        let username = 'xXMLGPro420Xx'
+        let password = 'flæskesteg'
+        let salt = generateSalt()
 
-    await addAccount(username,password,salt);
+        await addAccount(username, password, salt);
 
-    let account = await getAccount(username)
+        let account = await getAccount(username)
 
-    assert.strictEqual(await account.username,username)
-    
+        assert.strictEqual(await account.username, username)
+
+    })
 })
 
-})
 
+/** 
+ * Test that ensures that a user gets deleted
+ * @author Amin Dahir
+*/
+describe('Delete user function', () => {
+    it('Should delete a account if their username matches in the db', async () => {
+        const username = 'testUser';
+        await addAccount(username, 'password', 'salt');
+
+        await deleteAccount(username);
+
+        const deletedAccount = await getAccount(username);
+
+        assert.strictEqual(deletedAccount, null);
+    });
+});

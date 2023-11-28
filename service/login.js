@@ -42,7 +42,6 @@ export async function checkUsername(username) {
 }
 
 export async function createAccount(username, password) {
-
     console.log(username);
     console.log(password);
 
