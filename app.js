@@ -3,6 +3,7 @@ import express from 'express';
 import * as url from 'url';
 import { notifyPeople } from './service/observer.js';
 import { getEmails } from './database/emailDB.js';
+import frontpageRoutes from './routes/frontpage.js';
 import mailRoutes from './routes/mail.js';
 import transactionRoutes from './routes/transactions.js';
 import productRoutes from './routes/product.js';
@@ -33,6 +34,8 @@ app.use(session({
 app.use(checkAllowedPages);
 
 // Routes
+app.use('/frontpage', frontpageRoutes);
+
 app.use('/mail', mailRoutes);
 
 app.use('/transactions', transactionRoutes);

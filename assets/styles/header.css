@@ -33,20 +33,3 @@
     color: #ffd700;
   }
 
-  .loginContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 50vh;
-    margin: 25px;
-  }
-
-  .loginMain {
-    display: block;
-    text-align: center;
-    width: 300px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
