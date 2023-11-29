@@ -1,9 +1,36 @@
 import { Product } from "../model/Product.js";
 import { doc, setDoc } from "firebase/firestore";
 import assert from 'assert'
-import { deleteProduct, addProduct, getProduct, updateProduct } from "../database/productDB.js";
+import { deleteProduct, addProduct, getProduct, updateProduct, getProducts } from "../database/productDB.js";
 import { db } from "../database/firestore.js";
 
+    
+    describe('Get Products Function', () => {
+
+        it('Should return an array of products',async ()=>{
+
+            let product1 = new Product('Monster Energy Monarch',20,new Date("2013-11-15"),'Skåde',20)
+            let product2 = new Product('Mountain Dew',200,new Date("2011-10-14"),'Skåde',30)
+            let product3 = new Product('Yoghurt',25,new Date('2016-06-20'),'Odder',10)
+
+            addProduct(product1)
+            addProduct(product2)
+            addProduct(product3)
+
+            let productsArray = await getProducts()
+            let getProductsIsWorking = false;
+
+            if(productsArray.indexOf('product1') && productsArray.indexOf('product2') && productsArray.indexOf('product3')) {
+                getProductsIsWorking = true;
+            }
+            assert.equal(getProductsIsWorking,true)
+
+            deleteProduct(product1)
+            deleteProduct(product2)
+            deleteProduct(product3)
+        })
+
+    })
 
 
        /**
