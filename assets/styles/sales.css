@@ -1,0 +1,9 @@
+.buttonManagement {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.griditem{
+display: block;
+}
