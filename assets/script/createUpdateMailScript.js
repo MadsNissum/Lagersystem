@@ -18,13 +18,13 @@ async function handleSubmit(event) {
         alert("Name is empty!");
     } else {
         let id = null;
-        let method;
-        if (form.action.split('/')[4] == "edit") {
-            id = window.location.href.split('/')[5];
-            method = "PUT";
-        } else {
-            method = "POST";
+        let method = form.dataset.method;
+        
+        if (method == "PUT") {
+            let URLArray = window.location.href.split('/');
+            id = URLArray[URLArray.length - 1];
         }
+
         const body = {
             email: {
                 email: email.value,

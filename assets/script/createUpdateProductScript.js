@@ -26,15 +26,14 @@ async function handleSubmit(event) {
     } else if (quantity.value == null || quantity.value <= 0) {
         alert("Quantity is not set or negative!");
     } else {
-
         let id = null;
-        let method;
-        if (form.action.split('/')[4] == "edit") {
-            id = window.location.href.split('/')[5]
-            method = "PUT"
-        } else {
-            method = "POST"
+        let method = form.dataset.method;
+
+        if (method == "PUT") {
+            let URLArray = window.location.href.split('/');
+            id = URLArray[URLArray.length - 1];
         }
+
         const body = {
             product: {
                 brand: brand.value,
@@ -47,7 +46,6 @@ async function handleSubmit(event) {
         };
 
         try {
-            console.log(body);
             await request(form.action, body, method);
             window.location = "/inventory";
         } catch (error) {

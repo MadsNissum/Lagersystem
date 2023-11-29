@@ -1,5 +1,5 @@
-import { addAccount, getAccount } from "../database/loginDB.js"
-import { generateSalt } from "../service/login.js"
+import { addAccount, getAccount } from "../../database/loginDB.js"
+import { generateSalt } from "../../service/login.js"
 import assert from 'assert'
 
 describe('LoginDB Test',()=>{
