@@ -13,6 +13,12 @@ describe('EmailDB Test',()=>{
         let addedEmail = await getEmail(emailDoc.id)
 
         assert.strictEqual(email,addedEmail.email)
+
+        deleteEmail(emaildoc.id)
+    })
+
+    it('Should return the correct email',()=>{
+        
     })
 
 })
