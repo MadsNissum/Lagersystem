@@ -1,4 +1,12 @@
-//kan ikk få den til at virke
+import { Product } from "../model/Product.js";
+import { addTransaction, registerSale, getTransactions } from "../database/transactionDB.js";
+import { collection } from "firebase/firestore";
+import { db } from "../database/firestore.js";
+import { addProduct, getProduct, deleteProduct } from "../database/productDB.js";
+import assert from 'assert'
+
+
+
 describe('Add transaction test',()=>{
     it('Should add the transaction into the database', async ()=>{
         let product = new Product('Carlsberg', 28, new Date("2013-11-16"), 'Skåde', 100)
