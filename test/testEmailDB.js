@@ -47,5 +47,61 @@ describe('EmailDB Test',()=>{
         })
     
     })
+
+    describe('Delete Email function', async =>{
+
+        it('Should delete the email', async ()=>{
+
+            let email = 'LagerSystemSkaade@hotmail.com';
+    
+            let emailDoc = await addEmail({email: email})
+    
+            deleteEmail(emailDoc.id)
+    
+            assert.strictEqual(await getEmail(emailDoc.id),null)         
+
+        })       
+    })
+
+    //Tror ikk jeg kan teste den da jeg kommer til at sætte en email
+    //ind der ikke hedder lagersystemskaade...
+    describe('Update Email function',()=>{
+
+        it('Should update the email',()=>{
+            assert.equal('hej','meddig')
+        })
+        
+    })
+
+    //idk bout this one chief
+
+    /*
+    describe('Get Emails Function',()=>{
+
+        it('Should return an array of correct emails', async ()=>{
+
+            let email = 'LagerSystemSkaade@hotmail.com';
+
+            let email1 = await addEmail({email: email})
+            let email2 = await addEmail({email: email})
+            let email3 = await addEmail({email: email})
+
+            
+            let emailsArray = await getEmails()
+            let getEmailsIsWorking = false;
+
+            if(emailsArray.indexOf('email1') && emailsArray.indexOf('email2') && emailsArray.indexOf('email3')) {
+                getProductsIsWorking = true;
+            }
+
+            assert.equal(getProductsIsWorking,true)
+
+            deleteEmail(email1.id)
+            deleteEmail(email2.id)
+            deleteEmail(email3.id)
+        })
+
+    })
+    */
     
 })
