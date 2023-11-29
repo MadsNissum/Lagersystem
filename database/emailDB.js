@@ -23,7 +23,7 @@ export async function getEmails() {
  * @author Mads Nissum
  */
 export async function addEmail(email) {
-    await addDoc(emailsCollection, email)
+    return await addDoc(emailsCollection, email)
 }
 
 /**
