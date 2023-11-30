@@ -1,4 +1,3 @@
-import { Product } from '../model/Product.js';
 import { db } from './firestore.js';
 import { getFirestore, collection, getDocs, getDoc, doc, deleteDoc, addDoc, updateDoc } from 'firebase/firestore';
 

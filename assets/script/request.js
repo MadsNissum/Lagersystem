@@ -27,7 +27,6 @@ async function request(url, objekt, method) {
         body: JSON.stringify(objekt),
         headers: { 'Content-Type': 'application/json' }
     });
-    console.log(respons.status);
     if (respons.status !== 201 && respons.status !== 200) {
         throw new Error(respons.status);
     }
@@ -50,6 +49,7 @@ async function deleteRequest(url) {
 /**
  * Makes an alert basen on the error code
  * @param {Error} error An error that is trown in the code.
+ * @author Mads Nissum
  */
 function errorCodeAlert(error) {
     let errorCode = Number(error.message.toString());

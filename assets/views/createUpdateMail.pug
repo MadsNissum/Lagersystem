@@ -10,11 +10,12 @@ html(lang="en")
     main
         - var text = (email) ? "Edit E-mail" : "Add E-mail"
         - var action = (email) ? "/mail/edit" : "/mail/add"
+        - var method = (email) ? "PUT" : "POST"
         h1= text
         if email
             - var mail = email.email;
             - var name = email.name;
-        form(action=action id="form")
+        form(action=action id="form" data-method=method)
             label(for="email") Email:
             input(type="email" id="email" value=mail placeholder="indsæt e-mail..")
             label(for="name") Navn: 

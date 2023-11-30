@@ -1,8 +1,8 @@
-import { Product } from "../model/Product.js";
+import { Product } from "../../model/Product.js";
 import { doc, setDoc } from "firebase/firestore";
 import assert from 'assert'
-import { deleteProduct, addProduct, getProduct, updateProduct, getProducts } from "../database/productDB.js";
-import { db } from "../database/firestore.js";
+import { deleteProduct, addProduct, getProduct, updateProduct, getProducts } from "../../database/productDB.js";
+import { db } from "../../database/firestore.js";
 
     
     describe('Get Products Function', () => {

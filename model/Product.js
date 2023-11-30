@@ -77,6 +77,7 @@ export class Product {
     /**
      * Return string date
      * @returns String output of date yyyy-mm-dd
+     * @author Mads Nissum
      */
     getDate() {
         return this.expirationDate.toISOString().split('T')[0];
