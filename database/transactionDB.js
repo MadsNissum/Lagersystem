@@ -51,8 +51,23 @@ export async function addTransaction(sale) {
         bon.push(product);
     }
     let finalBon = { bon };
-    await addDoc(transactionCollection, JSON.parse(JSON.stringify(finalBon)));
+    return await addDoc(transactionCollection, JSON.parse(JSON.stringify(finalBon)));
 }
+
+/**
+ * 
+ * @param {*} id 
+ * @returns doc
+ * @author Mikkel Hess
+ */
+export async function deleteTransaction(id) {
+    const docRef = doc(db, 'transaction', id);
+    return await deleteDoc(docRef);
+}
+
+
+
+
 
 /**
  * Function returns an array of products from firestore
