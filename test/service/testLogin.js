@@ -10,7 +10,7 @@ describe('Login Test',()=>{
 
         await createAccount('testAccount','kaninpis')
 
-        let account = getAccount('testAccount')
+        let account = await getAccount('testAccount')
         
         let accountExists = false;
 
