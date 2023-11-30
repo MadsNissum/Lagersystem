@@ -35,6 +35,8 @@ describe('Login Test',()=>{
 
         assert.strictEqual(status,200)
 
+        deleteAccount('testingAccount')
+
     })
 
   
