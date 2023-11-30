@@ -42,9 +42,8 @@ app.use('/inventory', productRoutes);
 app.use('/login', loginRoutes);
 
 app.post('/registerSale', async (request, response) => {
-    request.body.array.forEach(order => {
-        registerSale(order.id, order.amount);
-    });
+    registerSale(request.body);
+
     response.sendStatus(200);
 });
 
