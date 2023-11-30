@@ -1,20 +1,18 @@
 const productButtons = document.getElementById('products');
-const table = document.getElementsByTagName('table')
-const thead = document.getElementsByTagName('thead');
-const tbody = document.getElementsByTagName('tbody');
-const tfoot = document.getElementsByTagName('tfoot');
+const tableBon = document.getElementById('bonTable');
 let productsList = []
 let productAmount = 0;
 
 createTable(); 
 
  function addProduct(productBrand, productPrice) {
-    let product = {productBrand, productPrice}
-    productsList.push(product)
-    console.log(productsList)
+    let product = {productBrand, productPrice};
+    productsList.push(product);
+    console.log(productsList);
+    createTable();
  }
 
- function productAmount(productBrand) {
+ function addProductAmount(productBrand) {
     let amount;
     productsList.forEach(product => {
         if(product.productBrand == productBrand) {
@@ -33,13 +31,13 @@ function sumProducts() {
 }
 
 function createTable() {
-  table.innerHTML = "";
-  document.createElement('thead');
-  document.createElement('tbody');
-  document.createElement('tfoot');
-  table.appendChild(thead);
-  table.appendChild(tbody);
-  table.appendChild(tfoot);
+  bonTable.innerHTML = "";
+  let tHead = document.createElement('thead');
+  let tBody = document.createElement('tbody');
+  let tFoot = document.createElement('tfoot');
+  bonTable.appendChild(tHead);
+  bonTable.appendChild(tBody);
+  bonTable.appendChild(tFoot);
   
 // thead 
   let theadHTML = `<tr>
@@ -47,7 +45,7 @@ function createTable() {
       <td></td>
       <td><h1>kr '${sumProducts()}'</h1></td>
   </tr>`
-  thead.innerHTML = theadHTML;
+  tHead.innerHTML = theadHTML;
 
 // tbody 
 let tbodyHTML1 = `<tbody>
@@ -56,11 +54,11 @@ let tbodyHTML1 = `<tbody>
     <td>antal</td>
     <td>Beløb</td>
 </tr>`
-tbody.innerHTML = tbodyHTML1
+tBody.innerHTML = tbodyHTML1
 productsList.forEach(product => {
-    tbody.innerHTML += `<tr>
+    tBody.innerHTML += `<tr>
     <td>'${product.productBrand}'</td>
-    <td>${productAmount(product.productBrand)}</td>
+    <td>${addProductAmount(product.productBrand)}</td>
     <td>${product.productPrice}</td>
 </tr>`
 })
@@ -89,10 +87,10 @@ let tbodyHTML2 = `<tr>
 <td></td>
 <td>'${calculateMoms()}'</td>
 </tr>`
-tbody.innerHTML += tbodyHTML2
+tBody.innerHTML += tbodyHTML2
 
 // tfoot
-tfoot.innerHTML = 
+tFoot.innerHTML = 
 ` <tr>
 <td><h2>Subtotal</h2></td>
 <td></td>
