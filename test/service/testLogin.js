@@ -2,7 +2,7 @@
 
 import { getAccount } from "../../database/loginDB.js"
 import { createAccount } from "../../service/login.js"
-import 
+import { deleteAccount } from "../../database/loginDB.js"
 import assert from 'assert'
 
 describe('Login Test',()=>{
@@ -21,8 +21,7 @@ describe('Login Test',()=>{
 
         assert.strictEqual(accountExists,true)
 
-    
-
+        deleteAccount('testAccount')
     })
 
   
