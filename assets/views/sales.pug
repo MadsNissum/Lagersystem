@@ -1,0 +1,77 @@
+doctype html
+html(lang='en')
+    head 
+        title Lagersystem - salg 
+        link(rel="stylesheet", href="/styles/style.css")
+        link(rel="stylesheet", href="/styles/sales.css")
+        script(src="/script/salesViewScript.js" defer)
+    body 
+        include header 
+        main 
+            div(class="mainGrid")
+                div(class="buttonManagement")
+                    button(class="griditem") Slet bonlinje 
+                    button(class="griditem") Retur 
+                    button(class="griditem") Udskriv bon 
+                    button(class="griditem") Vælg kontokunde 
+                    button(class="griditem") Manager 
+                
+                table(id="bonTable" class="bonTable")
+                    thead
+                        tr
+                            td
+                                h1 Byttepenge  
+                            td 
+                            td 
+                                h1 kr 0.00
+                    tbody 
+                        tr
+                            td Beskrivelse 
+                            td Antal 
+                            td Beløb 
+                        tr 
+                            td Fadøl 
+                            td En 
+                            td 30
+                        tr 
+                            td Bon total 
+                            td
+                            td 30
+                            br
+                        tr 
+                            td Beløb modtaget kreditkort 
+                            td
+                            td 30
+                        tr 
+                            td Beløb at betale 
+                            td 
+                            td -30
+                        tr 
+                            td Byttepenge 
+                            td 
+                            td 0
+                            br
+                        tr 
+                            td Moms 25% af 30
+                            td 
+                            td 7,5
+                    tfoot 
+                        tr 
+                            td
+                                h2 Subtotal
+                            td 
+                            td     
+                                h2 0.00
+                div(class="Approve")
+                    button Godkend ekspedition 
+                    button Godkend kreditkort 
+                    button Mobilpay
+                    button Annullér ekspedition 
+                    button Modtaget kontakt / Spin
+                div(class="Products")
+                    each product in products 
+                        button(onclick=`addProduct('${product.brand}', '${product.price}')`)                      
+                            p=product.brand
+                            br
+                            p=product.price + " kr."
+        include footer 

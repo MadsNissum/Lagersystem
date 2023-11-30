@@ -5,6 +5,7 @@ import { notifyPeople } from './service/observer.js';
 import { getEmails } from './database/emailDB.js';
 import mailRoutes from './routes/mail.js';
 import transactionRoutes from './routes/transactions.js';
+import saleRoutes from './routes/sales.js';
 import productRoutes from './routes/product.js';
 import loginRoutes from './routes/login.js';
 import session from 'express-session';
@@ -32,7 +33,10 @@ app.use(session({
 
 app.use(checkAllowedPages);
 
+
 // Routes
+app.use('/sales', saleRoutes)
+
 app.use('/mail', mailRoutes);
 
 app.use('/transactions', transactionRoutes);
