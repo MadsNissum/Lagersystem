@@ -1,6 +1,6 @@
 const productButtons = document.getElementById('products');
 const tableBon = document.getElementById('bonTable');
-let productsList = []
+let productsList = [];
 
 createTable(); 
 
@@ -42,7 +42,7 @@ function createTable() {
   let theadHTML = `<tr>
       <td><h1>Byttepenge</h1></td>
       <td></td>
-      <td><h1>kr '${sumProducts()}'</h1></td>
+      <td><h1>kr 0</h1></td>
   </tr>`
   tHead.innerHTML = theadHTML;
 
@@ -50,7 +50,7 @@ function createTable() {
 let tbodyHTML1 = `<tbody>
 <tr>
     <td>Beskrivelse</td>
-    <td>antal</td>
+    <td>Antal</td>
     <td>Beløb</td>
 </tr>`
 tBody.innerHTML = tbodyHTML1
@@ -72,17 +72,17 @@ productsList.forEach(product => {
 let tbodyHTML2 = `<tr>
 <td>Bon total</td>
 <td></td>
-<td>'${sumProducts()}'<br></td>
+<td>0<br></td>
 </tr>
 <tr>
 <td>Beløb modtaget kreditkort</td>
 <td></td>
-<td>'${sumProducts()}'</td>
+<td>${sumProducts()}</td>
 </tr>
 <tr>
 <td>Beløb at betale</td>
 <td></td>
-<td>-'${sumProducts()}'</td>
+<td>-${sumProducts()}</td>
 </tr>
 <tr>
 <td>Byttepenge</td>
@@ -90,9 +90,9 @@ let tbodyHTML2 = `<tr>
 <td>0<br></td>
 </tr>
 <tr>
-<td>Moms 25% af '${sumProducts()}'</td>
+<td>Moms 25% af ${totalwithoutVAT()}</td>
 <td></td>
-<td>'${calculateMoms()}'</td>
+<td>${vatOTotal()}</td>
 </tr>`
 tBody.innerHTML += tbodyHTML2
 
@@ -101,11 +101,14 @@ tFoot.innerHTML =
 ` <tr>
 <td><h2>Subtotal</h2></td>
 <td></td>
-<td><h2>0.00</h2></td>
+<td><h2>${sumProducts()}</h2></td>
 </tr>`
 }
 
-function calculateMoms() {
+function vatOTotal() {
     return (sumProducts()/100)*25
 }
 
+function totalwithoutVAT() {
+    return sumProducts() - vatOTotal();
+}
