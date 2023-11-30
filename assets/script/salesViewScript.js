@@ -6,61 +6,7 @@ const tfoot = document.getElementsByTagName('tfoot');
 let productsList = []
 let productAmount = 0;
 
-const tableHTML = `
-<table>
-    <thead>
-        <tr>
-            <td><h1>Byttepenge</h1></td>
-            <td></td>
-            <td><h1>kr 0.00</h1></td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Beskrivelse</td>
-            <td>antal</td>
-            <td>Beløb</td>
-        </tr>
-        <tr>
-            <td>Fadøl</td>
-            <td>En</td>
-            <td>30</td>
-        </tr>
-        <tr>
-            <td>Bon total</td>
-            <td></td>
-            <td>30<br></td>
-        </tr>
-        <tr>
-            <td>Beløb modtaget kreditkort</td>
-            <td></td>
-            <td>30</td>
-        </tr>
-        <tr>
-            <td>Beløb at betale</td>
-            <td></td>
-            <td>-30</td>
-        </tr>
-        <tr>
-            <td>Byttepenge</td>
-            <td></td>
-            <td>0<br></td>
-        </tr>
-        <tr>
-            <td>Moms 25% af 30</td>
-            <td></td>
-            <td>7,5</td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td><h2>Subtotal</h2></td>
-            <td></td>
-            <td><h2>0.00</h2></td>
-        </tr>
-    </tfoot>
-</table>`;
-
+createTable(); 
 
  function addProduct(productBrand, productPrice) {
     let product = {productBrand, productPrice}
@@ -95,7 +41,7 @@ function createTable() {
   table.appendChild(tbody);
   table.appendChild(tfoot);
   
-
+// thead 
   let theadHTML = `<tr>
       <td><h1>Byttepenge</h1></td>
       <td></td>
@@ -103,6 +49,7 @@ function createTable() {
   </tr>`
   thead.innerHTML = theadHTML;
 
+// tbody 
 let tbodyHTML1 = `<tbody>
 <tr>
     <td>Beskrivelse</td>
@@ -117,6 +64,40 @@ productsList.forEach(product => {
     <td>${product.productPrice}</td>
 </tr>`
 })
+let tbodyHTML2 = `<tr>
+<td>Bon total</td>
+<td></td>
+<td>'${sumProducts()}'<br></td>
+</tr>
+<tr>
+<td>Beløb modtaget kreditkort</td>
+<td></td>
+<td>'${sumProducts()}'</td>
+</tr>
+<tr>
+<td>Beløb at betale</td>
+<td></td>
+<td>-'${sumProducts()}'</td>
+</tr>
+<tr>
+<td>Byttepenge</td>
+<td></td>
+<td>0<br></td>
+</tr>
+<tr>
+<td>Moms 25% af '${sumProducts()}'</td>
+<td></td>
+<td>'${calculateMoms()}'</td>
+</tr>`
+tbody.innerHTML += tbodyHTML2
+
+// tfoot
+tfoot.innerHTML = 
+` <tr>
+<td><h2>Subtotal</h2></td>
+<td></td>
+<td><h2>0.00</h2></td>
+</tr>`
 }
 
 function calculateMoms() {
