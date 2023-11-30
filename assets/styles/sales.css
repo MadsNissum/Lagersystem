@@ -13,9 +13,48 @@ display: block;
 
 .mainGrid {
     display: grid;
-    grid-template-columns: 10px 100px auto;
+    grid-template-columns: 10px 100px 600px auto;
+    grid-gap: 10px;
+    margin: 0px;
+    align-content: center;
 }
 
 .bonTable {
     margin: 0px;
+}
+
+.calculator { 
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    height: auto;
+    width: 75px;
+    margin: 0px;
+}
+.calculator button {
+    display: block;
+}
+.Approve {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-gap: 10px;
+    margin: 0px;
+}
+
+.Approve button{
+    display: block;
+    height: 150px;
+    width: auto;
+}
+
+.Products { 
+    display: grid;
+    grid-template-columns: repeat(5, auto);
+    grid-gap: 10px;
+}
+
+.Products button {
+    font-size: 1rem;
+    display: block;
+    width: 350px;
+    height: auto;
 }

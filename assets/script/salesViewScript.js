@@ -1,19 +1,17 @@
 const productButtons = document.getElementById('products');
 const tableBon = document.getElementById('bonTable');
 let productsList = []
-let productAmount = 0;
 
 createTable(); 
 
  function addProduct(productBrand, productPrice) {
     let product = {productBrand, productPrice};
     productsList.push(product);
-    console.log(productsList);
     createTable();
  }
 
  function addProductAmount(productBrand) {
-    let amount;
+    let amount = 0; 
     productsList.forEach(product => {
         if(product.productBrand == productBrand) {
             amount++;
@@ -23,15 +21,16 @@ createTable();
  }
 
 function sumProducts() {
-    let sum = 0;
+    let sum = 0; 
     productsList.forEach(product => {
-        sum += product.productPrice;
+            sum += Number(product.productPrice);
     });
     return sum;
 }
 
 function createTable() {
   bonTable.innerHTML = "";
+
   let tHead = document.createElement('thead');
   let tBody = document.createElement('tbody');
   let tFoot = document.createElement('tfoot');
@@ -55,13 +54,21 @@ let tbodyHTML1 = `<tbody>
     <td>Beløb</td>
 </tr>`
 tBody.innerHTML = tbodyHTML1
+
+let newProductList = new Set();
+
 productsList.forEach(product => {
-    tBody.innerHTML += `<tr>
-    <td>'${product.productBrand}'</td>
-    <td>${addProductAmount(product.productBrand)}</td>
-    <td>${product.productPrice}</td>
-</tr>`
-})
+    if (!newProductList.has(product.productBrand)) {
+        newProductList.add(product.productBrand);
+
+        tBody.innerHTML += `<tr>
+            <td>${product.productBrand}</td>
+            <td>${addProductAmount(product.productBrand)}</td>
+            <td>${product.productPrice}</td>
+        </tr>`;
+    }
+});
+
 let tbodyHTML2 = `<tr>
 <td>Bon total</td>
 <td></td>
