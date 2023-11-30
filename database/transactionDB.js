@@ -8,43 +8,50 @@ const transactionCollection = collection(db, 'transaction');
 
 /**
  * Counts down products quantity, deletes if quanitity less than 1
- * @param {*} id Id of document in firebase
- * @param {*} amount that will be sold
+ * @param {*} sale an object with an array of ids of products sold and their corresponding amountsold
  * @author Kasper
  */
-export async function registerSale(id, amount) {
+export async function registerSale(sale) {
     console.log("INDE I REGISTER SALE");
-    let product = await getProduct(id);
 
-    let newProductQuantity = product.quantity - amount;
+    for (let i = 0; i < sale.array.length; i++) {
+        let product = await getProduct(sale.array[i].id);
+        let newProductQuantity = product.quantity - sale.array[i].amount;
 
-    // Add logic for each type of product there is and when you should be notified
-    if (product.quantity >= 10 && newProductQuantity < 10) {
-        console.log("INDE I IF");
-        addMessageToMail(`Beholdning  af <b>${product.brand}</b> med ID: <b>${product.getId()}</b> er lavere 10`);
+        // Add logic for each type of product there is and when you should be notified
+        if (product.quantity >= 10 && newProductQuantity < 10) {
+            console.log("INDE I IF");
+            addMessageToMail(`Beholdning  af <b>${product.brand}</b> med ID: <b>${product.getId()}</b> er lavere 10`);
+        }
+
+            product.quantity = newProductQuantity;
+
+        if (product.quantity <= 0) {
+            deleteProduct(sale.array[i].id);
+        } else {
+            updateProduct(sale.array[i].id, product.toPlainObject());
+        }
     }
 
-    product.quantity = newProductQuantity;
-
-    if (product.quantity <= 0) {
-        deleteProduct(id);
-    } else {
-        updateProduct(id, product.toPlainObject());
-    }
-
-    addTransaction(product, amount);
+    addTransaction(sale);
 }
 
 /**
  * Inserts a record of a transaction when registering a sale.
- * @param {*} product Product that was sold
- * @param {*} amount Amount that was sold
+ * @param {*} sale an object with an array of ids of products sold and their corresponding amountsold
  * @author Kasper
  */
-export async function addTransaction(product, amount) {
-    product.amountSold = amount;
-    product.transactionDate = new Date().toISOString().split('T')[0];
-    await addDoc(transactionCollection, JSON.parse(JSON.stringify(product)));
+export async function addTransaction(sale) {
+    let bon = [];
+
+    for (let i = 0; i < sale.array.length; i++) {
+        let product = await getProduct(sale.array[i].id);
+        product.amountSold = sale.array[i].amount
+        product.transactionDate = new Date().toISOString().split('T')[0];
+        bon.push(product);
+    }
+    let finalBon = { bon };
+    await addDoc(transactionCollection, JSON.parse(JSON.stringify(finalBon)));
 }
 
 /**
