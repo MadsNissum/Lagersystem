@@ -1,7 +1,7 @@
 // i am tha test monkeyyyyyyyyyyyyyyyyyyyyy :-)
 
 import { getAccount } from "../../database/loginDB.js"
-import { createAccount } from "../../service/login.js"
+import { checkLogin, createAccount } from "../../service/login.js"
 import { deleteAccount } from "../../database/loginDB.js"
 import assert from 'assert'
 
@@ -22,6 +22,19 @@ describe('Login Test',()=>{
         assert.strictEqual(accountExists,true)
 
         deleteAccount('testAccount')
+    })
+
+    it('Check Login function',async ()=>{
+
+        let username = 'testingAccount'
+        let password = 'qwerty'
+
+        await createAccount(username, password)
+
+        let status = await checkLogin(username,password)
+
+        assert.strictEqual(status,200)
+
     })
 
   
