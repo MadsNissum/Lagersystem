@@ -63,7 +63,7 @@ describe('EmailDB Test',()=>{
         })       
     })
 
-    //Tror ikk jeg kan teste den da jeg kommer til at sætte en email
+    //Ved ikke om jeg kan teste den da jeg kommer til at sætte en email
     //ind der ikke hedder lagersystemskaade...
     describe('Update Email function',()=>{
 
@@ -73,9 +73,8 @@ describe('EmailDB Test',()=>{
         
     })
 
-    //idk bout this one chief
 
-    /*
+    
     describe('Get Emails Function',()=>{
 
         it('Should return an array of correct emails', async ()=>{
@@ -91,10 +90,10 @@ describe('EmailDB Test',()=>{
             let getEmailsIsWorking = false;
 
             if(emailsArray.indexOf('email1') && emailsArray.indexOf('email2') && emailsArray.indexOf('email3')) {
-                getProductsIsWorking = true;
+                getEmailsIsWorking = true;
             }
 
-            assert.equal(getProductsIsWorking,true)
+            assert.equal(getEmailsIsWorking,true)
 
             deleteEmail(email1.id)
             deleteEmail(email2.id)
@@ -102,6 +101,4 @@ describe('EmailDB Test',()=>{
         })
 
     })
-    */
-    
 })

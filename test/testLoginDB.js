@@ -15,7 +15,6 @@ describe('LoginDB Test',()=>{
     
         assert.strictEqual(await account.username,username)
         
-        
     })  
 })
 

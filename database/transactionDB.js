@@ -32,7 +32,7 @@ export async function registerSale(id, amount) {
         updateProduct(id, product.toPlainObject());
     }
 
-    addTransaction(product, amount);
+    return addTransaction(product, amount);
 }
 
 /**
@@ -44,8 +44,24 @@ export async function registerSale(id, amount) {
 export async function addTransaction(product, amount) {
     product.amountSold = amount;
     product.transactionDate = new Date().toISOString().split('T')[0];
-    await addDoc(transactionCollection, JSON.parse(JSON.stringify(product)));
+    let doc = await addDoc(transactionCollection, JSON.parse(JSON.stringify(product)));
+    return doc;
 }
+
+/**
+ * 
+ * @param {*} id 
+ * @returns doc
+ * @author Mikkel Hess
+ */
+export async function deleteTransaction(id) {
+    const docRef = doc(db, 'transaction', id);
+    return await deleteDoc(docRef);
+}
+
+
+
+
 
 /**
  * Function returns an array of products from firestore
