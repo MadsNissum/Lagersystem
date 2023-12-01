@@ -1,4 +1,3 @@
-// i am tha test monkeyyyyyyyyyyyyyyyyyyyyy :-)
 
 import { getAccount } from "../../database/loginDB.js"
 import { checkLogin, createAccount } from "../../service/login.js"
