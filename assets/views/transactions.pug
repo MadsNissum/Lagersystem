@@ -6,24 +6,25 @@ html(lang="en")
     body
         include header
         main 
-            table 
-                thead
-                    tr 
-                        th Udløbningsdato 
-                        th Transaktionsdato
-                        th Antal solgt 
-                        th Mærke
-                        th Pris 
-                        th Mængde 
-                        th Lokation
-                tbody
-                    each transaction in transactions
-                        tr
-                            td= transaction.getExpirationDate()
-                            td= transaction.getTransactionDate()
-                            td= transaction.amountSold
-                            td= transaction.brand
-                            td= transaction.price + ' kr.'
-                            td= transaction.quantity + ' stk.'
-                            td= transaction.location
+            each receipt in receipts
+                table 
+                    thead
+                        tr 
+                            th Udløbningsdato 
+                            th Transaktionsdato
+                            th Antal solgt 
+                            th Mærke
+                            th Pris 
+                            th Mængde 
+                            th Lokation
+                    tbody
+                        each product in receipt 
+                            tr
+                                td= product.expirationDate
+                                td= product.transactionDate
+                                td= product.amountSold
+                                td= product.brand
+                                td= product.price + ' kr.'
+                                td= product.quantity + ' stk.'
+                                td= product.location
         include footer 

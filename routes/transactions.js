@@ -5,8 +5,8 @@ const router = express.Router();
 
 // GET
 router.get('/', async (request, response) => {
-    let transactions = await getTransactions();
-    response.render('transactions', { transactions: transactions });
+    let receipts = await getTransactions();
+    response.render('transactions', { receipts: receipts });
 });
 
 
