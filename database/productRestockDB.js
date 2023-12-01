@@ -13,3 +13,26 @@ export async function addProductRestock(product) {
     product.restockDate = new Date().toISOString().split('T')[0];
     return await addDoc(productRestockCollection, product);
 }
+
+/**
+ * Returns a productrestock by id
+ * @param {String} id of productrestock
+ * @returns {productRestock} productRestock
+ * @author Kasper
+ */
+export async function getProductRestock(id) {
+    const docRef = doc(db, 'productRestock', id);
+    const restockDoc = await getDoc(docRef);
+
+    return restockDoc.data();
+}
+
+/**
+ * Deletes productRestock by id
+ * @param {String} id of productRestock
+ * @author Kasper
+ */
+export async function deleteProductRestock(id) {
+    const docRef = doc(db, 'productRestock', id);
+    return await deleteDoc(docRef);
+}
