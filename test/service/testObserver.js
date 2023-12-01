@@ -21,7 +21,7 @@ describe('Observer notifications', () => {
             let product = new Product('Test', 25, date, 'Test', 20);
             let docRef = await addProduct(product.toPlainObject());
 
-            let receivers = ['LagerSystemSkaade@hotmail.com']
+            let receivers = [{email: 'LagerSystemSkaade@hotmail.com'}]
 
             let response = await notifyPeople(receivers);
 

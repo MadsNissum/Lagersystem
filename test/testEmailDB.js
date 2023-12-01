@@ -99,6 +99,5 @@ describe('EmailDB Test',()=>{
             deleteEmail(email2.id)
             deleteEmail(email3.id)
         })
-
     })
 })

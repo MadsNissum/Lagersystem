@@ -31,6 +31,8 @@ export async function notifyPeople(receivers) {
         secure: false,
     });
 
+    console.log(receivers);
+
     let mailList = receivers.map(data => data.email);
 
     return new Promise(async (resolve, reject) => {

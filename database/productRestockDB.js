@@ -11,5 +11,5 @@ const productRestockCollection = collection(db, 'productRestock');
  */
 export async function addProductRestock(product) {
     product.restockDate = new Date().toISOString().split('T')[0];
-    return await addDoc(productRestockCollection, product.toPlainObject());
+    return await addDoc(productRestockCollection, product);
 }

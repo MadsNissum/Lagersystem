@@ -1,5 +1,5 @@
-import { Product } from "../model/Product.js";
-import { addTransaction, registerSale, getTransactions, deleteTransaction } from "../database/transactionDB.js";
+import { Product } from "../../model/Product.js";
+import { addTransaction, registerSale, getTransactions, deleteTransaction } from "../../database/transactionDB.js";
 import { collection } from "firebase/firestore";
 import { db } from "../../database/firestore.js";
 import { addProduct, getProduct, deleteProduct } from "../../database/productDB.js";
