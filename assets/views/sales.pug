@@ -4,7 +4,8 @@ html(lang='en')
         title Lagersystem - salg 
         link(rel="stylesheet", href="/styles/style.css")
         link(rel="stylesheet", href="/styles/sales.css")
-        script(src="/script/salesViewScript.js" defer)
+        script(src="/script/transactionDB.js" defer)
+        script(src="/database/transactionDB.js" defer)
     body 
         include header 
         main 
@@ -63,7 +64,7 @@ html(lang='en')
                             td     
                                 h2 0.00
                 div(class="Approve")
-                    button Godkend ekspedition 
+                    button Godkend ekspedition(onclick=`addTransaction()`)
                     button Godkend kreditkort 
                     button Mobilpay
                     button Annullér ekspedition 
