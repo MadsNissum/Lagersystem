@@ -1,3 +1,5 @@
+import { addTransaction } from "../../database/transactionDB";
+
 const productButtons = document.getElementById('products');
 const tableBon = document.getElementById('bonTable');
 let productsList = [];
@@ -103,6 +105,13 @@ tFoot.innerHTML =
 <td></td>
 <td><h2>${sumProducts()}</h2></td>
 </tr>`
+}
+
+async function addBon() {
+    await addTransaction(productsList)
+    //så snart jeg tilføjer addtransaction bliver addproduct "declared but never read" og man kan
+    //ikke tilføje produkter via knapperne
+
 }
 
 function vatOTotal() {
