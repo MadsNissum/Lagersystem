@@ -80,7 +80,6 @@ export class Product {
      * @author Mads Nissum
      */
     getDate() {
-        console.log(this.expirationDate);
         return this.expirationDate.toISOString().split('T')[0];
     }
 }

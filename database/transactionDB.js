@@ -18,6 +18,10 @@ export async function registerSale(sale) {
         let product = await getProduct(sale[i].id);
         let newProductQuantity = product.quantity - sale[i].amount;
 
+        console.log(sale[i]);
+
+        console.log(newProductQuantity);
+
         // Add logic for each type of product there is and when you should be notified
         if (product.quantity >= 10 && newProductQuantity < 10) {
             console.log("INDE I IF");
@@ -44,9 +48,9 @@ export async function registerSale(sale) {
 export async function addTransaction(sale) {
     let bon = [];
 
-    for (let i = 0; i < sale.array.length; i++) {
-        let product = await getProduct(sale.array[i].id);
-        product.amountSold = sale.array[i].amount
+    for (let i = 0; i < sale.length; i++) {
+        let product = await getProduct(sale[i].id);
+        product.amountSold = sale[i].amount
         product.transactionDate = new Date().toISOString().split('T')[0];
         bon.push(product);
     }

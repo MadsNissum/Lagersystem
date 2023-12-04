@@ -1,5 +1,3 @@
-
-
 const productButtons = document.getElementById('products');
 const tableBon = document.getElementById('bonTable');
 let productsList = [];
@@ -7,8 +5,21 @@ let productsList = [];
 createTable();
 
 function addProduct(productBrand, productPrice, productId) {
-    let product = { productBrand, productPrice, id: productId };
-    productsList.push(product);
+    let boo = true;
+
+    console.log(productId);
+
+    productsList.forEach(line => {
+        if (line.id == productId) {
+            line.amount++;
+            boo = false;
+        }
+    });
+
+    if (boo) {
+        productsList.push({ productBrand, productPrice, id: productId, amount: 1 });
+    }
+
     createTable();
 }
 
@@ -25,7 +36,7 @@ function addProductAmount(productBrand) {
 function sumProducts() {
     let sum = 0;
     productsList.forEach(product => {
-        sum += Number(product.productPrice);
+        sum += product.productPrice * product.amount;
     });
     return sum;
 }
@@ -65,7 +76,7 @@ function createTable() {
 
             tBody.innerHTML += `<tr>
             <td>${product.productBrand}</td>
-            <td>${addProductAmount(product.productBrand)}</td>
+            <td>${product.amount}</td>
             <td>${product.productPrice}</td>
         </tr>`;
         }
@@ -108,10 +119,11 @@ function createTable() {
 }
 
 function vatOTotal() {
-    return (sumProducts() / 100) * 25
+    return Math.round((sumProducts() / 100) * 25)
 }
 
 function addBon() {
+    console.log(productsList);
 
     console.log('Inde i Add Bon');
 
@@ -120,10 +132,8 @@ function addBon() {
     } catch (error) {
         errorCodeAlert(error)
     }
-
-
 }
 
 function totalwithoutVAT() {
-    return sumProducts() - vatOTotal();
+    return Math.round(sumProducts() - vatOTotal());
 }

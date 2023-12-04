@@ -11,7 +11,7 @@ router.get('/', async (request, response) => {
 });
 
 router.post('/', async (request, response) => {
-    console.log(request.body + "Hej");
+    console.log(request.body);
     registerSale(request.body);
     response.sendStatus(200);
 });
