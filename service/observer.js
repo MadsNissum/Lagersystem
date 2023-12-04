@@ -41,6 +41,7 @@ export async function notifyPeople(receivers) {
 
         product.forEach(product => {
             let date = new Date();
+
             date.setDate(date.getDate() + 10);
 
             if (product.getDate() == date.toISOString().split('T')[0]) {

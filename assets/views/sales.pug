@@ -70,7 +70,7 @@ html(lang='en')
                     button Modtaget kontakt / Spin
                 div(class="Products")
                     each product in products 
-                        button(onclick=`addProduct('${product.brand}', '${product.price}')`)                      
+                        button(onclick=`addProduct('${product.brand}', '${product.price}', '${product.getId()}')`)                      
                             p=product.brand
                             br
                             p=product.price + " kr."

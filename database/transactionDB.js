@@ -14,9 +14,9 @@ const transactionCollection = collection(db, 'transaction');
 export async function registerSale(sale) {
     console.log("INDE I REGISTER SALE");
 
-    for (let i = 0; i < sale.array.length; i++) {
-        let product = await getProduct(sale.array[i].id);
-        let newProductQuantity = product.quantity - sale.array[i].amount;
+    for (let i = 0; i < sale.length; i++) {
+        let product = await getProduct(sale[i].id);
+        let newProductQuantity = product.quantity - sale[i].amount;
 
         // Add logic for each type of product there is and when you should be notified
         if (product.quantity >= 10 && newProductQuantity < 10) {
@@ -27,9 +27,9 @@ export async function registerSale(sale) {
             product.quantity = newProductQuantity;
 
         if (product.quantity <= 0) {
-            deleteProduct(sale.array[i].id);
+            deleteProduct(sale[i].id);
         } else {
-            updateProduct(sale.array[i].id, product.toPlainObject());
+            updateProduct(sale[i].id, product.toPlainObject());
         }
     }
 
