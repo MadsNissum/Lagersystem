@@ -5,13 +5,18 @@ import { deleteProduct, addProduct, getProduct, updateProduct, getProducts } fro
 import { db } from "../../database/firestore.js";
 
     
+/**
+ * Tests that the getProducts function, where an array with a variety of products 
+ * are to be returned.
+ * @author Mikkel Hess
+ */
     describe('Get Products Function', () => {
 
         it('Should return an array of products',async ()=>{
 
             let product1 = new Product('Monster Energy Monarch',20,new Date("2013-11-15"),'Skåde',20)
             let product2 = new Product('Mountain Dew',200,new Date("2011-10-14"),'Skåde',30)
-            let product3 = new Product('Yoghurt',25,new Date('2016-06-20'),'Odder',10)
+            let product3 = new Product('Pilsner',25,new Date('2016-06-20'),'Odder',10)
 
             addProduct(product1)
             addProduct(product2)
@@ -34,7 +39,7 @@ import { db } from "../../database/firestore.js";
 
 
        /**
-     * Tests that getProduct gets the correct product object
+     * Tests that getProduct recieves the correct product object
      * @author Mikkel Hess
      */
         describe('Get Product function', () => {
