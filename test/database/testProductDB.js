@@ -3,6 +3,7 @@ import { doc, setDoc } from "firebase/firestore";
 import assert from 'assert'
 import { deleteProduct, addProduct, getProduct, updateProduct, getProducts } from "../../database/productDB.js";
 import { db } from "../../database/firestore.js";
+import { deleteProductRestock } from "../../database/productRestockDB.js";
 
     
     describe('Get Products Function', () => {
@@ -13,23 +14,28 @@ import { db } from "../../database/firestore.js";
             let product2 = new Product('Mountain Dew',200,new Date("2011-10-14"),'Skåde',30)
             let product3 = new Product('Yoghurt',25,new Date('2016-06-20'),'Odder',10)
 
-            addProduct(product1)
-            addProduct(product2)
-            addProduct(product3)
+            let doc1 = await addProduct(product1.toPlainObject());
+            let doc2 = await addProduct(product2.toPlainObject());
+            let doc3 = await addProduct(product3.toPlainObject());
 
-            let productsArray = await getProducts()
+            let productsArray = await getProducts();
             let getProductsIsWorking = false;
-
-            if(productsArray.indexOf('product1') && productsArray.indexOf('product2') && productsArray.indexOf('product3')) {
+            
+            if(productsArray.indexOf(product1) && productsArray.indexOf('product2') && productsArray.indexOf('product3')) {
                 getProductsIsWorking = true;
             }
-            assert.equal(getProductsIsWorking,true)
+            assert.equal(getProductsIsWorking,true);
 
-            deleteProduct(product1)
-            deleteProduct(product2)
-            deleteProduct(product3)
+            deleteProduct(product1);
+            deleteProduct(product2);
+            deleteProduct(product3);
+
+            deleteProductRestock(doc1.id);
+            deleteProductRestock(doc2.id);
+            deleteProductRestock(doc3.id);
+
         })
-
+        
     })
 
 

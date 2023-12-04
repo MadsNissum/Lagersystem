@@ -9,11 +9,11 @@ import assert from 'assert'
 
     describe('Register sale function', async () => {
         it('Should update the product if the quantity after the sale is above 0', async () => {
-            let product = new Product('Kanin', 50, new Date("2013-11-28"), 'Skåde', 20);
-            let docRef1233 = await addProduct(product.toPlainObject());
+            let product = new Product('Test', 50, new Date("2013-11-28"), 'Skåde', 20);
+            let docRef = await addProduct(product.toPlainObject());
 
-            let sale = await registerSale(docRef1233.id, 10);
-            let productdb = await getProduct(docRef1233.id);
+            let sale = await registerSale(docRef.id, 10);
+            let productdb = await getProduct(docRef.id);
 
             assert.equal(productdb.quantity, 10);
             
