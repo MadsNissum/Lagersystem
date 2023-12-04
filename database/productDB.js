@@ -59,6 +59,7 @@ export async function deleteProduct(id) {
 export async function addProduct(product) {
     // TODO Error checking on variables from product!
     let document = await addDoc(productCollection, product);
+    product.productID = document.id;
     addProductRestock(product);
     return document;
 }
