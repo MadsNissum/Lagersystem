@@ -7,30 +7,30 @@ import assert from 'assert'
  */
 describe('Product Constructor', () => {
     describe('Initialize object properties', () => {
-        const product = new Product('Carlsberg', 50, new Date('2023-11-15'), 'Skåde', 20)
-        product.setId('016120')
+        const product = new Product('Carlsberg', 50, new Date('2023-11-15'), 'Skåde', 20);
+        product.setId('016120');
 
         it('Should display brand correctly', () => {
-            assert.equal(product.brand, 'Carlsberg')
+            assert.equal(product.brand, 'Carlsberg');
         })
 
         it('Should display price correctly', () => {
-            assert.equal(product.price, 50)
+            assert.equal(product.price, 50);
         })
 
         it('Should display date correctly', () => {
-            assert.equal(product.expirationDate.getDate(), new Date('2023-11-15').getDate())
+            assert.equal(product.expirationDate.getDate(), new Date('2023-11-15').getDate());
         })
 
         it('Should display location correctly', () => {
-            assert.equal(product.location, 'Skåde')
+            assert.equal(product.location, 'Skåde');
         })
         it('Should display quantity correctly', () => {
-            assert.equal(product.quantity, 20)
+            assert.equal(product.quantity, 20);
         })
 
         it('Should display id correctly', () => {
-            assert.equal(product.getId(), '016120')
+            assert.equal(product.getId(), '016120');
         })
 
     })
@@ -43,11 +43,11 @@ describe('Product Constructor', () => {
         product.setId('016120');
 
         it('Brand should be of type string', () => {
-            assert.strictEqual(typeof product.brand, 'string')
+            assert.strictEqual(typeof product.brand, 'string');
         })
 
         it('Price should be of type number', () => {
-            assert.strictEqual(typeof product.price, 'number')
+            assert.strictEqual(typeof product.price, 'number');
         })
 
         it('Expiration date should be a Date object', () => {
@@ -65,6 +65,8 @@ describe('Product Constructor', () => {
         it('Id should be of type string', () => {
             assert.strictEqual(typeof product.getId(), 'string')
         })
+
+        
     })
 
     /**

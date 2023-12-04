@@ -2,7 +2,7 @@ import { Sale } from "../../model/Sale.js"
 import assert from 'assert'
 
 /**
- * Tests instantiation of Product object
+ * Tests instantiation of Sale object
  * @author Lucas Andersen
  */
 describe('Sale Constructor', () => {
