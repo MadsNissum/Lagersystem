@@ -19,7 +19,6 @@ export function addMessageToMail(message) {
  * @author Mads Nissum
  */
 export async function notifyPeople(receivers) {
-    console.log("Entered");
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
         port: 587,
@@ -41,6 +40,7 @@ export async function notifyPeople(receivers) {
 
         product.forEach(product => {
             let date = new Date();
+
             date.setDate(date.getDate() + 10);
 
             if (product.getDate() == date.toISOString().split('T')[0]) {

@@ -17,9 +17,10 @@ async function getRequest(url) {
 
 /**
  * Function make a post request with url and body for request
- * @param {String} url URL Sting to post a request.
+ * @param {String} url URL String to post a request.
  * @param {Object} objekt Object sent as the body of post request.
- * @author Mads Nissum
+ * @param {String} method HTTP Method
+ * @author Mads Nissum & Mikkel Hess
  */
 async function request(url, objekt, method) {
     const respons = await fetch(url, {
@@ -62,6 +63,9 @@ function errorCodeAlert(error) {
             break;
         case 409:
             alert("Username already in use!");
+            break;
+        case 503:
+            alert("Kan ikke sælge flere produkter end der er på lageret!");
             break;
         default:
             alert("Something went wrong on the server!");

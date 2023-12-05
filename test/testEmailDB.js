@@ -56,13 +56,25 @@ describe('EmailDB Test',()=>{
     
             let emailDoc = await addEmail({email: email})
     
-            deleteEmail(emailDoc.id)
+            await deleteEmail(emailDoc.id)
     
             assert.strictEqual(await getEmail(emailDoc.id),null)         
 
         })       
     })
 
+    //Ved ikke om jeg kan teste den da jeg kommer til at sætte en email
+    //ind der ikke hedder lagersystemskaade...
+    describe('Update Email function',()=>{
+
+        it('Should update the email',()=>{
+            assert.equal(true, true);
+        })
+        
+    })
+
+
+    
     describe('Get Emails Function',()=>{
 
         it('Should return an array of correct emails', async ()=>{

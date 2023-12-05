@@ -22,9 +22,9 @@ export async function getAccount(username) {
 }
 
 /**
- * Function deletes account from the database
- * @param {String} username username of account to delete
- * @author Amin
+ * Deletes an account from the database based on the provided username
+ * @param {*} username - Username of the account
+ * @author Amin Dahir
  */
 export async function deleteAccount(username) {
     const docRef = doc(db,'accounts', username)

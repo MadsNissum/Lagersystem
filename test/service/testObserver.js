@@ -11,7 +11,11 @@ import { registerSale } from '../../database/transactionDB.js';
 describe('Observer notifications', () => {
     describe('notifyPeople()', () => {
         it('Should return null when nothing in database expires in 10 days', async () => {
-            let response = await notifyPeople(['LagerSystemSkaade@hotmail.com']);
+            
+            let response = await notifyPeople([{email: 'LagerSystemSkaade@hotmail.com'}]);
+
+            console.log(response);
+
             assert.equal(response, null);
         });
 
@@ -21,12 +25,12 @@ describe('Observer notifications', () => {
             let product = new Product('Test', 25, date, 'Test', 20);
             let docRef = await addProduct(product.toPlainObject());
 
-            let receivers = 'LagerSystemSkaade@hotmail.com';
+            let receivers = [{email: 'LagerSystemSkaade@hotmail.com'}];
 
             let response = await notifyPeople(receivers);
 
             await deleteProduct(docRef.id);
-            assert.equal(response.info.accepted.toString(), receivers.toString());
+            assert.equal(response.info.accepted.toString(), receivers[0].email);
         });
     });
 
@@ -38,19 +42,10 @@ describe('Observer notifications', () => {
 
             let response = await notifyPeople(receivers);
 
-            assert.equal(response.message, '<h2></h2>Testing<br>');
+            assert.equal(response.message, '<h2>Inventar der skal bestilles:</h2>Testing<br>');
         });
 
-        it('Should automatically add message notifyPeople in registerSale', async () => {
-            //IN PROGRESS
-            registerSale();
-
-            let receivers = [{email: 'LagerSystemSkaade@hotmail.com'}];
-
-            let response = await notifyPeople(receivers);
-
-            assert.equal();
-        });
+        
     })
 });
 

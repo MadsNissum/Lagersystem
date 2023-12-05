@@ -45,11 +45,7 @@ app.use('/inventory', productRoutes);
 
 app.use('/login', loginRoutes);
 
-app.post('/registerSale', async (request, response) => {
-    registerSale(request.body);
 
-    response.sendStatus(200);
-});
 
 // Function running once a day and when the program starts
 notifyPeople(await getEmails());

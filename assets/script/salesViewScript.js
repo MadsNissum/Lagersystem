@@ -2,74 +2,87 @@ const productButtons = document.getElementById('products');
 const tableBon = document.getElementById('bonTable');
 let productsList = [];
 
-createTable(); 
+createTable();
 
- function addProduct(productBrand, productPrice) {
-    let product = {productBrand, productPrice};
-    productsList.push(product);
+function addProduct(productBrand, productPrice, productId) {
+    let boo = true;
+
+    console.log(productId);
+
+    productsList.forEach(line => {
+        if (line.id == productId) {
+            line.amount++;
+            boo = false;
+        }
+    });
+
+    if (boo) {
+        productsList.push({ productBrand, productPrice, id: productId, amount: 1 });
+    }
+
     createTable();
- }
+}
 
- function addProductAmount(productBrand) {
-    let amount = 0; 
+function addProductAmount(productBrand) {
+    let amount = 0;
     productsList.forEach(product => {
-        if(product.productBrand == productBrand) {
+        if (product.productBrand == productBrand) {
             amount++;
         }
     })
     return amount;
- }
+}
 
 function sumProducts() {
-    let sum = 0; 
+    let sum = 0;
     productsList.forEach(product => {
-            sum += Number(product.productPrice);
+        sum += product.productPrice * product.amount;
     });
     return sum;
 }
 
 function createTable() {
-  bonTable.innerHTML = "";
+    bonTable.innerHTML = "";
 
-  let tHead = document.createElement('thead');
-  let tBody = document.createElement('tbody');
-  let tFoot = document.createElement('tfoot');
-  bonTable.appendChild(tHead);
-  bonTable.appendChild(tBody);
-  bonTable.appendChild(tFoot);
-  
-// thead 
-  let theadHTML = `<tr>
+    let tHead = document.createElement('thead');
+    let tBody = document.createElement('tbody');
+    let tFoot = document.createElement('tfoot');
+    bonTable.appendChild(tHead);
+    bonTable.appendChild(tBody);
+    bonTable.appendChild(tFoot);
+
+    // thead 
+    let theadHTML = `<tr>
       <td><h1>Byttepenge</h1></td>
       <td></td>
       <td><h1>kr 0</h1></td>
   </tr>`
-  tHead.innerHTML = theadHTML;
+    tHead.innerHTML = theadHTML;
 
-// tbody 
-let tbodyHTML1 = `<tbody>
+    // tbody 
+    let tbodyHTML1 = `<tbody>
 <tr>
     <td>Beskrivelse</td>
     <td>Antal</td>
     <td>Beløb</td>
 </tr>`
-tBody.innerHTML = tbodyHTML1
+    tBody.innerHTML = tbodyHTML1
 
-let newProductList = new Set();
+    let newProductList = new Set();
 
-productsList.forEach(product => {
-    if (!newProductList.has(product.productBrand)) {
-        newProductList.add(product.productBrand);
+    productsList.forEach(product => {
+        if (!newProductList.has(product.productBrand)) {
+            newProductList.add(product.productBrand);
 
-        tBody.innerHTML += `<tr>
+            tBody.innerHTML += `<tr>
             <td>${product.productBrand}</td>
-            <td>${addProductAmount(product.productBrand)}</td>
+            <td>${product.amount}</td>
             <td>${product.productPrice}</td>
         </tr>`;
-    }
-});
+        }
+    });
 
-let tbodyHTML2 = `<tr>
+    let tbodyHTML2 = `<tr>
 <td>Bon total</td>
 <td></td>
 <td>0<br></td>
@@ -94,11 +107,11 @@ let tbodyHTML2 = `<tr>
 <td></td>
 <td>${vatOTotal()}</td>
 </tr>`
-tBody.innerHTML += tbodyHTML2
+    tBody.innerHTML += tbodyHTML2
 
-// tfoot
-tFoot.innerHTML = 
-` <tr>
+    // tfoot
+    tFoot.innerHTML =
+        ` <tr>
 <td><h2>Subtotal</h2></td>
 <td></td>
 <td><h2>${sumProducts()}</h2></td>
@@ -106,9 +119,24 @@ tFoot.innerHTML =
 }
 
 function vatOTotal() {
-    return (sumProducts()/100)*25
+    return Math.round((sumProducts() / 100) * 25)
+}
+
+async function addBon() {
+    console.log(productsList);
+
+    console.log('Inde i Add Bon');
+
+    try {
+        await request('/sales', productsList, 'POST');
+        productsList = []
+        createTable();
+        alert("Gennemført salg!")
+    } catch (error) {
+        errorCodeAlert(error)
+    }
 }
 
 function totalwithoutVAT() {
-    return sumProducts() - vatOTotal();
+    return Math.round(sumProducts() - vatOTotal());
 }

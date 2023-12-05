@@ -4,7 +4,7 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "test": "mocha --recursive"
+    "test": "mocha --recursive --exit"
   },
   "keywords": [],
   "author": "",
