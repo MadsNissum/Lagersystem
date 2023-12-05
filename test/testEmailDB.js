@@ -63,18 +63,6 @@ describe('EmailDB Test',()=>{
         })       
     })
 
-    //Ved ikke om jeg kan teste den da jeg kommer til at sætte en email
-    //ind der ikke hedder lagersystemskaade...
-    describe('Update Email function',()=>{
-
-        it('Should update the email',()=>{
-            assert.equal('hej','meddig')
-        })
-        
-    })
-
-
-    
     describe('Get Emails Function',()=>{
 
         it('Should return an array of correct emails', async ()=>{

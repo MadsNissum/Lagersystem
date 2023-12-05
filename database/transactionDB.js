@@ -33,7 +33,7 @@ export async function registerSale(sale) {
         }
     }
 
-    addTransaction(sale);
+    return addTransaction(sale);
 }
 
 /**
