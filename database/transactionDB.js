@@ -39,9 +39,9 @@ export async function registerSale(sale) {
         product.quantity = newProductQuantity;
 
         if (product.quantity == 0) {
-            deleteProduct(sale[i].id);
+            await deleteProduct(sale[i].id);
         } else {
-            updateProduct(sale[i].id, product.toPlainObject());
+            await updateProduct(sale[i].id, product.toPlainObject());
         }
     }
     

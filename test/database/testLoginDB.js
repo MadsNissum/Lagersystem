@@ -8,7 +8,6 @@ import assert from 'assert'
  */
 describe('LoginDB Test', () => {
     it('Should add the account to the database', async () => {
-
         let username = 'TestUsername';
         let password = 'flæskesteg';
         let salt = generateSalt();

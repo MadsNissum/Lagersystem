@@ -44,7 +44,6 @@ describe('Register sale function', async () => {
         let docRef = await addProduct(gløggProdukt.toPlainObject());
 
         let sale = await registerSale([{ id: docRef.id, amount: 11 }]);
-        let product = await getProduct(docRef.id);
 
         deleteProduct(docRef.id);
 
