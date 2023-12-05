@@ -19,7 +19,6 @@ export function addMessageToMail(message) {
  * @author Mads Nissum
  */
 export async function notifyPeople(receivers) {
-    console.log("Entered");
     // create reusable transporter object using the default SMTP transport
     const transporter = nodemailer.createTransport({
         port: 587,

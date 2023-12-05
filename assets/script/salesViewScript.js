@@ -122,13 +122,16 @@ function vatOTotal() {
     return Math.round((sumProducts() / 100) * 25)
 }
 
-function addBon() {
+async function addBon() {
     console.log(productsList);
 
     console.log('Inde i Add Bon');
 
     try {
-        request('/sales', productsList, 'POST')
+        await request('/sales', productsList, 'POST');
+        productsList = []
+        createTable();
+        alert("Gennemført salg!")
     } catch (error) {
         errorCodeAlert(error)
     }

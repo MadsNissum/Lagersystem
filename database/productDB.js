@@ -25,7 +25,6 @@ export async function getProducts() {
 /**
  * Function return a Product with a given id from firestore
  * @param {String} id Auto generated ID from firebase
- * @returns {Product} A product
  * @author Mads Nissum & Mikkel Hess
  */
 export async function getProduct(id) {

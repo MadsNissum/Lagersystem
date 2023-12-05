@@ -64,6 +64,9 @@ function errorCodeAlert(error) {
         case 409:
             alert("Username already in use!");
             break;
+        case 503:
+            alert("Kan ikke sælge flere produkter end der er på lageret!");
+            break;
         default:
             alert("Something went wrong on the server!");
             break;

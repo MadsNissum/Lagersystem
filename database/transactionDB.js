@@ -9,35 +9,43 @@ const transactionCollection = collection(db, 'transaction');
 /**
  * Counts down products quantity, deletes if quanitity less than 1
  * @param {*} sale an object with an array of ids of products sold and their corresponding amountsold
- * @author Kasper
+ * @returns Status code to be sent to client
+ * @author Kasper & Mads Nissum
  */
 export async function registerSale(sale) {
-    console.log("INDE I REGISTER SALE");
+    // CHECKER OM DER PRØVES AT SÆLGE FLERE PRODUKTER END DER ER PÅ LAGER!
+    for (let i = 0; i < sale.length; i++) {
+        let product = await getProduct(sale[i].id);
+        let newProductQuantity = product.quantity - sale[i].amount;
+        if (newProductQuantity < 0) {
+            return {statusCode: 503};
+        }
+    }
+
+    let transDoc = await addTransaction(sale);
 
     for (let i = 0; i < sale.length; i++) {
         let product = await getProduct(sale[i].id);
         let newProductQuantity = product.quantity - sale[i].amount;
 
-        console.log(sale[i]);
-
-        console.log(newProductQuantity);
-
         // Add logic for each type of product there is and when you should be notified
         if (product.quantity >= 10 && newProductQuantity < 10) {
-            console.log("INDE I IF");
+
+            console.log(`TEST FEJLER HER ${product.getId()} DER ER NOGET GALT!!! ${product}`);
+
             addMessageToMail(`Beholdning  af <b>${product.brand}</b> med ID: <b>${product.getId()}</b> er lavere 10`);
         }
 
-            product.quantity = newProductQuantity;
+        product.quantity = newProductQuantity;
 
-        if (product.quantity <= 0) {
+        if (product.quantity == 0) {
             deleteProduct(sale[i].id);
         } else {
             updateProduct(sale[i].id, product.toPlainObject());
         }
     }
-
-    addTransaction(sale);
+    
+    return {statusCode: 200, transactionId: transDoc.id};
 }
 
 /**
