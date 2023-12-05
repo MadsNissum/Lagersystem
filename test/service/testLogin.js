@@ -23,7 +23,7 @@ describe('Login Test', () => {
             accountExists = true;
         }
 
-        assert.strictEqual(accountExists, true);
+        await assert.strictEqual(accountExists, true);
 
         deleteAccount('testAccount');
     })
@@ -36,7 +36,7 @@ describe('Login Test', () => {
 
         let status = await checkLogin(username, password);
 
-        assert.strictEqual(status, 200);
+        await assert.strictEqual(status, 200);
 
         deleteAccount('testingAccount');
 

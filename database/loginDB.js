@@ -15,8 +15,10 @@ export async function getAccount(username) {
     const accountDoc = await getDoc(docRef);
     let data = accountDoc.data();
     if (data != null) {
+        console.log("yes")
         return data;
     } else {
+        console.log("no")
         return null;
     }
 }

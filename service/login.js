@@ -74,7 +74,7 @@ export async function createAccount(username, password) {
         return 409; 
     } else {
         const salt = generateSalt();
-        addAccount(username, hash(password, salt), salt);
+        await addAccount(username, hash(password, salt), salt);
         return 201;
     }
 }
