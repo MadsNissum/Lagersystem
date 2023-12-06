@@ -13,7 +13,7 @@ router.get('/', async (request, response) => {
 router.post('/', async (request, response) => {
     console.log(request.body);
     let status = await registerSale(request.body);
-    response.sendStatus(status);
+    response.sendStatus(status.statusCode);
 });
 
 export default router;
