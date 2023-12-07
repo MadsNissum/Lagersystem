@@ -1,6 +1,8 @@
 import { Product } from '../model/Product.js';
 import { db } from './firestore.js';
-import { collection, getDoc, doc, deleteDoc, setDoc } from 'firebase/firestore';
+import { collection, getDoc, doc, deleteDoc, addDoc } from 'firebase/firestore';
+
+const productRestockCollection = collection(db, 'productRestock');
 
 /**
  * Inserts a record when restocking product to warehouse.
@@ -9,7 +11,7 @@ import { collection, getDoc, doc, deleteDoc, setDoc } from 'firebase/firestore';
  */
 export async function addProductRestock(product) {
     product.restockDate = new Date().toISOString().split('T')[0];
-    return await setDoc(doc(db, "productRestock", product.productID), product);
+    return await addDoc(productRestockCollection, product);
 }
 
 /**
