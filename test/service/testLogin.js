@@ -1,4 +1,3 @@
-
 import { getAccount } from "../../database/loginDB.js"
 import { checkLogin, createAccount } from "../../service/login.js"
 import { deleteAccount } from "../../database/loginDB.js"
@@ -42,3 +41,20 @@ describe('Login Test', () => {
 
     })
 })
+
+/** 
+ * Test that ensures that a user gets deleted
+ * @author Amin Dahir
+*/
+describe('Delete user function', () => {
+    it('Should delete a account if their username matches in the db', async () => {
+        const username = 'testUser';
+        await addAccount(username, 'password', 'salt');
+
+        await deleteAccount(username);
+
+        const deletedAccount = await getAccount(username);
+
+        assert.strictEqual(deletedAccount, null);
+    });
+});
