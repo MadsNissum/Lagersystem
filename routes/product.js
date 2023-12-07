@@ -4,6 +4,7 @@ import { addProduct, deleteProduct, getProduct, getProducts, updateProduct } fro
 
 const router = express.Router();
 
+// GET
 router.get('/', async (request, response) => {
     const { brand, price, quantity, expirationDate, location } = request.query;
 
@@ -25,9 +26,8 @@ router.get('/edit/:id', async (request, response) => {
     response.render('createUpdateProduct', { product: product });
 });
 
-// POSTS
+// POST
 router.post('/create', (request, response) => {
-    console.log(request.body.product);
     addProduct(request.body.product);
     response.sendStatus(201);
 });
@@ -38,7 +38,7 @@ router.put('/edit', (request, response) => {
     response.sendStatus(201);
 });
 
-// DELETES
+// DELETE
 router.delete('/:id', async (request, response) => {
     deleteProduct(request.params.id).then(() => {
         response.sendStatus(200);

@@ -1,10 +1,7 @@
 import { db } from './firestore.js';
-import { getFirestore, collection, getDocs, getDoc, doc, deleteDoc, addDoc, updateDoc, setDoc } from 'firebase/firestore';
-
-const accountsCollection = collection(db, 'accounts');
+import { getDoc, doc, deleteDoc, setDoc } from 'firebase/firestore';
 
 /**
- * 
  * @param {*} username 
  * @param {*} password 
  * @param {*} salt 

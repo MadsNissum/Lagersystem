@@ -1,29 +1,32 @@
 html(lang="en")
     head 
         title Lagersystem - Salg  
-        link(rel="stylesheet", href="/styles/style.css")
         script(src="/script/productViewScript.js" defer) 
     body
         include header
-        main 
-            table 
-                thead
-                    tr 
-                        th Udløbningsdato 
-                        th Transaktionsdato
-                        th Antal solgt 
+        main
+            each transaction in transactions
+                table
+                    tr
+                        th Produkt ID
                         th Mærke
-                        th Pris 
-                        th Mængde 
+                        th Antal på lager
                         th Lokation
-                tbody
-                    each transaction in transactions
+                        th Antal solgt
+                        th Pris
+                    each product in transaction.products
                         tr
-                            td= transaction.getExpirationDate()
-                            td= transaction.getTransactionDate()
-                            td= transaction.amountSold
-                            td= transaction.brand
-                            td= transaction.price + ' kr.'
-                            td= transaction.quantity + ' stk.'
-                            td= transaction.location
+                            td= product.id
+                            td= product.productBrand
+                            td= product.quantity
+                            td= product.location
+                            td= product.amount
+                            td= product.productPrice
+                    tr 
+                        th Bon ID:
+                        th= transaction.id
+                        th Dato:
+                        th= transaction.transactionDate
+                        th Bon sum:
+                        th= transaction.productSum() + " Kr."
         include footer 

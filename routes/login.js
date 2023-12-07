@@ -13,7 +13,6 @@ router.get('/create', (request, response) => {
     response.render('createAccount');
 });
 
-
 // POST
 router.post('/', async (request, response) => {
     const { username, password } = request.body;

@@ -15,9 +15,6 @@ router.get('/add', (request, response) => {
 router.get('/edit/:id', async (request, response) => {
     const id = request.params.id;
     let mail = await getEmail(id);
-
-    console.log(mail);
-
     response.render('createUpdateMail', { email: mail });
 });
 

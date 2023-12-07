@@ -10,7 +10,6 @@ import productRoutes from './routes/product.js';
 import loginRoutes from './routes/login.js';
 import session from 'express-session';
 import { checkAllowedPages } from './service/login.js';
-import { registerSale } from './database/transactionDB.js';
 
 // Consts
 const app = express();
@@ -45,12 +44,9 @@ app.use('/inventory', productRoutes);
 
 app.use('/login', loginRoutes);
 
-
-
 // Function running once a day and when the program starts
 notifyPeople(await getEmails());
 setInterval(async () => { await notifyPeople(await getEmails()) }, 1000 * 60 * 60 * 24);
-// 1000 * 60 * 60 * 24
 
 // Listen for connection
 app.listen(port, () => console.log(`Server listening on port: ${port}...`));

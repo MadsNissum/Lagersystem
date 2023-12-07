@@ -8,7 +8,6 @@
 async function getRequest(url) {
     const respons = await fetch(url);
     if (respons.status !== 200) {
-        console.log("TEST");
         throw new Error(respons.status);
     }
     return await respons.json();

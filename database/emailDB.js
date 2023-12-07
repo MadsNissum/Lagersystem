@@ -1,5 +1,5 @@
 import { db } from './firestore.js';
-import { getFirestore, collection, getDocs, getDoc, doc, deleteDoc, addDoc, updateDoc } from 'firebase/firestore';
+import { collection, getDocs, getDoc, doc, deleteDoc, addDoc, updateDoc } from 'firebase/firestore';
 
 const emailsCollection = collection(db, 'emails');
 
@@ -28,7 +28,6 @@ export async function addEmail(email) {
 /**
  * Function return a Email with a given id from firestore
  * @param {String} id Auto generated ID from firebase
- * @returns {Object} Email object
  * @author Mads Nissum & Mikkel Hess
  */
 export async function getEmail(id) {

@@ -50,16 +50,6 @@ export async function checkLogin(username, password) {
     }
 }
 
-// TODO Maby delete
-export async function checkUsername(username) {
-    let user = await getAccount(username);
-    if (user !== null && username === user.username) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 /**
  * Function used to create account if username dosen't exists in database
  * @param {String} username 

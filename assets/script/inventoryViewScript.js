@@ -45,6 +45,7 @@ datePicker.addEventListener("change", function () {
 locationPicker.addEventListener("change", function () {
     locationValue = this.value;
 });
+
 /**
  * Changes url to add product
  * @author Mads Nissum

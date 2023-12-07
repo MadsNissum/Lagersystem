@@ -2,7 +2,6 @@ import assert from 'assert'
 import { addMessageToMail, notifyPeople } from '../../service/observer.js'
 import { Product } from '../../model/Product.js'
 import { addProduct, deleteProduct } from '../../database/productDB.js';
-import { registerSale } from '../../database/transactionDB.js';
 
 /**
  * Test observer.js file
@@ -10,11 +9,8 @@ import { registerSale } from '../../database/transactionDB.js';
  */
 describe('Observer notifications', () => {
     describe('notifyPeople()', () => {
-        it('Should return null when nothing in database expires in 10 days', async () => {
-            
+        it('Should return null when nothing in database expires in 10 days', async () => {            
             let response = await notifyPeople([{email: 'LagerSystemSkaade@hotmail.com'}]);
-
-            console.log(response);
 
             assert.equal(response, null);
         });

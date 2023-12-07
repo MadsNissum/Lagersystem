@@ -7,7 +7,6 @@ const productCollection = collection(db, 'products');
 
 /**
  * Function returns an array of products from firestore
- * @returns {Array<Product>} An array of Products
  * @author Mads Nissum & Kasper
  */
 export async function getProducts() {

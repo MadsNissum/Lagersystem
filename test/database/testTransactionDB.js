@@ -18,8 +18,6 @@ describe('Register sale function', async () => {
         let sale = await registerSale([{ id: docRef.id, amount: 5 }]);
         let productdb = await getProduct(docRef.id);
 
-        console.log(productdb);
-
         deleteProduct(docRef.id);
         deleteTransaction(sale.transactionId)
 

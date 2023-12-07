@@ -7,8 +7,6 @@ createTable();
 function addProduct(productBrand, productPrice, productId) {
     let boo = true;
 
-    console.log(productId);
-
     productsList.forEach(line => {
         if (line.id == productId) {
             line.amount++;
@@ -17,7 +15,7 @@ function addProduct(productBrand, productPrice, productId) {
     });
 
     if (boo) {
-        productsList.push({ productBrand, productPrice, id: productId, amount: 1 });
+        productsList.push({ productBrand, productPrice: parseInt(productPrice), id: productId, amount: 1 });
     }
 
     createTable();
@@ -123,18 +121,14 @@ function vatOTotal() {
 }
 
 async function addBon() {
-    console.log(productsList);
-
-    console.log('Inde i Add Bon');
-
     try {
         await request('/sales', productsList, 'POST');
-        productsList = []
-        createTable();
         alert("Gennemført salg!")
     } catch (error) {
         errorCodeAlert(error)
     }
+    productsList = []
+    createTable();
 }
 
 function totalwithoutVAT() {

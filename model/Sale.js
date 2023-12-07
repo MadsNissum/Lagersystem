@@ -26,6 +26,7 @@ export class Sale {
         if (typeof quantity !== 'number') {
             throw new TypeError('Quantity must be a number')
         }
+
         this.amountSold = amountSold;
         this.brand = brand;
         this.expirationDate = expirationDate;
