@@ -1,45 +1,47 @@
 /* General settings */
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     padding: 0;
-  }
+}
 
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
     margin: 0px;
     padding: 0px;
-  }
+}
 
-  main {
+main {
     padding: 25px;
     flex: 1;
-  }
+}
 
 table {
     width: 80%;
     border-collapse: collapse;
     margin: 20px auto;
-  }
-  
-th, td {
+}
+
+th,
+td {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: left;
-  }
-  
+}
+
 th {
     background-color: #f2f2f2;
-  }
-  
-  tbody tr:nth-child(even) {
+}
+
+tbody tr:nth-child(even) {
     background-color: #f9f9f9;
-  }
+}
 
 select {
     font-weight: bold;
-    padding: 10px; 
+    padding: 10px;
     background-color: transparent;
     border-color: transparent;
     border-radius: 0px;
@@ -50,12 +52,12 @@ button {
     border-color: transparent;
     border-radius: 5px;
     background-color: rgb(214, 214, 214);
-    padding: 10px; 
+    padding: 10px;
 }
 
 button:hover {
     transition: ease 0.3;
-    background-color:rgb(194, 194, 194);
+    background-color: rgb(194, 194, 194);
 }
 
 input {
@@ -64,4 +66,4 @@ input {
     background-color: transparent;
     border: none;
     padding: 5px;
-  }
+}

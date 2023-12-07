@@ -11,7 +11,7 @@ import * as crypto from 'crypto';
  * @author Mads Nissum & Kasper
  */
 export function checkAllowedPages(request, response, next) {
-    let allowedPages = [ '/login', '/login/create', '/registerSale' ];
+    let allowedPages = ['/login', '/login/create', '/registerSale'];
     if (allowedPages.includes(request.url)) {
         next();
     } else {
@@ -61,7 +61,7 @@ export async function checkLogin(username, password) {
  */
 export async function createAccount(username, password) {
     if (await getAccount(username) != null) {
-        return 409; 
+        return 409;
     } else {
         const salt = generateSalt();
         await addAccount(username, hash(password, salt), salt);
@@ -86,7 +86,7 @@ export function generateSalt() {
  * @author Kasper
  */
 function hash(password, salt) {
-    const bitArray = sjcl.hash.sha256.hash(password+salt);
+    const bitArray = sjcl.hash.sha256.hash(password + salt);
     const hash = sjcl.codec.hex.fromBits(bitArray);
     return hash;
 }

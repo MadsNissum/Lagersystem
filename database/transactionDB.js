@@ -17,7 +17,7 @@ export async function registerSale(sale) {
         let product = await getProduct(sale[i].id);
         let newProductQuantity = product.quantity - sale[i].amount;
         if (newProductQuantity < 0) {
-            return {statusCode: 503};
+            return { statusCode: 503 };
         }
     }
 
@@ -40,8 +40,8 @@ export async function registerSale(sale) {
     }
 
     let transDoc = await addTransaction(sale);
-    
-    return {statusCode: 200, transactionId: transDoc.id};
+
+    return { statusCode: 200, transactionId: transDoc.id };
 }
 
 /**
@@ -85,7 +85,7 @@ export async function getTransactions() {
         let transactions = doc.data();
         transactions.id = doc.id;
         transactions.productSum = () => {
-            
+
             let sum = 0;
             transactions.products.forEach(product => {
                 sum += (product.productPrice * product.amount);

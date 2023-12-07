@@ -42,7 +42,7 @@ async function handleSubmit(event) {
                 location: loc.value,
                 quantity: quantity.value
             },
-            id : id
+            id: id
         };
 
         try {

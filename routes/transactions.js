@@ -6,7 +6,7 @@ const router = express.Router();
 // GET
 router.get('/', async (request, response) => {
     let transaction = await getTransactions();
-    response.render('transactions', { transactions: transaction});
+    response.render('transactions', { transactions: transaction });
 });
 
 export default router;

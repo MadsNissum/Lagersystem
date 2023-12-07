@@ -7,7 +7,7 @@ const router = express.Router();
 // GET
 router.get('/', async (request, response) => {
     let products = await getProducts();
-    response.render('sales',{products: products})
+    response.render('sales', { products: products })
 
 });
 

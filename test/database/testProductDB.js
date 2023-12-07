@@ -1,6 +1,6 @@
+import assert from 'assert'
 import { Product } from "../../model/Product.js";
 import { doc, setDoc } from "firebase/firestore";
-import assert from 'assert'
 import { deleteProduct, addProduct, getProduct, updateProduct, getProducts } from "../../database/productDB.js";
 import { db } from "../../database/firestore.js";
 import { deleteProductRestock } from "../../database/productRestockDB.js";
@@ -12,9 +12,7 @@ import { deleteProductRestock } from "../../database/productRestockDB.js";
  * @author Mikkel Hess
  */
 describe('Get Products Function', () => {
-
     it('Should return an array of products', async () => {
-
         let product1 = new Product('Monster Energy Monarch', 20, new Date("2013-11-15"), 'Skåde', 20)
         let product2 = new Product('Mountain Dew', 200, new Date("2011-10-14"), 'Skåde', 30)
         let product3 = new Product('Pilsner', 25, new Date('2016-06-20'), 'Odder', 10)
@@ -38,9 +36,7 @@ describe('Get Products Function', () => {
         deleteProductRestock(doc1.id);
         deleteProductRestock(doc2.id);
         deleteProductRestock(doc3.id);
-
     })
-
 })
 
 

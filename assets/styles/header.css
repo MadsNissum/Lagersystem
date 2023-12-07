@@ -4,44 +4,44 @@
     color: #fff;
     padding: 20px;
     text-align: center;
-  }
-  
-  .nice-header h1 {
+}
+
+.nice-header h1 {
     margin: 0;
-  }
-  
-  .nice-header ul {
+}
+
+.nice-header ul {
     list-style: none;
     padding: 0;
     margin: 10px 0;
-  }
-  
-  .nice-header li {
+}
+
+.nice-header li {
     display: inline-block;
     margin-right: 20px;
-  }
-  
-  .nice-header a {
+}
+
+.nice-header a {
     text-decoration: none;
     color: #fff;
     font-weight: bold;
     font-size: 16px;
     transition: color 0.3s ease;
-  }
-  
-  .nice-header a:hover {
-    color: #ffd700;
-  }
+}
 
-  .loginContainer {
+.nice-header a:hover {
+    color: #ffd700;
+}
+
+.loginContainer {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 50vh;
     margin: 25px;
-  }
+}
 
-  .loginMain {
+.loginMain {
     display: block;
     text-align: center;
     width: 300px;

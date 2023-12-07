@@ -9,7 +9,6 @@ import assert from 'assert'
  * @author Mikkelhess
  */
 describe('Login Test', () => {
-
     it('Create account function', async () => {
 
         await createAccount('testAccount', 'password123');

@@ -1,5 +1,5 @@
 import assert from 'assert'
-import { getEmail, addEmail, getEmails, deleteEmail, updateEmail } from '../database/emailDB.js'
+import { getEmail, addEmail, getEmails, deleteEmail } from '../database/emailDB.js'
 
 
 describe('EmailDB Test', () => {

@@ -7,8 +7,8 @@
 }
 
 
-.griditem{
-display: block;
+.griditem {
+    display: block;
 }
 
 .mainGrid {
@@ -23,16 +23,18 @@ display: block;
     margin: 0px;
 }
 
-.calculator { 
+.calculator {
     display: grid;
     grid-template-columns: repeat(3, 100px);
     height: auto;
     width: 75px;
     margin: 0px;
 }
+
 .calculator button {
     display: block;
 }
+
 .Approve {
     display: grid;
     grid-template-columns: repeat(2, auto);
@@ -40,13 +42,13 @@ display: block;
     margin: 0px;
 }
 
-.Approve button{
+.Approve button {
     display: block;
     height: 150px;
     width: auto;
 }
 
-.Products { 
+.Products {
     display: grid;
     grid-template-columns: repeat(5, auto);
     grid-gap: 10px;

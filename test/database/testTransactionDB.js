@@ -1,8 +1,7 @@
 import { Product } from "../../model/Product.js";
-import { registerSale, getTransactions, deleteTransaction } from "../../database/transactionDB.js";
+import { registerSale, deleteTransaction } from "../../database/transactionDB.js";
 import { addProduct, getProduct, deleteProduct } from "../../database/productDB.js";
 import assert from 'assert'
-
 
 /**
  * Tests the register sale function, with two scenarios

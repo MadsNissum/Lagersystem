@@ -9,8 +9,8 @@ import { addProduct, deleteProduct } from '../../database/productDB.js';
  */
 describe('Observer notifications', () => {
     describe('notifyPeople()', () => {
-        it('Should return null when nothing in database expires in 10 days', async () => {            
-            let response = await notifyPeople([{email: 'LagerSystemSkaade@hotmail.com'}]);
+        it('Should return null when nothing in database expires in 10 days', async () => {
+            let response = await notifyPeople([{ email: 'LagerSystemSkaade@hotmail.com' }]);
 
             assert.equal(response, null);
         });
@@ -21,7 +21,7 @@ describe('Observer notifications', () => {
             let product = new Product('Test', 25, date, 'Test', 20);
             let docRef = await addProduct(product.toPlainObject());
 
-            let receivers = [{email: 'LagerSystemSkaade@hotmail.com'}];
+            let receivers = [{ email: 'LagerSystemSkaade@hotmail.com' }];
 
             let response = await notifyPeople(receivers);
 
@@ -34,14 +34,14 @@ describe('Observer notifications', () => {
         it('Should add message correctly', async () => {
             addMessageToMail("Testing");
 
-            let receivers = [{email: 'LagerSystemSkaade@hotmail.com'}];
+            let receivers = [{ email: 'LagerSystemSkaade@hotmail.com' }];
 
             let response = await notifyPeople(receivers);
 
             assert.equal(response.message, '<h2>Inventar der skal bestilles:</h2>Testing<br>');
         });
 
-        
+
     })
 });
 

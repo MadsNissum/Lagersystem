@@ -19,7 +19,7 @@ async function handleSubmit(event) {
     } else {
         let id = null;
         let method = form.dataset.method;
-        
+
         if (method == "PUT") {
             let URLArray = window.location.href.split('/');
             id = URLArray[URLArray.length - 1];
@@ -30,7 +30,7 @@ async function handleSubmit(event) {
                 email: email.value,
                 name: inputName.value
             },
-            id : id
+            id: id
         };
 
         try {

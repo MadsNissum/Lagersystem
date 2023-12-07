@@ -66,7 +66,7 @@ describe('Product Constructor', () => {
             assert.strictEqual(typeof product.getId(), 'string')
         })
 
-        
+
     })
 
     /**

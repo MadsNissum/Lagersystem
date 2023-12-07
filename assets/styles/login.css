@@ -1,33 +1,34 @@
 /* login settings */
-.loginMain input{
+.loginMain input {
     font-weight: 300;
     text-align: left;
     display: block;
     margin: auto;
-    width: 80%; /* Adjust the width as needed */
+    width: 80%;
+    /* Adjust the width as needed */
     padding: 8px;
     border: 1px solid rgb(150, 150, 150);
     border-radius: 5px;
-  }
+}
 
-  .loginButton {
+.loginButton {
     font-size: 16px;
     color: white;
-  }
+}
 
-  .loginButton a:hover {
+.loginButton a:hover {
     color: #ffd700;
-  }
+}
 
-  .loginMain a {
+.loginMain a {
     color: #333;
     font-size: small;
     font-weight: bold;
     display: block;
     text-align: center;
     text-decoration: none;
-  }
-  
-  .loginMain label{
+}
+
+.loginMain label {
     font-weight: bold;
-  }
+}

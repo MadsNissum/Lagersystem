@@ -38,6 +38,6 @@ export async function getAccount(username) {
  * @author Kasper
  */
 export async function deleteAccount(username) {
-    const docRef = doc(db,'accounts', username)
+    const docRef = doc(db, 'accounts', username)
     await deleteDoc(docRef)
 }
