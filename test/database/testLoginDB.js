@@ -20,7 +20,3 @@ describe('LoginDB Test', () => {
         deleteAccount(username);
     });
 })
-
-
-
-
